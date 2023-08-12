@@ -3,7 +3,7 @@ import * as Styled from './styles'
 import { ButtonComponentPropTypes } from './types'
 
 
-export const Button = ({
+const Button = ({
   children,
   type = 'button',
   size = 'medium',
@@ -23,3 +23,5 @@ export const Button = ({
     {children}
   </Styled.ButtonStyled>
 )
+
+export default Button

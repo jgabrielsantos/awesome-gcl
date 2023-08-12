@@ -1,9 +1,9 @@
 {
-  "name": "@jgabrielsantos/awesome-gcl",
+  "name": "awesome-gcl",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/YOUR_GITHUB_USERNAME"
   },
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "React component library",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
