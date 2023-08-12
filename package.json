@@ -1,5 +1,5 @@
 {
-  "name": "awesome-gcl",
+  "name": "@jgabrielsantos/awesome-gcl",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/YOUR_GITHUB_USERNAME"
   },
