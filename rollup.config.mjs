@@ -22,7 +22,9 @@ export default [
     ],
     plugins: [
       PeerDepsExternalPlugin(),
-      resolve(),
+      resolve({
+        browser: true,
+      }),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
     ],

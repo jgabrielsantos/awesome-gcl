@@ -13,10 +13,14 @@ import { colors } from '../../styles/theme';
 
 type ButtonStylePropsTypes = Readonly<Pick<ButtonComponentPropTypes, 'size' | 'customTheme' | 'disabled'>>
 
-export const ButtonStyled = styled.button<ButtonStylePropsTypes>`
+export const ButtonStyled = styled.button.withConfig({
+  shouldForwardProp: (prop) => !['customTheme'].includes(prop)
+})<ButtonStylePropsTypes>`
   cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
   width: fit-content;
+  height: fit-content;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   border-radius: ${toRem(6)};
@@ -81,7 +85,7 @@ export const ButtonStyled = styled.button<ButtonStylePropsTypes>`
       case 'success-secondary':
         return colors.support.success[50]
       case 'contrast-primary':
-        return colors.white[100]
+        return colors.primary[50]
       case 'contrast-secondary':
         return colors.white[100]
       default:
