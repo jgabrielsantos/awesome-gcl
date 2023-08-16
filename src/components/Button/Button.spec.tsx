@@ -103,32 +103,48 @@ describe('Button sizes styles', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        size="small"
       >
         {buttonChildMock}
       </Button>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('font-size', toRem(12))
+    expect(button).toHaveStyleRule('line-height', toRem(16))
+    expect(button).toHaveStyleRule('padding', `${toRem(8)} ${toRem(12)}`)
   })
 
   it('Should render medium size respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        size="medium"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('font-size', toRem(14))
+    expect(button).toHaveStyleRule('line-height', toRem(20))
+    expect(button).toHaveStyleRule('padding', `${toRem(10)} ${toRem(20)}`)
   })
 
   it('Should render large size respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        size="large"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('font-size', toRem(16))
+    expect(button).toHaveStyleRule('line-height', toRem(24))
+    expect(button).toHaveStyleRule('padding', `${toRem(12)} ${toRem(24)}`)
   })
 })
 
@@ -137,90 +153,207 @@ describe('Button themes styles', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="primary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.primary[50])
+    expect(button).toHaveStyleRule('color', colors.white[100])
+    expect(button).toHaveStyleRule('background-color', colors.primary[50])
+
+    expect(button).toHaveStyleRule('border-color', colors.primary[100], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.primary[100], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render secondary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="secondary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.primary[50])
+    expect(button).toHaveStyleRule('color', colors.primary[50])
+    expect(button).toHaveStyleRule('background-color', colors.white[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.primary[50], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.primary[0], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render tertiary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="tertiary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.grayscale[40])
+    expect(button).toHaveStyleRule('color', colors.grayscale[100])
+    expect(button).toHaveStyleRule('background-color', colors.white[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.grayscale[100], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render destructive-primary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="destructive-primary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.support.alert[50])
+    expect(button).toHaveStyleRule('color', colors.white[100])
+    expect(button).toHaveStyleRule('background-color', colors.support.alert[50])
+
+    expect(button).toHaveStyleRule('border-color', colors.support.alert[100], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.support.alert[100], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render destructive-secondary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="destructive-secondary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.support.alert[50])
+    expect(button).toHaveStyleRule('color', colors.support.alert[50])
+    expect(button).toHaveStyleRule('background-color', colors.white[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.support.alert[50], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.support.alert[5], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render success-primary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="success-primary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.support.success[50])
+    expect(button).toHaveStyleRule('color', colors.white[100])
+    expect(button).toHaveStyleRule('background-color', colors.support.success[50])
+
+    expect(button).toHaveStyleRule('border-color', colors.support.success[100], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.support.success[100], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render success-secondary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="success-secondary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.support.success[50])
+    expect(button).toHaveStyleRule('color', colors.support.success[50])
+    expect(button).toHaveStyleRule('background-color', colors.white[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.support.success[50], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.support.success[5], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render contrast-primary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="contrast-primary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.primary[50])
+    expect(button).toHaveStyleRule('color', colors.primary[50])
+    expect(button).toHaveStyleRule('background-color', colors.white[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.primary[50], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.primary[0], {
+      modifier: ':hover'
+    })
   })
 
   it('Should render contrast-secondary customTheme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
+        customTheme="contrast-secondary"
       >
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('border-color', colors.white[100])
+    expect(button).toHaveStyleRule('color', colors.white[100])
+    expect(button).toHaveStyleRule('background-color', colors.grayscale[100])
+
+    expect(button).toHaveStyleRule('border-color', colors.white[100], {
+      modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.white[40], {
+      modifier: ':hover'
+    })
   })
 })
 
