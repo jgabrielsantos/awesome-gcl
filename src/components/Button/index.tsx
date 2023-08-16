@@ -18,6 +18,7 @@ export const Button = ({
     onClick={handleClick}
     disabled={disabled}
     className={className}
+    data-testid='awesome-gcl-button-component'
   >
     {children}
   </Styled.ButtonStyled>
