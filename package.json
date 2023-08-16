@@ -1,8 +1,5 @@
 {
   "name": "awesome-gcl",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/jgabrielsantos"
-  },
   "version": "0.0.1",
   "description": "React component library",
   "author": "Joao Gabriel Santos",
