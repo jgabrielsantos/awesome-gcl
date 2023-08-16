@@ -1,10 +1,12 @@
 {
-  "name": "@jgabrielsantos/awesome-gcl",
+  "name": "awesome-gcl",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/jgabrielsantos"
   },
-  "version": "0.0.16",
+  "version": "0.0.1",
   "description": "React component library",
+  "author": "Joao Gabriel Santos",
+  "license": "MIT",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
@@ -17,8 +19,6 @@
     "test:watch": "jest --watchAll ./src/components",
     "test:coverage": "jest --coverage ./src"
   },
-  "author": "Joao Gabriel Santos",
-  "license": "ISC",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
     "@rollup/plugin-node-resolve": "^15.1.0",
@@ -47,5 +47,13 @@
     "jsdom": "^22.1.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "styled-components": "^6.0.7"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgabrielsantos/awesome-gcl.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgabrielsantos/awesome-gcl/issues"
+  },
+  "homepage": "https://github.com/jgabrielsantos/awesome-gcl#readme"
 }

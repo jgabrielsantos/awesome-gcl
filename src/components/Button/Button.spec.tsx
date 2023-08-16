@@ -107,6 +107,8 @@ describe('Button sizes styles', () => {
         {buttonChildMock}
       </Button>
     )
+
+    const button = screen.getByTestId('awesome-gcl-button-component')
   })
 
   it('Should render medium size respective style when receiving the prop', () => {
@@ -277,6 +279,7 @@ describe('Button disabled prop', () => {
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
+    expect(button).toHaveStyleRule('cursor', 'not-allowed')
     expect(button).toHaveStyleRule('border-color', colors.grayscale[40], {
       modifier: ':disabled'
     })
