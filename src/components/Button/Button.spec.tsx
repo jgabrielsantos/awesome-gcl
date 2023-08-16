@@ -170,6 +170,9 @@ describe('Button themes styles', () => {
     expect(button).toHaveStyleRule('background-color', colors.primary[100], {
       modifier: ':hover'
     })
+    expect(button).toHaveStyleRule('background-color', colors.grayscale[5], {
+      modifier: ':disabled'
+    })
   })
 
   it('Should render secondary customTheme respective style when receiving the prop', () => {
@@ -192,6 +195,9 @@ describe('Button themes styles', () => {
     })
     expect(button).toHaveStyleRule('background-color', colors.primary[0], {
       modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':disabled'
     })
   })
 
@@ -216,6 +222,9 @@ describe('Button themes styles', () => {
     expect(button).toHaveStyleRule('background-color', colors.white[100], {
       modifier: ':hover'
     })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':disabled'
+    })
   })
 
   it('Should render destructive-primary customTheme respective style when receiving the prop', () => {
@@ -238,6 +247,9 @@ describe('Button themes styles', () => {
     })
     expect(button).toHaveStyleRule('background-color', colors.support.alert[100], {
       modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.grayscale[5], {
+      modifier: ':disabled'
     })
   })
 
@@ -262,6 +274,9 @@ describe('Button themes styles', () => {
     expect(button).toHaveStyleRule('background-color', colors.support.alert[5], {
       modifier: ':hover'
     })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':disabled'
+    })
   })
 
   it('Should render success-primary customTheme respective style when receiving the prop', () => {
@@ -284,6 +299,9 @@ describe('Button themes styles', () => {
     })
     expect(button).toHaveStyleRule('background-color', colors.support.success[100], {
       modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.grayscale[5], {
+      modifier: ':disabled'
     })
   })
 
@@ -308,6 +326,9 @@ describe('Button themes styles', () => {
     expect(button).toHaveStyleRule('background-color', colors.support.success[5], {
       modifier: ':hover'
     })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':disabled'
+    })
   })
 
   it('Should render contrast-primary customTheme respective style when receiving the prop', () => {
@@ -331,6 +352,9 @@ describe('Button themes styles', () => {
     expect(button).toHaveStyleRule('background-color', colors.primary[0], {
       modifier: ':hover'
     })
+    expect(button).toHaveStyleRule('background-color', colors.grayscale[5], {
+      modifier: ':disabled'
+    })
   })
 
   it('Should render contrast-secondary customTheme respective style when receiving the prop', () => {
@@ -353,6 +377,9 @@ describe('Button themes styles', () => {
     })
     expect(button).toHaveStyleRule('background-color', colors.white[40], {
       modifier: ':hover'
+    })
+    expect(button).toHaveStyleRule('background-color', colors.white[100], {
+      modifier: ':disabled'
     })
   })
 })

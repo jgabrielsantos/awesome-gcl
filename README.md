@@ -1,4 +1,4 @@
-# [Awesome GCL] (https://www.npmjs.com/package/awesome-gcl)
+# Awesome GCL
 
 Foundation React UI components for shipping new projects faster
 

@@ -34,8 +34,6 @@ export const ButtonStyled = styled.button.withConfig({
         return toRem(14)
       case 'small':
         return toRem(12)
-      default:
-        return toRem(14)
     }
   }};
 
@@ -47,8 +45,6 @@ export const ButtonStyled = styled.button.withConfig({
         return toRem(20)
       case 'small':
         return toRem(16)
-      default:
-        return toRem(20)
     }
   }};
 
@@ -60,8 +56,6 @@ export const ButtonStyled = styled.button.withConfig({
         return `${toRem(10)} ${toRem(20)}`
       case 'small':
         return `${toRem(8)} ${toRem(12)}`
-      default:
-        return `${toRem(10)} ${toRem(20)}`
     }
   }};
 
@@ -88,8 +82,6 @@ export const ButtonStyled = styled.button.withConfig({
         return colors.primary[50]
       case 'contrast-secondary':
         return colors.white[100]
-      default:
-        return colors.primary[50]
     }
   }};
 
@@ -112,8 +104,6 @@ export const ButtonStyled = styled.button.withConfig({
       case 'contrast-primary':
         return colors.primary[50]
       case 'contrast-secondary':
-        return colors.white[100]
-      default:
         return colors.white[100]
     }
   }};
@@ -138,8 +128,6 @@ export const ButtonStyled = styled.button.withConfig({
         return colors.white[100]
       case 'contrast-secondary':
         return colors.grayscale[100]
-      default:
-        return colors.primary[50]
     }
   }};
 
@@ -164,8 +152,6 @@ export const ButtonStyled = styled.button.withConfig({
           return colors.primary[50]
         case 'contrast-secondary':
           return colors.white[100]
-        default:
-          return colors.primary[100]
       }
     }};
 
@@ -189,8 +175,6 @@ export const ButtonStyled = styled.button.withConfig({
           return colors.primary[0]
         case 'contrast-secondary':
           return colors.white[40]
-        default:
-          return colors.primary[100]
       }
     }};
   }
