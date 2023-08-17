@@ -4,6 +4,7 @@ import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import peerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
 import cssOnly from 'rollup-plugin-css-only'
+import copy from 'rollup-plugin-copy'
 import packageJson from './package.json' assert { type: 'json' }
 
 export default [
@@ -31,7 +32,18 @@ export default [
       }),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
-      cssOnly()
+      cssOnly(),
+      copy({
+        targets: [
+          {
+            src: './src/styles/*.css',
+            dest: [
+              'dist/cjs/types/styles',
+              'dist/esm/types/styles',
+            ]
+          }
+        ]
+      })
     ],
   },
   {
