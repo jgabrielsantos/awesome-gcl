@@ -2,15 +2,15 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import PeerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
+import peerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
+import cssOnly from 'rollup-plugin-css-only'
 import packageJson from './package.json' assert { type: 'json' }
 
 export default [
   {
     input: "src/index.ts",
     external: [
-      './src/styles/normalize.css',
-      './src/styles/reset.css',
+      /\.css$/
     ],
     output: [
       {
@@ -25,16 +25,20 @@ export default [
       },
     ],
     plugins: [
-      PeerDepsExternalPlugin(),
+      peerDepsExternalPlugin(),
       resolve({
         browser: true,
       }),
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
+      cssOnly()
     ],
   },
   {
     input: "dist/esm/types/index.d.ts",
+    external: [
+      /\.css$/
+    ],
     output: [{ file: "dist/index.d.ts", format: "esm" }],
     plugins: [
       dts()

@@ -1,3 +1,5 @@
+import './styles/reset.css'
+import './styles/normalize.css'
 export * from './components'
 export * from './styles'
 export * from './utils'
