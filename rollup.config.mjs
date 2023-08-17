@@ -8,6 +8,10 @@ import packageJson from './package.json' assert { type: 'json' }
 export default [
   {
     input: "src/index.ts",
+    external: [
+      './src/styles/normalize.css',
+      './src/styles/reset.css',
+    ],
     output: [
       {
         file: packageJson.main,

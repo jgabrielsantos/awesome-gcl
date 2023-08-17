@@ -17,5 +17,6 @@ import { Button } from 'awesome-gcl'
 
 **Next js:**
 ```jsx
+'use client'
 import { Button } from 'awesome-gcl'
 ```
