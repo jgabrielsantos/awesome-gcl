@@ -39,8 +39,8 @@ export default [
             src: './src/styles/*.css',
             dest: [
               'dist/cjs/types/styles',
-              'dist/esm/styles',
-              'dist/cjs/types/styles',
+              'dist/cjs/styles',
+              'dist/esm/types/styles',
               'dist/esm/styles',
             ]
           }
