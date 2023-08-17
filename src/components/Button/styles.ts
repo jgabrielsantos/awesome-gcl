@@ -3,7 +3,7 @@ import { ButtonComponentPropTypes } from './types';
 import { toRem } from '../../utils';
 import { colors } from '../../styles/theme';
 
-/*
+/**
  * @param size          controls the font-size, line-height and padding
  * @param customTheme   controls the color, border and background color
  * @param disabled      controls the pointer, color, border and background color

@@ -36,6 +36,7 @@
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-dts": "^5.3.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
+    "rollup-plugin-replace": "^2.2.0",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.1",
     "typescript": "^5.1.6"
