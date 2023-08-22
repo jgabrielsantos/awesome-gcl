@@ -1,9 +1,10 @@
 import React from 'react'
 import * as Styled from './styles'
-import { SelectPropTypes, SelectedPropTypes } from './types'
+import { SelectPropTypes } from './types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { useSelect } from './hooks'
+import { InputWrapper } from './Components'
 
 export const Select = ({
   label,
@@ -15,7 +16,7 @@ export const Select = ({
   disabled = false,
   className
 }: Readonly<SelectPropTypes>) => {
-  const hook = useSelect({ onChange })
+  const hook = useSelect()
 
   return (
     <Styled.WrapperStyled
@@ -29,16 +30,16 @@ export const Select = ({
           {label}
         </Styled.LabelStyled>
       )}
-      <Styled.InputWrapperStyled
+      <InputWrapper
         onClick={hook.hookSetIsOptionListVisible}
         disabled={disabled}
-        data-testid='select-input-wrapper'
       >
         <Styled.InputStyled
           type='text'
-          value={selected?.label}
+          value={selected?.label || ''}
           placeholder={placeholder}
           data-testid='select-input'
+          readOnly
         />
         {icon ? (
           <i
@@ -47,20 +48,23 @@ export const Select = ({
             />
         ) : (
           <FontAwesomeIcon
-            icon={faChevronDown}
-            data-testid='select-icon'
+            icon={hook.hookIsOptionListVisible ? faChevronUp : faChevronDown}
+            data-testid='select-default-icon'
           />
         )}
-      </Styled.InputWrapperStyled>
+      </InputWrapper>
       <Styled.OptionListStyled
-        isOpen={true}
+        isOpen={hook.hookIsOptionListVisible}
         data-testid='select-option-list'
       >
         {options.map(option => (
           <Styled.OptionItemStyled
             key={option.value}
             value={option.value}
-            onClick={hook.hookSetIsOptionListVisible}
+            onClick={() => {
+              onChange(option);
+              hook.hookSetIsOptionListVisible()
+            }}
             data-testid={`select-option-item-${option.value}`}
           >
             {option.label}

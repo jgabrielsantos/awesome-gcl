@@ -1,16 +1,14 @@
 import React, { useState } from "react"
-import { SelectedPropTypes, UseSelectPropTypes } from "../types"
+import { UseSelectPropTypes } from "../types"
 
 export const toggleOptionListVisibility = ({
   isVisible,
   setIsVisible,
-  onChange
-}: Readonly<UseSelectPropTypes>) => (value: SelectedPropTypes) => {
-  onChange(value)
+}: Readonly<UseSelectPropTypes>) => () => {
   setIsVisible(!isVisible)
 }
 
-export const useSelect = ({ onChange }: Readonly<Pick<UseSelectPropTypes, 'onChange'>>) => {
+export const useSelect = () => {
   const [isOptionListVisible, setIsOptionListVisible] = useState(false)
 
   return {
@@ -18,7 +16,6 @@ export const useSelect = ({ onChange }: Readonly<Pick<UseSelectPropTypes, 'onCha
     hookSetIsOptionListVisible: toggleOptionListVisibility({
       isVisible: isOptionListVisible,
       setIsVisible: setIsOptionListVisible,
-      onChange
-    }) as any as React.MouseEventHandler<HTMLElement>,
+    }),
   }
 }

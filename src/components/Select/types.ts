@@ -2,21 +2,12 @@ export type SelectOptionListPropTypes = {
   isOpen: boolean
 }
 
-export type InputWrapperPropTypes = {
-  disabled: boolean
-}
-
-export type SelectedPropTypes = {
-  label: string
-  value: any
-}
-
 export type SelectPropTypes = {
   label?: string
-  selected?: SelectedPropTypes
+  selected?: Record<string, any>
   placeholder?: string
-  options: SelectedPropTypes[]
-  onChange: (option: SelectedPropTypes) => void
+  options: Record<string, any>[]
+  onChange: (option: Record<string, any>) => void
   icon?: string
   disabled?: boolean
   className?: string
@@ -25,5 +16,4 @@ export type SelectPropTypes = {
 export type UseSelectPropTypes = {
   isVisible: boolean
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
-  onChange: (option: SelectedPropTypes) => void
 }
