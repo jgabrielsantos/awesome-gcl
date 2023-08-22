@@ -1,8 +1,8 @@
-export type ButtonTypeEnum = 'button'
+type ButtonTypeEnum = 'button'
 | 'submit'
 | 'reset'
 
-export type ButtonThemeEnum = 'primary'
+type ButtonThemeEnum = 'primary'
 | 'secondary'
 | 'tertiary'
 | 'destructive-primary'
@@ -12,7 +12,7 @@ export type ButtonThemeEnum = 'primary'
 | 'contrast-primary'
 | 'contrast-secondary'
 
-export type ButtonSizeEnum = 'large'
+type ButtonSizeEnum = 'large'
 | 'medium'
 | 'small'
 
