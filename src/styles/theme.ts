@@ -1,4 +1,4 @@
-export const colors = {
+export let colors = {
   white: {
     100: '#FFFFFF',
     72: '#FFFFFFB8',
@@ -37,5 +37,12 @@ export const colors = {
       50: '#DE1C22',
       5: '#FFD6D7',
     },
+  }
+}
+
+export const setColor = (customColor: Record<string, any>) => {
+  colors = {
+    ...colors,
+    ...customColor
   }
 }
