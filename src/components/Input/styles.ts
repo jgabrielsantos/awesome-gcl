@@ -29,10 +29,10 @@ export const InputWrapperStyled = styled.div.withConfig({
   padding: ${toRem(12)} ${toRem(16)};
   border-radius: ${toRem(6)};
   border: 1px solid ${({ error }) => error ? colors.support.alert[50] : colors.grayscale[40]};
-  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'text'};
   background-color: ${({ disabled }) => disabled ? colors.grayscale[5] : colors.white[100]};
 
-  &focus {
+  &:focus-within {
     border-color: ${colors.primary[50]}
   }
 `
@@ -42,7 +42,7 @@ export const InputStyled = styled.input<InputStyledPropTypes>`
   color: ${colors.grayscale[80]};
   font-size: 1rem;
   border: none;
-  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
+  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'text'};
 
   ::placeholder {
     color: ${colors.grayscale[40]};
@@ -53,7 +53,9 @@ export const InputStyled = styled.input<InputStyledPropTypes>`
   }
 `
 
-export const PasswordIconStyled = styled.button``
+export const PasswordIconStyled = styled.button`
+  cursor: pointer;
+`
 
 export const ErrorMessageStyled = styled.span`
   font-size: 1rem;

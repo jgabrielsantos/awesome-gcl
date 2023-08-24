@@ -3,6 +3,7 @@ import * as Styled from './styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { InputPropTypes } from "./types"
+import { useInput } from "./hooks"
 
 export const Input = ({
   type = 'text',
@@ -18,6 +19,8 @@ export const Input = ({
   pattern,
   className
 }: Readonly<InputPropTypes>) => {
+  const hook = useInput({ type, showPassword })
+
   return (
     <Styled.WrapperStyled
       className={className}
@@ -36,7 +39,7 @@ export const Input = ({
         data-testid='input-input-wrapper'
       >
         <Styled.InputStyled
-          type={type}
+          type={hook.hookType}
           value={value}
           onChange={onChange}
           onKeyDown={onKeyDown}
@@ -47,10 +50,10 @@ export const Input = ({
         />
         {type === 'password' && (
           <Styled.PasswordIconStyled
-            onClick={() => null}
+            onClick={hook.hookSetPasswordVisible}
             data-testid='input-password-icon'
           >
-            <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+            <FontAwesomeIcon icon={hook.hookPasswordVisible ? faEye : faEyeSlash} />
           </Styled.PasswordIconStyled>
         )}
       </Styled.InputWrapperStyled>
