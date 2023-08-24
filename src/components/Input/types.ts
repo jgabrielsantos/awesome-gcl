@@ -19,8 +19,6 @@ export type InputPropTypes = {
 
 export type InputWrapperStyledPropTypes = Readonly<Pick<InputPropTypes, 'error' | 'disabled'>>
 
-export type InputStyledPropTypes = Readonly<Pick<InputPropTypes, 'disabled'>>
-
 export type UseInputPropTypes = Readonly<Pick<InputPropTypes, 'type' | 'showPassword'>>
 
 export type ShowPasswordValuePropTypes = {

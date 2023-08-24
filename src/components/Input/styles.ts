@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { toRem } from "../../utils";
 import { colors } from "../../styles";
-import { InputStyledPropTypes, InputWrapperStyledPropTypes } from "./types";
+import { InputWrapperStyledPropTypes } from "./types";
 
 export const WrapperStyled = styled.div`
   width: 100%;
@@ -37,18 +37,19 @@ export const InputWrapperStyled = styled.div.withConfig({
   }
 `
 
-export const InputStyled = styled.input<InputStyledPropTypes>`
+export const InputStyled = styled.input`
   width: 100%;
   color: ${colors.grayscale[80]};
   font-size: 1rem;
   border: none;
-  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'text'};
+  cursor: text;
 
   ::placeholder {
     color: ${colors.grayscale[40]};
   }
 
   &:disabled {
+    cursor: not-allowed;
     color: ${colors.grayscale[60]};
   }
 `

@@ -53,7 +53,10 @@ export const Input = ({
             onClick={hook.hookSetPasswordVisible}
             data-testid='input-password-icon'
           >
-            <FontAwesomeIcon icon={hook.hookPasswordVisible ? faEye : faEyeSlash} />
+            <FontAwesomeIcon
+              icon={hook.hookPasswordVisible? faEye : faEyeSlash}
+              data-testid='input-password-font-awesome-icon'
+            />
           </Styled.PasswordIconStyled>
         )}
       </Styled.InputWrapperStyled>
