@@ -26,6 +26,7 @@ All components are built based on the styled-components library!
 - Button
 - Figure
 - Select
+_ Input
 
 ### Customize a component
 Add new css rules or overwrite the existing ones
@@ -55,7 +56,6 @@ const customColor = {
 ```
 
 ### Add new colors
-./theme.ts
 ```jsx
 import { setColor } from 'awesome-gcl'
 
