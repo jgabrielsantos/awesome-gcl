@@ -7,24 +7,26 @@ import { ToastWrapperPropType } from "./types";
 export const Toast = ({
   toasts
 }: Readonly<ToastWrapperPropType>) => (
-  <Styled.WrapperStyled>
+  <Styled.WrapperStyled
+    data-testid='toast-wrapper'
+  >
     {toasts.map((toast, index) => (
       <Styled.ToastStyled
         key={index}
-        name={toast.name}
+        id={toast.id}
         theme={toast.theme}
         isOpen={toast.isOpen}
         className={toast.className}
-        data-testid='toast-wrapper'
+        data-testid={`toast-${toast.id}`}
       >
         {toast.children}
         <Styled.CloseButtonStyled
           onClick={toast.handleClose}
-          data-testid='toast-close-button'
+          data-testid={`toast-close-button-${toast.id}`}
         >
           <FontAwesomeIcon
             icon={faTimes}
-            data-testid='toast-close-icon'
+            data-testid={`toast-close-icon-${toast.id}`}
           />
         </Styled.CloseButtonStyled>
       </Styled.ToastStyled>

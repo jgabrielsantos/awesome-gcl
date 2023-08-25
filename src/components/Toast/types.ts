@@ -1,7 +1,7 @@
 type ToastThemePropTypes = 'info' | 'success' | 'fail' | 'warning'
 
 export type ToastComponentPropTypes = {
-  name: string
+  id: string
   theme: ToastThemePropTypes
   isOpen: boolean
   handleClose: () => void
