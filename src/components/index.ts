@@ -1,5 +1,6 @@
 export { Button } from './Button'
 export { Figure } from './Figure'
 export { Input } from './Input'
+export { Modal } from './Modal'
 export { Select } from './Select'
 export { Toast } from './Toast'
