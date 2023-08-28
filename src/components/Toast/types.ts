@@ -4,11 +4,15 @@ export type ToastComponentPropTypes = {
   id: string
   theme: ToastThemePropTypes
   isOpen: boolean
-  handleClose: () => void
+  handleClose: React.MouseEventHandler<HTMLButtonElement>
   children: React.ReactNode
   className?: string
 }
 
 export type ToastWrapperPropType = {
-  toasts: ToastComponentPropTypes[]
+  toastList: ToastComponentPropTypes[]
+}
+
+export type UseToastPropTypes = ToastWrapperPropType & {
+  setToastList: React.Dispatch<React.SetStateAction<ToastComponentPropTypes[]>>
 }

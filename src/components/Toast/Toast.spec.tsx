@@ -43,7 +43,7 @@ describe('Component design', () => {
   it('Wrapper', () => {
     render(
       <Toast
-        toasts={toastsMock}
+        toastList={toastsMock}
       />
     )
 
@@ -64,7 +64,7 @@ describe('Component design', () => {
   it('Toasts', () => {
     render(
       <Toast
-        toasts={toastsMock}
+        toastList={toastsMock}
       />
     )
 
@@ -78,22 +78,22 @@ describe('Component design', () => {
     expect(successToast).toHaveStyleRule('padding',  `${toRem(10)} ${toRem(12)}`)
     expect(successToast).toHaveStyleRule('gap',  toRem(6))
     expect(successToast).toHaveStyleRule('border-radius',  toRem(6))
-    expect(successToast).toHaveStyleRule('background-color',  colors.support.success[5])
+    expect(successToast).toHaveStyleRule('background-color', colors.support.success[5])
 
     const failToast = screen.getByTestId('toast-fail')
-    expect(failToast).toHaveStyleRule('background-color',  colors.support.alert[5])
+    expect(failToast).toHaveStyleRule('background-color', colors.support.alert[5])
 
     const warningToast = screen.getByTestId('toast-warning')
-    expect(warningToast).toHaveStyleRule('background-color',  colors.support.warning[5])
+    expect(warningToast).toHaveStyleRule('background-color', colors.support.warning[5])
 
     const infoToast = screen.getByTestId('toast-info')
-    expect(infoToast).toHaveStyleRule('background-color',  colors.primary[5])
+    expect(infoToast).toHaveStyleRule('background-color', colors.primary[5])
   })
 
   it('Close button', () => {
     render(
       <Toast
-        toasts={toastsMock}
+        toastList={toastsMock}
       />
     )
 
@@ -111,7 +111,7 @@ describe('Component logic', () => {
   it('Should call handleCLick function on toast close button', () => {
     render(
       <Toast
-        toasts={toastsMock}
+        toastList={toastsMock}
       />
     )
 
