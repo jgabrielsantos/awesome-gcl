@@ -2,7 +2,7 @@ export type CheckboxPropTypes = {
   checked: boolean
   handleClick: React.MouseEventHandler
   disabled?: boolean
-  description?: string
+  label?: string
   className?: string
 }
 

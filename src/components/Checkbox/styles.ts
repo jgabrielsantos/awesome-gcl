@@ -23,19 +23,20 @@ export const InputStyled = styled.input<StyledPropTypes>`
 
   &:disabled {
     cursor: not-allowed;
+    border: 1px solid ${colors.grayscale[40]};
     background-color: ${colors.grayscale[40]};
   }
 `
 
-export const IconStyled = styled(FontAwesomeIcon)<StyledPropTypes>`
+export const IconStyled = styled(FontAwesomeIcon)`
   width: ${toRem(16)};
-  display: ${({ checked }) => checked ? 'flex' : ' none'};
+  display: flex;
   color: ${colors.white[100]};
   position: absolute;
   left: 2px;
   cursor: pointer;
 `
 
-export const DescriptionStyled = styled.label`
+export const LabelStyled = styled.label`
   font-size: 1rem;
 `

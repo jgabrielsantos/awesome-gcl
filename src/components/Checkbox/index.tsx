@@ -7,7 +7,7 @@ export const Checkbox = ({
   checked,
   handleClick,
   disabled,
-  description,
+  label,
   className
 }: CheckboxPropTypes) => (
   <Styled.Wrapper
@@ -19,20 +19,22 @@ export const Checkbox = ({
       checked={checked}
       onClick={handleClick}
       disabled={disabled}
+      readOnly
       data-testid='checkbox-input'
     />
-    <Styled.IconStyled
-      onClick={handleClick}
-      checked={checked}
-      icon={faCheck}
-      data-testid='checkbox-icon'
-    />
-    {description && (
-      <Styled.DescriptionStyled
-        data-testid='checkbox-description'
+    {checked && (
+      <Styled.IconStyled
+        onClick={handleClick}
+        icon={faCheck}
+        data-testid='checkbox-icon'
+      />
+    )}
+    {label && (
+      <Styled.LabelStyled
+        data-testid='checkbox-label'
       >
-        {description}
-      </Styled.DescriptionStyled>
+        {label}
+      </Styled.LabelStyled>
     )}
   </Styled.Wrapper>
 )
