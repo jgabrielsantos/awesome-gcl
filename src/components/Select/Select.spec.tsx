@@ -94,6 +94,7 @@ describe('Select Component default styles', () => {
     expect(optionsWrapper).toHaveStyleRule('position', 'absolute')
     expect(optionsWrapper).toHaveStyleRule('right', '0')
     expect(optionsWrapper).toHaveStyleRule('top', '110%')
+    expect(optionsWrapper).toHaveStyleRule('background-color', colors.white[100])
 
     const inputWrapper = screen.getByTestId('select-input-wrapper')
     fireEvent.click(inputWrapper)
