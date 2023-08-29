@@ -24,9 +24,13 @@ import { Button } from 'awesome-gcl'
 ## Components
 All components are built based on the styled-components library!
 - Button
+- Checkbox
 - Figure
-- Select
 - Input
+- Modal
+- Select
+- Toast
+- User
 
 ### Customize a component
 Add new css rules or overwrite the existing ones

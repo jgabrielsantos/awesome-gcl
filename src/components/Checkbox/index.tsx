@@ -6,7 +6,7 @@ import { faCheck } from "@fortawesome/free-solid-svg-icons";
 export const Checkbox = ({
   checked,
   handleClick,
-  disabled,
+  disabled = false,
   label,
   className
 }: CheckboxPropTypes) => (
