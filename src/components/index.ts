@@ -1,4 +1,5 @@
 export { Button } from './Button'
+export { Checkbox } from './Checkbox'
 export { Figure } from './Figure'
 export { Input } from './Input'
 export { Modal } from './Modal'
