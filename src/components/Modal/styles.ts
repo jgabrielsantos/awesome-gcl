@@ -7,7 +7,7 @@ export const ModalStyled = styled.dialog.withConfig({
   shouldForwardProp: (prop) => !['isOpen'].includes(prop)
 })<ModalStyledPropTypes>`
   position: absolute;
-  left: 50%;
+  right: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   display: ${({ isOpen }) => isOpen ? 'flex' : 'none'};

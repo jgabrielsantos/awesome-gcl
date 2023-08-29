@@ -18,7 +18,7 @@ describe('Component design', () => {
     const modal = screen.getByTestId('modal')
 
     expect(modal).toHaveStyleRule('position', 'absolute')
-    expect(modal).toHaveStyleRule('left', '50%')
+    expect(modal).toHaveStyleRule('right', '50%')
     expect(modal).toHaveStyleRule('top', '50%')
     expect(modal).toHaveStyleRule('transform', 'translate(-50%, -50%)')
     expect(modal).toHaveStyleRule('display', 'flex')
