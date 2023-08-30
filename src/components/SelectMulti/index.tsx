@@ -2,8 +2,9 @@ import React from "react";
 import * as Styled from './styles'
 import { SelectMultiPropTypes } from "./types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../Checkbox";
+import { useSelectMulti } from "./hooks";
 
 export const SelectMulti = ({
   options,
@@ -15,6 +16,10 @@ export const SelectMulti = ({
   placeholder,
   className
 }: SelectMultiPropTypes) => {
+  const hook = useSelectMulti({
+    selectedList: selected || []
+  })
+
   return (
     <Styled.Wrapper
       className={className}
@@ -28,7 +33,7 @@ export const SelectMulti = ({
         </Styled.LabelStyled>
       )}
       <Styled.ListWrapper
-        onClick={() => null} // TODO: toggle options list
+        onClick={hook.hookSetIsOptionListVisible}
         disabled={disabled}
         data-testid='select-multi-select-list-wrapper'
       >
@@ -44,6 +49,7 @@ export const SelectMulti = ({
         >
           {selected?.map(item => (
             <Styled.SelectedStyled
+              onClick={(event) => event.stopPropagation()}
               key={item.id}
               data-testid='select-multi-selected-item'
             >
@@ -57,23 +63,22 @@ export const SelectMulti = ({
           ))}
         </Styled.SelectedListStyled>
         <FontAwesomeIcon
-          icon={faChevronDown}
+          icon={hook.hookIsOptionListVisible ? faChevronUp : faChevronDown}
           data-testid='select-multi-toggle-options-icon'
         />
       </Styled.ListWrapper>
 
       <Styled.OptionListStyled
-        isOpen
+        isOpen={hook.hookIsOptionListVisible}
         data-testid='seelct-multi-option-list'
       >
         {options.map(option => (
           <Styled.OptionItemStyled
             value={option.id}
-            onClick={() => selected?.find(selected => selected.id === option.id) ? removeOption(option) : addOption(option)}
+            onClick={() => hook.hookMarkCheckbox(option) ? removeOption(option) : addOption(option)}
           >
             <Checkbox
-              checked={selected?.find(selected => selected.id === option.id) ? true : false || false}
-              handleClick={() => null}
+              checked={hook.hookMarkCheckbox(option) ? true : false || false}
               label={option.label}
             />
           </Styled.OptionItemStyled>

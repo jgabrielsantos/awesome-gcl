@@ -1,4 +1,4 @@
-type ListItemPropTypes = {
+export type ListItemPropTypes = {
   id: string
   label: string
 }
@@ -16,4 +16,10 @@ export type SelectMultiPropTypes = {
 
 export type StyledPropTypes = Readonly<Pick<SelectMultiPropTypes, 'disabled'>> & {
   isOpen: boolean
+}
+
+export type UseSelectMultiPropTypes = {
+  isVisible: boolean
+  setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
+  selectedList: ListItemPropTypes[]
 }

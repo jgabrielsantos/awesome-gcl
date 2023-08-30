@@ -35,6 +35,7 @@ export const ListWrapper = styled.div<Pick<StyledPropTypes, 'disabled'>>`
 export const PlaceholderStyled = styled.p`
   font-size: 1rem;
   color: ${colors.grayscale[80]};
+  width: 100%;
 `
 
 export const SelectedListStyled = styled.div`
@@ -52,6 +53,12 @@ export const SelectedStyled = styled.div`
   justify-content: space-between;
   gap: ${toRem(6)};
   padding: ${toRem(8)} ${toRem(12)};
+  border-radius: ${toRem(4)};
+  background-color: ${colors.grayscale[0]};
+
+  &:hover {
+    background-color: ${colors.support.alert[5]};
+  }
 `
 
 export const OptionListStyled = styled.ul.withConfig({
