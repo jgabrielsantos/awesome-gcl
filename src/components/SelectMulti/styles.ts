@@ -53,7 +53,7 @@ export const SelectedStyled = styled.div`
   justify-content: space-between;
   gap: ${toRem(6)};
   padding: ${toRem(8)} ${toRem(12)};
-  border-radius: ${toRem(4)};
+  border-radius: ${toRem(6)};
   background-color: ${colors.grayscale[0]};
 
   &:hover {

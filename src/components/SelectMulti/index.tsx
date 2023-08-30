@@ -12,12 +12,13 @@ export const SelectMulti = ({
   removeOption,
   label,
   selected,
-  disabled,
+  disabled = false,
   placeholder,
   className
 }: SelectMultiPropTypes) => {
   const hook = useSelectMulti({
-    selectedList: selected || []
+    selectedList: selected || [],
+    disabled
   })
 
   return (
@@ -37,7 +38,7 @@ export const SelectMulti = ({
         disabled={disabled}
         data-testid='select-multi-select-list-wrapper'
       >
-        {placeholder && selected?.length === 0 && (
+        {placeholder && (selected?.length === 0 || selected === undefined) && (
           <Styled.PlaceholderStyled
           data-testid='select-multi-placeholder'
           >
@@ -64,18 +65,20 @@ export const SelectMulti = ({
         </Styled.SelectedListStyled>
         <FontAwesomeIcon
           icon={hook.hookIsOptionListVisible ? faChevronUp : faChevronDown}
-          data-testid='select-multi-toggle-options-icon'
+          data-testid='select-multi-toggle-options-list-icon'
         />
       </Styled.ListWrapper>
 
       <Styled.OptionListStyled
         isOpen={hook.hookIsOptionListVisible}
-        data-testid='seelct-multi-option-list'
+        data-testid='select-multi-options-list'
       >
         {options.map(option => (
           <Styled.OptionItemStyled
+            key={option.id}
             value={option.id}
             onClick={() => hook.hookMarkCheckbox(option) ? removeOption(option) : addOption(option)}
+            data-testid='select-multi-options-item'
           >
             <Checkbox
               checked={hook.hookMarkCheckbox(option) ? true : false || false}

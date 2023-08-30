@@ -22,4 +22,5 @@ export type UseSelectMultiPropTypes = {
   isVisible: boolean
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>
   selectedList: ListItemPropTypes[]
+  disabled: boolean
 }

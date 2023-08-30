@@ -3,28 +3,31 @@ import { ListItemPropTypes, UseSelectMultiPropTypes } from "../types"
 
 export const toggleOptionsListVisibility = ({
   isVisible,
-  setIsVisible
-}: Readonly<Pick<UseSelectMultiPropTypes, 'isVisible' | 'setIsVisible'>>) => () => {
+  setIsVisible,
+  disabled
+}: Readonly<Pick<UseSelectMultiPropTypes, 'isVisible' | 'setIsVisible' | 'disabled'>>) => () => {
+  if (disabled) return
   setIsVisible(!isVisible)
 }
 
 export const markCheckbox = ({
-  selectedList
+  selectedList,
 }: Readonly<Pick<UseSelectMultiPropTypes, 'selectedList'>>) => (optionItem: ListItemPropTypes) => {
-  if (selectedList.find(selected => selected.id === optionItem.id)) return true
-  return false
+  if (selectedList) return selectedList.find(selected => selected.id === optionItem.id)
 }
 
 export const useSelectMulti = ({
-  selectedList
-}: Readonly<Pick<UseSelectMultiPropTypes, 'selectedList'>>) => {
+  selectedList,
+  disabled
+}: Readonly<Pick<UseSelectMultiPropTypes, 'selectedList' | 'disabled'>>) => {
   const [isOptionListVisible, setIsOptionListVisible] = useState(false)
 
   return {
     hookIsOptionListVisible: isOptionListVisible,
     hookSetIsOptionListVisible: toggleOptionsListVisibility({
       isVisible: isOptionListVisible,
-      setIsVisible: setIsOptionListVisible
+      setIsVisible: setIsOptionListVisible,
+      disabled
     }),
     hookMarkCheckbox: markCheckbox({
       selectedList
