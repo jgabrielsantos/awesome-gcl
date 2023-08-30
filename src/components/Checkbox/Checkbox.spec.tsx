@@ -3,7 +3,7 @@ import { screen, render, fireEvent } from "@testing-library/react";
 import { colors } from "../../styles";
 import { toRem } from "../../utils";
 import 'jest-styled-components'
-import { Checkbox } from ".";
+import { Checkbox } from "./index";
 
 const handleClickSpy = jest.fn()
 

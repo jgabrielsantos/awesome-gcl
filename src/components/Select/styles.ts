@@ -43,6 +43,7 @@ export const OptionListStyled = styled.ul.withConfig({
   right: 0;
   top: 110%;
   background-color: ${colors.white[100]};
+  z-index: 1;
 `
 
 export const OptionItemStyled = styled.li`
