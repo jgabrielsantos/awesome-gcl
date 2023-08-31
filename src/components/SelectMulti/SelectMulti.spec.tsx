@@ -101,7 +101,7 @@ describe('Component design', () => {
     const placeholder = screen.getByTestId('select-multi-placeholder')
 
     expect(placeholder).toHaveStyleRule('font-size', '1rem')
-    expect(placeholder).toHaveStyleRule('color', colors.grayscale[80])
+    expect(placeholder).toHaveStyleRule('color', colors.grayscale[60])
     expect(placeholder).toHaveStyleRule('width', '100%')
   })
 

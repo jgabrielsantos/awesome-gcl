@@ -34,7 +34,8 @@ export const ListWrapper = styled.div<Pick<StyledPropTypes, 'disabled'>>`
 
 export const PlaceholderStyled = styled.p`
   font-size: 1rem;
-  color: ${colors.grayscale[80]};
+  color: ${colors.grayscale[60]};
+  white-space: nowrap;
   width: 100%;
 `
 
@@ -43,6 +44,7 @@ export const SelectedListStyled = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-start;
+  flex-wrap: wrap;
   gap: ${toRem(6)};
 `
 
