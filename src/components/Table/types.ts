@@ -23,4 +23,5 @@ export type UseTablePropTypes = Pick<TablePropTypes, 'data'> & {
 export type RowPropTypes = Pick<TablePropTypes, 'headers' | 'checkbox'> & {
   headersCheck: boolean
   row: DataPropTypes
+  index: number
 }
