@@ -2,19 +2,21 @@ import React, { useEffect, useMemo, useState } from "react";
 import { RowPropTypes, TablePropTypes } from "./types";
 import * as Styled from './styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faSort } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faSort } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../Checkbox";
 import { useTable } from "./hooks";
 
 const renderRows = ({
   checkbox,
   headers,
-  headersCheck,
+  headerCheck,
   row,
   index,
   onRowClick,
+  details,
 }: RowPropTypes) => {
   const [checked, setChecked] = useState(false)
+  const [detailsOpen, setDetailsOpen] = useState(false)
 
   const rowMemoed = useMemo(() => ({
     row,
@@ -22,44 +24,65 @@ const renderRows = ({
     checked
   }), [checked])
 
+  const onClickHandler = () => {
+    if(onRowClick) onRowClick(rowMemoed.row)
+  }
+
   useEffect(() => {
-    headersCheck ? setChecked(true) : setChecked(false)
-  }, [headersCheck])
+    setChecked(headerCheck)
+  }, [headerCheck])
 
   return (
     <Styled.RowStyled
-      id={rowMemoed.index.toString()}
-      key={rowMemoed.index}
-      onClick={onRowClick ? () => onRowClick(row) : undefined}
-      hasClickFunction={!!onRowClick}
-    >
-      {checkbox && (
-        <td>
-          <Checkbox
-            checked={rowMemoed.checked}
-            handleClick={(event) => {
-              event.stopPropagation()
-              setChecked(!rowMemoed.checked)
-            }}
-          />
-        </td>
-      )}
-      {headers.map(header => (
-        <Styled.DataStyled>
-          {rowMemoed.row[header.id]}
-        </Styled.DataStyled>
-      ))}
-      {rowMemoed.row.rowDetails && (
-        <td>
-          <FontAwesomeIcon
-            onClick={(event) => {
-              event.stopPropagation()
-              console.log(`row ${rowMemoed.index} expansion button was clicked`)
-            }}
-            icon={faPlus}
-          />
-        </td>
-      )}
+      id={`row-${rowMemoed.index.toString()}`}
+      key={`row-${rowMemoed.index}`}
+      >
+      <Styled.RowMainStyled
+        id={`${rowMemoed.index.toString()}-default`}
+        key={`${rowMemoed.index}-default`}
+        onClick={onClickHandler}
+        hasClickFunction={!!onRowClick}
+      >
+        {checkbox && (
+          <div>
+            <Checkbox
+              checked={rowMemoed.checked}
+              handleClick={(event) => {
+                event.stopPropagation()
+                setChecked(!rowMemoed.checked)
+              }}
+            />
+          </div>
+        )}
+        {headers.map(header => (
+          <Styled.DataStyled
+            key={`${rowMemoed.index}-data-${header.id}`}
+          >
+            {rowMemoed.row[header.id]}
+          </Styled.DataStyled>
+        ))}
+        <Styled.IconWrapper
+          onClick={(event) => {
+            event.stopPropagation()
+            setDetailsOpen(!detailsOpen)
+          }}
+        >
+          {details && (
+            <FontAwesomeIcon
+              icon={detailsOpen ? faChevronUp : faChevronDown}
+            />
+          )}
+        </Styled.IconWrapper>
+      </Styled.RowMainStyled>
+      <Styled.RowDetailStyled
+        className="row-details"
+        id={`${rowMemoed.index.toString()}-details`}
+        key={`${rowMemoed.index}-details`}
+        isOpen={detailsOpen}
+        onClick={() => setDetailsOpen(false)}
+      >
+        {details && details(row)}
+      </Styled.RowDetailStyled>
     </Styled.RowStyled>
   )
 }
@@ -69,27 +92,32 @@ export const Table = ({
   data,
   checkbox,
   onRowClick,
-  loading,
+  details,
+  className,
 }: TablePropTypes) => {
   const hook = useTable()
 
   return (
-    <Styled.TableStyled>
+    <Styled.TableStyled
+      className={className}
+    >
       <Styled.HeadStyled>
         <Styled.RowStyled
-          hasClickFunction={false}
+          isTableHeader
         >
           {checkbox && (
             <th>
               <Checkbox
                 checked={hook.hookHeaderCheck}
-                handleClick={hook.hookSetHeaderCheck}
+                handleClick={() => {
+                  hook.hookSetHeaderCheck(!hook.hookHeaderCheck)
+                }}
               />
             </th>
           )}
           {headers.map(header => (
             <Styled.HeaderStyled
-              key={header.id}
+              key={`header-${header.id}`}
             >
               {header.label}
               <Styled.IconStyled
@@ -103,11 +131,12 @@ export const Table = ({
 
       <tbody>
         {data.map((row, index) => renderRows({
-          headersCheck: hook.hookHeaderCheck,
+          headerCheck: hook.hookHeaderCheck,
           headers,
           row,
           index,
           onRowClick,
+          details,
           checkbox
         }))}
       </tbody>

@@ -4,9 +4,7 @@ type HeaderPropTypes = {
 }
 
 export type DataPropTypes = Record<string, any> & {
-  rowDetails?: {
-    children: React.ReactNode
-  }
+  details?: any
 }
 
 export type TablePropTypes = {
@@ -14,19 +12,33 @@ export type TablePropTypes = {
   data: DataPropTypes[]
   onRowClick?: (row: DataPropTypes) => void
   checkbox?: boolean
-  loading?: boolean
+  details?: (row: DataPropTypes) => React.ReactNode
+  className?: string
 }
 
 export type UseTablePropTypes = Pick<TablePropTypes, 'data'> & {
   setList: React.Dispatch<React.SetStateAction<DataPropTypes[]>>
 }
 
-export type RowPropTypes = Pick<TablePropTypes, 'headers' | 'checkbox' | 'onRowClick'> & {
-  headersCheck: boolean
+export type RowPropTypes = Pick<TablePropTypes, 'headers' | 'checkbox' | 'onRowClick' | 'details'> & {
+  headerCheck: boolean
   row: DataPropTypes
   index: number
 }
 
+export type UseHeaderCheckPropTypes = {
+  headerCheck: boolean
+  setHeaderCheck: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 export type RowStyledPropTypes = {
+  isTableHeader?: boolean
+}
+
+export type RowMainStyledPropTypes = {
   hasClickFunction: boolean
+}
+
+export type RowDetailStyledPropTypes = {
+  isOpen: boolean
 }
