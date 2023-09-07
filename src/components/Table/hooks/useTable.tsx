@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react"
-import { DataPropTypes, UseTablePropTypes } from "../types"
+import { useState } from "react"
+import { UseTablePropTypes } from "../types"
 
 export const setHeaderCheckHandler = ({
   headerCheck,
@@ -8,9 +8,13 @@ export const setHeaderCheckHandler = ({
   setHeaderCheck(!headerCheck)
 }
 
-export const useTable = ({
+export const getCheckedRows = ({
   data
 }: Pick<UseTablePropTypes, 'data'>) => {
+  data.filter(row => row.checked === true)
+}
+
+export const useTable = () => {
   const [headerCheck, setHeaderCheck] = useState(false)
 
   return {

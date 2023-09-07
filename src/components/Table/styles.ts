@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { toRem } from "../../utils";
+import { RowStyledPropTypes } from "./types";
 
 export const TableStyled = styled.table`
   width: 100%;
@@ -17,7 +18,7 @@ export const HeaderStyled = styled.th`
   gap: ${toRem(6)};
 `
 
-export const RowStyled = styled.tr`
+export const RowStyled = styled.tr<RowStyledPropTypes>`
   width: 100%;
   display: flex;
   align-items: center;
@@ -25,6 +26,7 @@ export const RowStyled = styled.tr`
   padding: 1rem 0.5rem;
   border-bottom: 1px solid ${colors.grayscale[10]};
   gap: ${toRem(10)};
+  cursor: ${({ hasClickFunction }) => hasClickFunction ? 'pointer' : 'default'};
 
   &:last-child {
     border: none;
