@@ -1,10 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { RowPropTypes, TablePropTypes } from "./types";
+import { DataPropTypes, RowPropTypes, TablePropTypes } from "./types";
 import * as Styled from './styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp, faSort } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../Checkbox";
-import { useTable } from "./hooks";
 
 const renderRows = ({
   checkbox,
@@ -13,6 +12,7 @@ const renderRows = ({
   row,
   index,
   onRowClick,
+  onRowCheckboxChange,
   details,
 }: RowPropTypes) => {
   const [checked, setChecked] = useState(false)
@@ -24,13 +24,22 @@ const renderRows = ({
     checked
   }), [checked])
 
-  const onClickHandler = () => {
-    if(onRowClick) onRowClick(rowMemoed.row)
+  const rowMainOnClickHandler = () => {
+    if(onRowClick) onRowClick(rowMemoed)
+  }
+
+  const checkboxOnClickHandler = (event: React.MouseEvent<Element, MouseEvent>) => {
+    event.stopPropagation()
+    setChecked(!rowMemoed.checked)
   }
 
   useEffect(() => {
     setChecked(headerCheck)
   }, [headerCheck])
+
+  useEffect(() => {
+    if(onRowCheckboxChange) onRowCheckboxChange(rowMemoed)
+  }, [checked])
 
   return (
     <Styled.RowStyled
@@ -40,17 +49,14 @@ const renderRows = ({
       <Styled.RowMainStyled
         id={`${rowMemoed.index.toString()}-default`}
         key={`${rowMemoed.index}-default`}
-        onClick={onClickHandler}
+        onClick={rowMainOnClickHandler}
         hasClickFunction={!!onRowClick}
       >
         {checkbox && (
           <div>
             <Checkbox
               checked={rowMemoed.checked}
-              handleClick={(event) => {
-                event.stopPropagation()
-                setChecked(!rowMemoed.checked)
-              }}
+              handleClick={checkboxOnClickHandler}
             />
           </div>
         )}
@@ -92,10 +98,11 @@ export const Table = ({
   data,
   checkbox,
   onRowClick,
+  onRowCheckboxChange,
   details,
   className,
 }: TablePropTypes) => {
-  const hook = useTable()
+  const [headerCheck, setHeaderCheck] = useState(false)
 
   return (
     <Styled.TableStyled
@@ -108,9 +115,9 @@ export const Table = ({
           {checkbox && (
             <th>
               <Checkbox
-                checked={hook.hookHeaderCheck}
+                checked={headerCheck}
                 handleClick={() => {
-                  hook.hookSetHeaderCheck(!hook.hookHeaderCheck)
+                  setHeaderCheck(!headerCheck)
                 }}
               />
             </th>
@@ -131,11 +138,12 @@ export const Table = ({
 
       <tbody>
         {data.map((row, index) => renderRows({
-          headerCheck: hook.hookHeaderCheck,
+          headerCheck,
           headers,
           row,
           index,
           onRowClick,
+          onRowCheckboxChange,
           details,
           checkbox
         }))}
