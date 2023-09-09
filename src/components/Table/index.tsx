@@ -6,13 +6,12 @@ import { faChevronDown, faChevronUp, faSort } from "@fortawesome/free-solid-svg-
 import { Checkbox } from "../Checkbox";
 
 const renderRows = ({
-  checkbox,
+  checkedArray,
   headers,
   headerCheck,
   row,
   index,
   onRowClick,
-  onRowCheckboxChange,
   details,
 }: RowPropTypes) => {
   const [checked, setChecked] = useState(false)
@@ -25,7 +24,7 @@ const renderRows = ({
   }), [checked])
 
   const rowMainOnClickHandler = () => {
-    if(onRowClick) onRowClick(rowMemoed)
+    if(onRowClick) onRowClick(rowMemoed.row)
   }
 
   const checkboxOnClickHandler = (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -38,8 +37,12 @@ const renderRows = ({
   }, [headerCheck])
 
   useEffect(() => {
-    if(onRowCheckboxChange) onRowCheckboxChange(rowMemoed)
-  }, [checked])
+    rowMemoed.checked ?
+    checkedArray?.push(rowMemoed) :
+    checkedArray?.splice(rowMemoed.index, 1)
+
+    checkedArray?.sort((a, b) => a.index - b.index)
+  }, [rowMemoed.checked])
 
   return (
     <Styled.RowStyled
@@ -52,7 +55,7 @@ const renderRows = ({
         onClick={rowMainOnClickHandler}
         hasClickFunction={!!onRowClick}
       >
-        {checkbox && (
+        {checkedArray && (
           <div>
             <Checkbox
               checked={rowMemoed.checked}
@@ -96,13 +99,20 @@ const renderRows = ({
 export const Table = ({
   headers,
   data,
-  checkbox,
+  checkedArray,
   onRowClick,
-  onRowCheckboxChange,
   details,
   className,
 }: TablePropTypes) => {
   const [headerCheck, setHeaderCheck] = useState(false)
+
+  const onHeaderClickHandler = () => {
+    setHeaderCheck(!headerCheck)
+  }
+
+  const headerCheckMemoed = useMemo(() => ({
+    headerCheck
+  }), [headerCheck])
 
   return (
     <Styled.TableStyled
@@ -112,13 +122,11 @@ export const Table = ({
         <Styled.RowStyled
           isTableHeader
         >
-          {checkbox && (
+          {checkedArray && (
             <th>
               <Checkbox
-                checked={headerCheck}
-                handleClick={() => {
-                  setHeaderCheck(!headerCheck)
-                }}
+                checked={headerCheckMemoed.headerCheck}
+                handleClick={onHeaderClickHandler}
               />
             </th>
           )}
@@ -138,14 +146,13 @@ export const Table = ({
 
       <tbody>
         {data.map((row, index) => renderRows({
-          headerCheck,
+          headerCheck: headerCheckMemoed.headerCheck,
           headers,
           row,
           index,
           onRowClick,
-          onRowCheckboxChange,
           details,
-          checkbox
+          checkedArray
         }))}
       </tbody>
     </Styled.TableStyled>

@@ -11,8 +11,7 @@ export type TablePropTypes = {
   headers: HeaderPropTypes[]
   data: DataPropTypes[]
   onRowClick?: (row: DataPropTypes) => void
-  onRowCheckboxChange?: (row: DataPropTypes) => void
-  checkbox?: boolean
+  checkedArray?: DataPropTypes[]
   details?: (row: DataPropTypes) => React.ReactNode
   className?: string
 }
@@ -23,10 +22,9 @@ export type UseTablePropTypes = Pick<TablePropTypes, 'data'> & {
 
 export type RowPropTypes = Pick<
 TablePropTypes, 'headers'
-  | 'checkbox'
+  | 'checkedArray'
   | 'onRowClick'
   | 'details'
-  | 'onRowCheckboxChange'
 > & {
   headerCheck: boolean
   row: DataPropTypes
