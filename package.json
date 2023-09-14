@@ -28,6 +28,7 @@
     "rollup"
   ],
   "scripts": {
+    "dev": "nodemon",
     "rollup": "rollup -c",
     "test:watch": "jest --watchAll ./src/components",
     "test:coverage": "jest --coverage ./src"
@@ -45,6 +46,7 @@
     "jest-environment-jsdom": "^29.6.2",
     "jest-styled-components": "^7.1.1",
     "jsdom": "^22.1.0",
+    "nodemon": "^3.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.28.0",

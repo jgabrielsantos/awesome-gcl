@@ -1,0 +1,9 @@
+{
+  "restartable": "rs",
+  "watch": ["src"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js, ts, tsx",
+  "exec": "rollup -c"
+}
