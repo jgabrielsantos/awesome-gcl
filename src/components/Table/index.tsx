@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { DataPropTypes, RowPropTypes, TablePropTypes } from "./types";
+import { RowPropTypes, TablePropTypes } from "./types";
 import * as Styled from './styles'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronDown, faChevronUp, faSort } from "@fortawesome/free-solid-svg-icons";
