@@ -2,7 +2,7 @@ type ButtonTypeEnum = 'button'
 | 'submit'
 | 'reset'
 
-type ButtonThemeEnum = 'primary'
+export type ButtonThemeEnum = 'primary'
 | 'secondary'
 | 'tertiary'
 | 'destructive-primary'
@@ -20,7 +20,7 @@ export type ButtonComponentPropTypes = {
   children: React.ReactNode
   type?: ButtonTypeEnum
   size?: ButtonSizeEnum
-  customTheme?: ButtonThemeEnum
+  theme?: ButtonThemeEnum
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
   className?: string

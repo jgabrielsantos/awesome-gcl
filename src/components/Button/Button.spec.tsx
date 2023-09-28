@@ -60,7 +60,7 @@ describe('Button default forms', () => {
     expect(button).toHaveStyleRule('padding', `${toRem(10)} ${toRem(20)}`)
   })
 
-  it('Should have primary customTheme', () => {
+  it('Should have primary theme', () => {
     render(
       <Button
         handleClick={handleClickMock}
@@ -149,11 +149,11 @@ describe('Button sizes styles', () => {
 })
 
 describe('Button themes styles', () => {
-  it('Should render primary customTheme respective style when receiving the prop', () => {
+  it('Should render primary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="primary"
+        theme="primary"
       >
         {buttonChildMock}
       </Button>
@@ -175,11 +175,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render secondary customTheme respective style when receiving the prop', () => {
+  it('Should render secondary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="secondary"
+        theme="secondary"
       >
         {buttonChildMock}
       </Button>
@@ -201,11 +201,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render tertiary customTheme respective style when receiving the prop', () => {
+  it('Should render tertiary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="tertiary"
+        theme="tertiary"
       >
         {buttonChildMock}
       </Button>
@@ -227,11 +227,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render destructive-primary customTheme respective style when receiving the prop', () => {
+  it('Should render destructive-primary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="destructive-primary"
+        theme="destructive-primary"
       >
         {buttonChildMock}
       </Button>
@@ -253,11 +253,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render destructive-secondary customTheme respective style when receiving the prop', () => {
+  it('Should render destructive-secondary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="destructive-secondary"
+        theme="destructive-secondary"
       >
         {buttonChildMock}
       </Button>
@@ -279,11 +279,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render success-primary customTheme respective style when receiving the prop', () => {
+  it('Should render success-primary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="success-primary"
+        theme="success-primary"
       >
         {buttonChildMock}
       </Button>
@@ -305,11 +305,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render success-secondary customTheme respective style when receiving the prop', () => {
+  it('Should render success-secondary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="success-secondary"
+        theme="success-secondary"
       >
         {buttonChildMock}
       </Button>
@@ -331,11 +331,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render contrast-primary customTheme respective style when receiving the prop', () => {
+  it('Should render contrast-primary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="contrast-primary"
+        theme="contrast-primary"
       >
         {buttonChildMock}
       </Button>
@@ -357,11 +357,11 @@ describe('Button themes styles', () => {
     })
   })
 
-  it('Should render contrast-secondary customTheme respective style when receiving the prop', () => {
+  it('Should render contrast-secondary theme respective style when receiving the prop', () => {
     render(
       <Button
         handleClick={handleClickMock}
-        customTheme="contrast-secondary"
+        theme="contrast-secondary"
       >
         {buttonChildMock}
       </Button>

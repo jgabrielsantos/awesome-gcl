@@ -1,25 +1,25 @@
 import React from 'react'
-import * as Styled from './styles'
+import { themes } from './styles'
 import { ButtonComponentPropTypes } from './types'
 
 export const Button = ({
   children,
   type = 'button',
   size = 'medium',
-  customTheme = 'primary',
+  theme = 'primary',
   handleClick,
   disabled = false,
   className
 }: Readonly<ButtonComponentPropTypes>) => (
-  <Styled.ButtonStyled
+  <button
     type={type}
-    size={size}
-    customTheme={customTheme}
+    // size={size}
+    // customTheme={customTheme}
     onClick={handleClick}
     disabled={disabled}
-    className={className}
+    className={`${themes[theme].join(" ")}`}
     data-testid='awesome-gcl-button-component'
   >
     {children}
-  </Styled.ButtonStyled>
+  </button>
 )
