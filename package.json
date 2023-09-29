@@ -5,8 +5,7 @@
   "author": "Joao Gabriel Santos",
   "license": "MIT",
   "types": "dist/index.d.ts",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -29,7 +28,7 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "rollup": "rollup -c",
+    "rollup": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c",
     "test:watch": "jest --watchAll ./src/components",
     "test:coverage": "jest --coverage ./src"
   },

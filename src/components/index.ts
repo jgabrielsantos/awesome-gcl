@@ -1,3 +1,4 @@
+import '../types/styles/styles.css'
 export { Button } from './Button'
 export { Checkbox } from './Checkbox'
 export { Figure } from './Figure'

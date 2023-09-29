@@ -1,5 +1,5 @@
 import React from 'react'
-import { themes } from './styles'
+import { ButtonStyles } from './styles'
 import { ButtonComponentPropTypes } from './types'
 
 export const Button = ({
@@ -9,17 +9,17 @@ export const Button = ({
   theme = 'primary',
   handleClick,
   disabled = false,
-  className
-}: Readonly<ButtonComponentPropTypes>) => (
-  <button
-    type={type}
-    // size={size}
-    // customTheme={customTheme}
-    onClick={handleClick}
-    disabled={disabled}
-    className={`${themes[theme].join(" ")}`}
-    data-testid='awesome-gcl-button-component'
-  >
-    {children}
-  </button>
-)
+}: Readonly<ButtonComponentPropTypes>) => {
+  const styles = new ButtonStyles()
+  return (
+    <button
+      type={type}
+      onClick={handleClick}
+      disabled={disabled}
+      className={styles.buildTheme(theme)}
+      data-testid='awesome-gcl-button-component'
+    >
+      {children}
+    </button>
+  )
+}

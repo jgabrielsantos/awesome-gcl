@@ -1,16 +1,18 @@
+import { ButtonStyles, IButtonStyle } from "./styles"
+
 type ButtonTypeEnum = 'button'
 | 'submit'
 | 'reset'
 
 export type ButtonThemeEnum = 'primary'
-| 'secondary'
-| 'tertiary'
-| 'destructive-primary'
-| 'destructive-secondary'
-| 'success-primary'
-| 'success-secondary'
-| 'contrast-primary'
-| 'contrast-secondary'
+// | 'secondary'
+// | 'tertiary'
+// | 'destructive-primary'
+// | 'destructive-secondary'
+// | 'success-primary'
+// | 'success-secondary'
+// | 'contrast-primary'
+// | 'contrast-secondary'
 
 type ButtonSizeEnum = 'large'
 | 'medium'
@@ -23,5 +25,4 @@ export type ButtonComponentPropTypes = {
   theme?: ButtonThemeEnum
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   disabled?: boolean
-  className?: string
 }

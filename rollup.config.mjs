@@ -14,11 +14,11 @@ export default [
       /\.css$/
     ],
     output: [
-      {
-        file: packageJson.main,
-        format: "cjs",
-        sourcemap: true,
-      },
+      // {
+      //   file: packageJson.main,
+      //   format: "cjs",
+      //   sourcemap: true,
+      // },
       {
         file: packageJson.module,
         format: "esm",
@@ -33,23 +33,20 @@ export default [
       commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       cssOnly(),
-      copy({
-        targets: [
-          {
-            src: './src/styles/*.css',
-            dest: [
-              'dist/cjs/types/styles',
-              'dist/cjs/styles',
-              'dist/esm/types/styles',
-              'dist/esm/styles',
-            ]
-          }
-        ]
-      })
+      // copy({
+      //   targets: [
+      //     {
+      //       src: './src/styles/styles.css',
+      //       dest: [
+      //         'dist/styles/'
+      //       ]
+      //     }
+      //   ]
+      // })
     ],
   },
   {
-    input: "dist/esm/types/index.d.ts",
+    input: "dist/types/index.d.ts",
     external: [
       /\.css$/
     ],

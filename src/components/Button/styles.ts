@@ -1,37 +1,47 @@
-import {styled} from 'styled-components';
-import { toRem } from '../../utils';
-import { colors } from '../../styles/theme';
 import { ButtonThemeEnum } from './types';
 
 /**
  * @param size          controls the font-size, line-height and padding
  * @param customTheme   controls the color, border and background color
- * @param disabled      controls the pointer, color, border and background color
+ * @param disabled      controls the cursor, color, border and background color
  * @return              style to be used by the Button component`
  * @see                 Button
 */
 
+const primaryTheme = new Map()
+primaryTheme.set('border-primary-50', 'border-primary-50')
+primaryTheme.set('text-white-100', 'text-white-100')
 
-export const themes: Record<ButtonThemeEnum, string[]> = {
-  primary: [
-    'p-100'
-    // "border-primary-50",
-    // "text-white-100",
-    // "bg-primary-50",
-    // "hover:border-primary-100",
-    // "hover:bg-primary-100",
-    // "disabled:border-grayscale-40",
-    // "disabled:text-grayscale-60",
-    // "disabled:text-grayscale-5",
-  ],
-  secondary: [],
-  tertiary: [],
-  "destructive-primary": [],
-  "destructive-secondary": [],
-  "success-primary": [],
-  "success-secondary": [],
-  "contrast-primary": [],
-  "contrast-secondary": []
+export interface IButtonStyle {
+  getTheme: (theme: ButtonThemeEnum) => Map<string, string>
+  buildTheme: (theme: ButtonThemeEnum) => string
+}
+
+export class ButtonStyles implements IButtonStyle {
+  private className: string
+  private themes: Record<ButtonThemeEnum, Map<string, string>> = {
+    primary: primaryTheme,
+    // secondary: [],
+    // tertiary: [],
+    // "destructive-primary": [],
+    // "destructive-secondary": [],
+    // "success-primary": [],
+    // "success-secondary": [],
+    // "contrast-primary": [],
+    // "contrast-secondary": []
+  }
+
+  constructor(className = '') {
+    this.className = className
+  }
+
+  getTheme(theme: ButtonThemeEnum) {
+    return this.themes[theme]
+  }
+
+  buildTheme(theme: ButtonThemeEnum) {
+    return [...this.getTheme(theme).values(), this.className].join(' ')
+  }
 }
 
 // type ButtonStylePropsTypes = Readonly<Pick<ButtonComponentPropTypes, 'size' | 'customTheme' | 'disabled'>>
