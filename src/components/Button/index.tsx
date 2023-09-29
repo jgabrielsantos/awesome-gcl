@@ -4,9 +4,9 @@ import { ButtonComponentPropTypes } from './types'
 
 export const Button = ({
   children,
-  type = 'button',
-  size = 'medium',
-  theme = 'primary',
+  type,
+  size,
+  theme,
   handleClick,
   disabled = false,
 }: Readonly<ButtonComponentPropTypes>) => {
@@ -16,7 +16,7 @@ export const Button = ({
       type={type}
       onClick={handleClick}
       disabled={disabled}
-      className={styles.buildTheme(theme)}
+      className={styles.buildStyleRules({theme, size})}
       data-testid='awesome-gcl-button-component'
     >
       {children}

@@ -1,222 +1,59 @@
-import { ButtonThemeEnum } from './types';
+import { ButtonComponentPropTypes, ButtonSizeEnum, ButtonThemeEnum } from './types';
 
 /**
  * @param size          controls the font-size, line-height and padding
- * @param customTheme   controls the color, border and background color
+ * @param theme   controls the color, border and background color
  * @param disabled      controls the cursor, color, border and background color
  * @return              style to be used by the Button component`
  * @see                 Button
 */
 
-const primaryTheme = new Map()
-primaryTheme.set('border-primary-50', 'border-primary-50')
-primaryTheme.set('text-white-100', 'text-white-100')
-
 export interface IButtonStyle {
-  getTheme: (theme: ButtonThemeEnum) => Map<string, string>
-  buildTheme: (theme: ButtonThemeEnum) => string
+  getThemeRules: (theme: ButtonThemeEnum) => Map<string, string>
+  getSizeRules: (size: ButtonSizeEnum) => Map<string, string>
+  buildStyleRules: ({theme, size}: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) => string
 }
 
 export class ButtonStyles implements IButtonStyle {
   private className: string
+  private sizes: Record<ButtonSizeEnum, Map<string, string>> = {
+    large: largeSize,
+    medium: mediumSize,
+    small: smallSize
+  }
   private themes: Record<ButtonThemeEnum, Map<string, string>> = {
     primary: primaryTheme,
-    // secondary: [],
-    // tertiary: [],
-    // "destructive-primary": [],
-    // "destructive-secondary": [],
-    // "success-primary": [],
-    // "success-secondary": [],
-    // "contrast-primary": [],
-    // "contrast-secondary": []
+    secondary: secondaryTheme,
+    tertiary: tertiaryTheme,
+    "destructive-primary": destructivePrimaryTheme,
+    "destructive-secondary": destructiveSecondaryTheme,
+    "success-primary": successPrimaryTheme,
+    "success-secondary": successSecondaryTheme,
+    "contrast-primary": contrastPrimaryTheme,
+    "contrast-secondary": contrastSecondaryTheme
   }
 
   constructor(className = '') {
     this.className = className
   }
 
-  getTheme(theme: ButtonThemeEnum) {
+  getThemeRules(theme: ButtonThemeEnum) {
     return this.themes[theme]
   }
 
-  buildTheme(theme: ButtonThemeEnum) {
-    return [...this.getTheme(theme).values(), this.className].join(' ')
+  getSizeRules(size: ButtonSizeEnum) {
+    return this.sizes[size]
+  }
+
+  buildStyleRules({ theme, size }: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) {
+    const classes = [
+      ...defaultRules.values(),
+      ...this.getThemeRules(theme).values(),
+      ...this.getSizeRules(size).values(),
+    ]
+
+    if (this.className !== '') classes.push(this.className)
+
+    return classes.join(' ')
   }
 }
-
-// type ButtonStylePropsTypes = Readonly<Pick<ButtonComponentPropTypes, 'size' | 'customTheme' | 'disabled'>>
-
-// export const ButtonStyled = styled.button.withConfig({
-//   shouldForwardProp: (prop) => !['customTheme'].includes(prop)
-// })<ButtonStylePropsTypes>`
-//   cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'pointer'};
-//   width: fit-content;
-//   height: fit-content;
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   align-items: center;
-//   border-radius: ${toRem(6)};
-//   font-weight: 500;
-
-//   font-size: ${({ size }) => {
-//     switch (size) {
-//       case 'large':
-//         return toRem(16)
-//       case 'medium':
-//         return toRem(14)
-//       case 'small':
-//         return toRem(12)
-//     }
-//   }};
-
-//   line-height: ${({ size }) => {
-//     switch(size) {
-//       case 'large':
-//         return toRem(24)
-//       case 'medium':
-//         return toRem(20)
-//       case 'small':
-//         return toRem(16)
-//     }
-//   }};
-
-//   padding: ${({ size }) => {
-//     switch(size) {
-//       case 'large':
-//         return `${toRem(12)} ${toRem(24)}`
-//       case 'medium':
-//         return `${toRem(10)} ${toRem(20)}`
-//       case 'small':
-//         return `${toRem(8)} ${toRem(12)}`
-//     }
-//   }};
-
-//   border-width: 1px;
-//   border-style: solid;
-
-//   border-color: ${({ customTheme }) => {
-//     switch(customTheme) {
-//       case 'primary':
-//         return colors.primary[50]
-//       case 'secondary':
-//         return colors.primary[50]
-//       case 'tertiary':
-//         return colors.grayscale[40]
-//       case 'destructive-primary':
-//         return colors.support.alert[50]
-//       case 'destructive-secondary':
-//         return colors.support.alert[50]
-//       case 'success-primary':
-//         return colors.support.success[50]
-//       case 'success-secondary':
-//         return colors.support.success[50]
-//       case 'contrast-primary':
-//         return colors.primary[50]
-//       case 'contrast-secondary':
-//         return colors.white[100]
-//     }
-//   }};
-
-//   color: ${({ customTheme }) => {
-//     switch(customTheme) {
-//       case 'primary':
-//         return colors.white[100]
-//       case 'secondary':
-//         return colors.primary[50]
-//       case 'tertiary':
-//         return colors.grayscale[100]
-//       case 'destructive-primary':
-//         return colors.white[100]
-//       case 'destructive-secondary':
-//         return colors.support.alert[50]
-//       case 'success-primary':
-//         return colors.white[100]
-//       case 'success-secondary':
-//         return colors.support.success[50]
-//       case 'contrast-primary':
-//         return colors.primary[50]
-//       case 'contrast-secondary':
-//         return colors.white[100]
-//     }
-//   }};
-
-//   background-color: ${({ customTheme }) => {
-//     switch(customTheme) {
-//       case 'primary':
-//         return colors.primary[50]
-//       case 'secondary':
-//         return colors.white[100]
-//       case 'tertiary':
-//         return colors.white[100]
-//       case 'destructive-primary':
-//         return colors.support.alert[50]
-//       case 'destructive-secondary':
-//         return colors.white[100]
-//       case 'success-primary':
-//         return colors.support.success[50]
-//       case 'success-secondary':
-//         return colors.white[100]
-//       case 'contrast-primary':
-//         return colors.white[100]
-//       case 'contrast-secondary':
-//         return colors.grayscale[100]
-//     }
-//   }};
-
-//   &:hover {
-//     border-color: ${({ customTheme }) => {
-//       switch(customTheme) {
-//         case 'primary':
-//           return colors.primary[100]
-//         case 'secondary':
-//           return colors.primary[50]
-//         case 'tertiary':
-//           return colors.grayscale[100]
-//         case 'destructive-primary':
-//           return colors.support.alert[100]
-//         case 'destructive-secondary':
-//           return colors.support.alert[50]
-//         case 'success-primary':
-//           return colors.support.success[100]
-//         case 'success-secondary':
-//           return colors.support.success[50]
-//         case 'contrast-primary':
-//           return colors.primary[50]
-//         case 'contrast-secondary':
-//           return colors.white[100]
-//       }
-//     }};
-
-//     background-color: ${({ customTheme }) => {
-//       switch(customTheme) {
-//         case 'primary':
-//           return colors.primary[100]
-//         case 'secondary':
-//           return colors.primary[0]
-//         case 'tertiary':
-//           return colors.white[100]
-//         case 'destructive-primary':
-//           return colors.support.alert[100]
-//         case 'destructive-secondary':
-//           return colors.support.alert[5]
-//         case 'success-primary':
-//           return colors.support.success[100]
-//         case 'success-secondary':
-//           return colors.support.success[5]
-//         case 'contrast-primary':
-//           return colors.primary[0]
-//         case 'contrast-secondary':
-//           return colors.white[40]
-//       }
-//     }};
-//   }
-
-//   &:disabled {
-//     border-color: ${colors.grayscale[40]};
-
-//     color: ${colors.grayscale[60]};
-
-//     background-color: ${({ customTheme }) => customTheme?.includes('primary') ? colors.grayscale[5] : colors.white[100]};
-//   }
-// `;
