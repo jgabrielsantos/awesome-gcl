@@ -1,4 +1,5 @@
 export let colors = {
+  transparent: 'transparent',
   white: {
     100: '#FFFFFF',
     72: '#FFFFFFB8',

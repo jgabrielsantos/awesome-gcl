@@ -2,8 +2,8 @@ import React from "react";
 import 'jest-styled-components'
 import { fireEvent, render, screen } from '@testing-library/react'
 import { Button } from "./index";
-import { toRem } from "../../utils";
-import { colors } from "../../styles";
+import { toRem } from "../../../utils";
+import { colors } from "../../../styles";
 
 const handleClickMock = jest.fn()
 const buttonChildMock = 'button rendered for test purposes'

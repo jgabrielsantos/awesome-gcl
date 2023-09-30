@@ -1,5 +1,5 @@
 import '../types/styles/styles.css'
-export { Button } from './Button'
+export * from './Buttons'
 export { Checkbox } from './Checkbox'
 export { Figure } from './Figure'
 export { Input } from './Input'

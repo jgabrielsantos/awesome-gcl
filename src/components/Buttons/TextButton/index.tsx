@@ -2,15 +2,16 @@ import React from 'react'
 import { ButtonStyles } from './styles'
 import { ButtonComponentPropTypes } from './types'
 
-export const Button = ({
+export const TextButton = ({
   children,
   type,
   size,
   theme,
   handleClick,
   disabled = false,
+  additionalClasses = []
 }: Readonly<ButtonComponentPropTypes>) => {
-  const styles = new ButtonStyles()
+  const styles = new ButtonStyles(additionalClasses)
   return (
     <button
       type={type}

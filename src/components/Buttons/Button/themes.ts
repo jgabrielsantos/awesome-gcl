@@ -15,7 +15,7 @@ const defaultRules = new Map([
   ['disabled-color', 'disabled:text-grayscale-60'],
 ])
 
-const primaryTheme = new Map([
+const primaryRules = new Map([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-primary-50'],
@@ -24,7 +24,7 @@ const primaryTheme = new Map([
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
-const secondaryTheme = new Map([
+const secondaryRules = new Map([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-primary-50'],
   ['background-color', 'bg-white-100'],
@@ -33,7 +33,7 @@ const secondaryTheme = new Map([
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
-const tertiaryTheme = new Map([
+const tertiaryRules = new Map([
   ['border-color', 'border-grayscale-40'],
   ['text-color', 'text-grayscale-100'],
   ['background-color', 'bg-white-100'],
@@ -42,7 +42,7 @@ const tertiaryTheme = new Map([
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
-const destructivePrimaryTheme = new Map ([
+const destructivePrimaryRules = new Map ([
   ['border-color', 'border-support-alert-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-support-alert-50'],
@@ -51,16 +51,16 @@ const destructivePrimaryTheme = new Map ([
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
-const destructiveSecondaryTheme = new Map ([
+const destructiveSecondaryRules = new Map ([
   ['border-color', 'border-support-alert-50'],
-  ['text-color', 'text-sipport-alert-50'],
+  ['text-color', 'text-support-alert-50'],
   ['background-color', 'bg-white-100'],
   ['hover-border-color', 'hover:border-support-alert-50'],
   ['hover-background-color', 'hover:bg-support-alert-5'],
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
-const successPrimaryTheme = new Map ([
+const successPrimaryRules = new Map ([
   ['border-color', 'border-support-success-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-support-success-50'],
@@ -69,7 +69,7 @@ const successPrimaryTheme = new Map ([
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
-const successSecondaryTheme = new Map ([
+const successSecondaryRules = new Map ([
   ['border-color', 'border-support-success-50'],
   ['text-color', 'text-support-success-50'],
   ['background-color', 'bg-white-100'],
@@ -78,7 +78,7 @@ const successSecondaryTheme = new Map ([
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
-const contrastPrimaryTheme = new Map ([
+const contrastPrimaryRules = new Map ([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-primary-50'],
   ['background-color', 'bg-white-100'],
@@ -87,7 +87,7 @@ const contrastPrimaryTheme = new Map ([
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
-const contrastSecondaryTheme = new Map ([
+const contrastSecondaryRules = new Map ([
   ['border-color', 'border-white-100'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-grayscale-100'],
@@ -95,3 +95,16 @@ const contrastSecondaryTheme = new Map ([
   ['hover-background-color', 'hover:bg-white-40'],
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
+
+export default {
+  defaultRules,
+  primaryRules,
+  secondaryRules,
+  tertiaryRules,
+  destructivePrimaryRules,
+  destructiveSecondaryRules,
+  successPrimaryRules,
+  successSecondaryRules,
+  contrastPrimaryRules,
+  contrastSecondaryRules
+}

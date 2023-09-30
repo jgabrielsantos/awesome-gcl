@@ -6,13 +6,9 @@ type ButtonTypeEnum = 'button'
 
 export type ButtonThemeEnum = 'primary'
 | 'secondary'
-| 'tertiary'
-| 'destructive-primary'
-| 'destructive-secondary'
-| 'success-primary'
-| 'success-secondary'
-| 'contrast-primary'
-| 'contrast-secondary'
+| 'destructive'
+| 'success'
+| 'contrast'
 
 export type ButtonSizeEnum = 'large'
 | 'medium'
@@ -24,5 +20,6 @@ export type ButtonComponentPropTypes = {
   size: ButtonSizeEnum
   theme: ButtonThemeEnum
   handleClick: React.MouseEventHandler<HTMLButtonElement>
+  additionalClasses?: string[]
   disabled?: boolean
 }
