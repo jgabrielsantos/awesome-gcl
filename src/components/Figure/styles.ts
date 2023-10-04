@@ -1,16 +1,37 @@
-import styled from "styled-components";
-import { FigurePropTypes } from "./types";
+import { FigureAdditionalClassesPropTypes } from "./types";
+import Themes from './themes'
 
-export const WrapperStyled = styled.figure<Readonly<Pick<FigurePropTypes, 'width' | 'height'>>>`
-  width: ${({ width }) => width || '100%' };
-  height: ${({ height }) => height || '100%' };
-`
+interface FigureStyle {
+  buildStyleRules: () => Record<string, string>
+}
 
-export const ImageStyled = styled.img`
-  width: 100%;
-  height: 100%;
-`
+export class FigureStyles implements FigureStyle {
+  private additionalClasses: FigureAdditionalClassesPropTypes
 
-export const CaptionStyled = styled.figcaption`
-  font-size: 1rem;
-`
+  constructor({ figure, image, caption }: FigureAdditionalClassesPropTypes) {
+    this.additionalClasses = {
+      figure,
+      image,
+      caption
+    }
+  }
+
+  buildStyleRules() {
+    const classes = {
+      figureClass: [
+        ...Themes.figureRule().values(),
+        ...this.additionalClasses.figure
+      ].join(' '),
+      imageClass: [
+        ...Themes.imageRule().values(),
+        ...this.additionalClasses.image
+      ].join(' '),
+      captionClass: [
+        ...Themes.captionRule().values(),
+        ...this.additionalClasses.caption
+      ].join(' ')
+    }
+
+    return classes
+  }
+}

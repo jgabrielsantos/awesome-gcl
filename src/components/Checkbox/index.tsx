@@ -1,8 +1,6 @@
 import React from "react";
 import { CheckboxStyles } from './styles'
 import { CheckboxPropTypes } from './types'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export const Checkbox = ({
   checked,
