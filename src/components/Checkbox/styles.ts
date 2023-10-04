@@ -1,42 +1,56 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import { StyledPropTypes } from "./types";
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import { CheckboxAdditionalClassesPropTypes, CheckboxPropTypes, CheckboxSizeEnum } from "./types";
+import Sizes from './sizes'
+import Themes from './themes'
 
-export const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: ${toRem(6)};
-  position: relative;
-`
+/**
+ * @param size      controls the width and height
+ * @param checked   controls the border color and background color
+ * @returns         string with all tailwind classes to be used in the component
+ * @see             Checkbox component
+ */
 
-export const InputStyled = styled.input<StyledPropTypes>`
-  width: ${toRem(20)};
-  height: ${toRem(20)};
-  border: 1px solid ${({ checked }) => checked ? colors.primary[50] : colors.grayscale[40]};
-  border-radius: ${toRem(4)};
-  background-color: ${({ checked }) => checked ? colors.primary[50] : colors.white[100]};
-  cursor: pointer;
+interface ICheckboxStyle {
+  getSizeRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Map<string, string>
+  buildStyleRules: ({ size, checked }: Pick<CheckboxPropTypes, 'size' | 'checked'>) => Record<string, string>
+}
 
-  &:disabled {
-    cursor: not-allowed;
-    border: 1px solid ${colors.grayscale[40]};
-    background-color: ${colors.grayscale[40]};
+export class CheckboxStyles implements ICheckboxStyle {
+  private additionalClasses: CheckboxAdditionalClassesPropTypes
+  private sizes: Record<CheckboxSizeEnum, Map<string, string>> = {
+    large: Sizes.largeSize,
+    medium: Sizes.mediumSize,
+    small: Sizes.smallSize
   }
-`
 
-export const IconStyled = styled(FontAwesomeIcon)`
-  width: ${toRem(16)};
-  display: flex;
-  color: ${colors.white[100]};
-  position: absolute;
-  left: 2px;
-  cursor: pointer;
-`
+  constructor({ wrapper, label, input }: CheckboxAdditionalClassesPropTypes) {
+    this.additionalClasses = {
+      wrapper,
+      label,
+      input
+    }
+  }
 
-export const LabelStyled = styled.label`
-  font-size: 1rem;
-`
+  getSizeRules({ size }: Pick<CheckboxPropTypes, 'size'>) {
+    return this.sizes[size]
+  }
+
+  buildStyleRules({ size, checked }: Pick<CheckboxPropTypes, 'size' | 'checked'>) {
+    const classes = {
+      wrapperClass: [
+        ...Themes.wrapperRules().values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      labelClass: [
+        ...Themes.labelRules().values(),
+        ...this.additionalClasses.label
+      ].join(' '),
+      inputClass: [
+        ...Themes.inputRules({ checked }).values(),
+        ...this.getSizeRules({ size }).values(),
+        ...this.additionalClasses.input
+      ].join(' '),
+    }
+
+    return classes
+  };
+}

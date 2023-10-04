@@ -26,9 +26,9 @@ export class ButtonStyles implements IButtonStyle {
   private themes: Record<ButtonThemeEnum, Map<string, string>> = {
     primary: Themes.primaryRules,
     secondary: Themes.secondaryRules,
-    "destructive": Themes.destructiveRules,
-    "success": Themes.successRules,
-    "contrast": Themes.contrastRules,
+    destructive: Themes.destructiveRules,
+    success: Themes.successRules,
+    contrast: Themes.contrastRules,
   }
 
   constructor(className: string[]) {

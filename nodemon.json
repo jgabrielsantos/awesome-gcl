@@ -5,5 +5,5 @@
     "NODE_ENV": "development"
   },
   "ext": "js, ts, tsx",
-  "exec": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c"
+  "exec": "rm -rf dist && npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c"
 }

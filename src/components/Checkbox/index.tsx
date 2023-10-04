@@ -1,40 +1,46 @@
 import React from "react";
-import * as Styled from './styles'
+import { CheckboxStyles } from './styles'
 import { CheckboxPropTypes } from './types'
-import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 export const Checkbox = ({
   checked,
+  size,
   handleClick,
   disabled = false,
   label,
-  className
-}: CheckboxPropTypes) => (
-  <Styled.Wrapper
-    className={className}
-    data-testid='checkbox-wrapper'
-  >
-    <Styled.InputStyled
-      type="checkbox"
-      checked={checked}
-      onClick={handleClick}
-      disabled={disabled}
-      readOnly
-      data-testid='checkbox-input'
-    />
-    {checked && (
-      <Styled.IconStyled
+  error,
+  additionalClasses = {
+    wrapper: [],
+    label: [],
+    input: []
+  }
+}: CheckboxPropTypes) => {
+  const styles = new CheckboxStyles(additionalClasses)
+  const { wrapperClass, inputClass, labelClass } = styles.buildStyleRules({ size, checked })
+
+  return (
+    <div
+      data-testid='checkbox-wrapper'
+      className={wrapperClass}
+    >
+      <input
+        id='checkbox-component'
+        data-testid='checkbox-input'
+        type="checkbox"
+        checked={checked}
         onClick={handleClick}
-        icon={faCheck}
-        data-testid='checkbox-icon'
+        disabled={disabled}
+        readOnly
+        className={inputClass}
       />
-    )}
-    {label && (
-      <Styled.LabelStyled
-        data-testid='checkbox-label'
-      >
-        {label}
-      </Styled.LabelStyled>
-    )}
-  </Styled.Wrapper>
-)
+      {label && (
+        <label
+          data-testid='checkbox-label'
+          className={labelClass}
+        >
+          {label}
+        </label>
+      )}
+    </div>
+  )
+}
