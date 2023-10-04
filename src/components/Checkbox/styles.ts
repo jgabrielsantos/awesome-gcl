@@ -11,7 +11,7 @@ import Themes from './themes'
 
 interface ICheckboxStyle {
   getSizeRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Map<string, string>
-  buildStyleRules: ({ size, checked }: Pick<CheckboxPropTypes, 'size' | 'checked'>) => Record<string, string>
+  buildStyleRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Record<string, string>
 }
 
 export class CheckboxStyles implements ICheckboxStyle {
@@ -22,10 +22,11 @@ export class CheckboxStyles implements ICheckboxStyle {
     small: Sizes.smallSize
   }
 
-  constructor({ wrapper, label, input }: CheckboxAdditionalClassesPropTypes) {
+  constructor({ wrapper, label, input, icon }: CheckboxAdditionalClassesPropTypes) {
     this.additionalClasses = {
       wrapper,
       label,
+      icon,
       input
     }
   }
@@ -34,7 +35,7 @@ export class CheckboxStyles implements ICheckboxStyle {
     return this.sizes[size]
   }
 
-  buildStyleRules({ size, checked }: Pick<CheckboxPropTypes, 'size' | 'checked'>) {
+  buildStyleRules({ size }: Pick<CheckboxPropTypes, 'size'>) {
     const classes = {
       wrapperClass: [
         ...Themes.wrapperRules().values(),
@@ -45,10 +46,15 @@ export class CheckboxStyles implements ICheckboxStyle {
         ...this.additionalClasses.label
       ].join(' '),
       inputClass: [
-        ...Themes.inputRules({ checked }).values(),
+        ...Themes.inputRules().values(),
         ...this.getSizeRules({ size }).values(),
         ...this.additionalClasses.input
       ].join(' '),
+      iconClass: [
+        ...Themes.iconRules({ size }).values(),
+        // ...this.getSizeRules({ size }).values(),
+        ...this.additionalClasses.icon
+      ].join(' ')
     }
 
     return classes
