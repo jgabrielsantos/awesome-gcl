@@ -42,7 +42,7 @@ const inputRules = () => new Map([
 const iconRules = ({ size }: Pick<CheckboxPropTypes, 'size'>) => {
   const sizes = {
     large: {
-      left: 'left-0.25',
+      left: 'left-2px',
       width: 'w-5',
       height: 'h-5'
     },

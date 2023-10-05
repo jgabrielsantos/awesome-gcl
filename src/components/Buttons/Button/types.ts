@@ -1,4 +1,5 @@
 import React from 'react'
+import { GSizeEnum } from '../../types'
 
 type ButtonTypeEnum = 'button'
 | 'submit'
@@ -14,14 +15,10 @@ export type ButtonThemeEnum = 'primary'
 | 'contrast-primary'
 | 'contrast-secondary'
 
-export type ButtonSizeEnum = 'large'
-| 'medium'
-| 'small'
-
 export type ButtonComponentPropTypes = {
   children: React.ReactNode
   type: ButtonTypeEnum
-  size: ButtonSizeEnum
+  size: GSizeEnum
   theme: ButtonThemeEnum
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   additionalClasses?: string[]

@@ -1,6 +1,4 @@
-export type CheckboxSizeEnum = 'large'
-| 'medium'
-| 'small'
+import { GSizeEnum } from "../types"
 
 export type CheckboxAdditionalClassesPropTypes = {
   wrapper: string[]
@@ -11,10 +9,9 @@ export type CheckboxAdditionalClassesPropTypes = {
 
 export type CheckboxPropTypes = {
   checked: boolean
-  size: CheckboxSizeEnum
+  size: GSizeEnum
   handleClick?: React.MouseEventHandler<HTMLDivElement>
   disabled?: boolean
   label?: string
-  error?: boolean
   additionalClasses?: CheckboxAdditionalClassesPropTypes
 }

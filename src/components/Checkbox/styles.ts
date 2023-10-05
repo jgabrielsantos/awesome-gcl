@@ -1,6 +1,7 @@
-import { CheckboxAdditionalClassesPropTypes, CheckboxPropTypes, CheckboxSizeEnum } from "./types";
+import { CheckboxAdditionalClassesPropTypes, CheckboxPropTypes } from "./types";
 import Sizes from './sizes'
 import Themes from './themes'
+import { GSizeEnum } from "../types";
 
 /**
  * @param size      controls the width and height
@@ -16,7 +17,7 @@ interface ICheckboxStyle {
 
 export class CheckboxStyles implements ICheckboxStyle {
   private additionalClasses: CheckboxAdditionalClassesPropTypes
-  private sizes: Record<CheckboxSizeEnum, Map<string, string>> = {
+  private sizes: Record<GSizeEnum, Map<string, string>> = {
     large: Sizes.largeSize,
     medium: Sizes.mediumSize,
     small: Sizes.smallSize
@@ -52,7 +53,6 @@ export class CheckboxStyles implements ICheckboxStyle {
       ].join(' '),
       iconClass: [
         ...Themes.iconRules({ size }).values(),
-        // ...this.getSizeRules({ size }).values(),
         ...this.additionalClasses.icon
       ].join(' ')
     }

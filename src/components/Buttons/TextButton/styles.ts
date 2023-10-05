@@ -1,6 +1,7 @@
-import { ButtonComponentPropTypes, ButtonSizeEnum, ButtonThemeEnum } from './types';
+import { ButtonComponentPropTypes, ButtonThemeEnum } from './types';
 import Sizes from './sizes'
 import Themes from './themes';
+import { GSizeEnum } from '../../types';
 
 /**
  * @param size          controls the font-size, line-height and padding
@@ -12,23 +13,23 @@ import Themes from './themes';
 
 export interface IButtonStyle {
   getThemeRules: (theme: ButtonThemeEnum) => Map<string, string>
-  getSizeRules: (size: ButtonSizeEnum) => Map<string, string>
+  getSizeRules: (size: GSizeEnum) => Map<string, string>
   buildStyleRules: ({theme, size}: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) => string
 }
 
 export class ButtonStyles implements IButtonStyle {
   private className: string[]
-  private sizes: Record<ButtonSizeEnum, Map<string, string>> = {
-    large: Sizes.largeSize,
-    medium: Sizes.mediumSize,
-    small: Sizes.smallSize
+  private sizes: Record<GSizeEnum, Map<string, string>> = {
+    large: Sizes.largeSize(),
+    medium: Sizes.mediumSize(),
+    small: Sizes.smallSize()
   }
   private themes: Record<ButtonThemeEnum, Map<string, string>> = {
-    primary: Themes.primaryRules,
-    secondary: Themes.secondaryRules,
-    destructive: Themes.destructiveRules,
-    success: Themes.successRules,
-    contrast: Themes.contrastRules,
+    primary: Themes.primaryRules(),
+    secondary: Themes.secondaryRules(),
+    destructive: Themes.destructiveRules(),
+    success: Themes.successRules(),
+    contrast: Themes.contrastRules(),
   }
 
   constructor(className: string[]) {
@@ -39,13 +40,13 @@ export class ButtonStyles implements IButtonStyle {
     return this.themes[theme]
   }
 
-  getSizeRules(size: ButtonSizeEnum) {
+  getSizeRules(size: GSizeEnum) {
     return this.sizes[size]
   }
 
   buildStyleRules({ theme = 'primary', size = 'medium' }: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) {
     const classes = [
-      ...Themes.defaultRules.values(),
+      ...Themes.defaultRules().values(),
       ...this.getSizeRules(size).values(),
       ...this.getThemeRules(theme).values(),
       this.className.join(" ")

@@ -1,7 +1,8 @@
 import styled from "styled-components";
 import { toRem } from "../../utils";
 import { colors } from "../../styles";
-import { InputWrapperStyledPropTypes } from "./types";
+import {  InputAdditionalClassesPropTypes, InputPropTypes, InputWrapperStyledPropTypes } from "./types";
+import { GSizeEnum } from "../types";
 
 export const WrapperStyled = styled.div`
   width: 100%;
@@ -62,3 +63,48 @@ export const ErrorMessageStyled = styled.span`
   font-size: 1rem;
   color: ${colors.support.alert[50]};
 `
+
+interface InputStyle {
+  getSizeRules: ({ size }: Pick<InputPropTypes, 'size'>) => Map<string, string>
+  buildStyleRules: ({ size }: Pick<InputPropTypes, 'size'>) => Record<string, string>
+}
+
+export class InputStyles implements InputStyle {
+  private additionalClasses: InputAdditionalClassesPropTypes
+  private sizes: Record<GSizeEnum, Map<string, string>> = {
+    large: new Map(),
+    medium: new Map(),
+    small: new Map()
+  }
+
+  constructor({ wrapper, label, input, caption }: InputAdditionalClassesPropTypes) {
+    this.additionalClasses = {
+      wrapper,
+      label,
+      input,
+      caption
+    }
+  }
+
+  getSizeRules({ size }: Pick<InputPropTypes, "size">) {
+    return this.sizes[size]
+  };
+
+  buildStyleRules({ size }: Pick<InputPropTypes, "size">) {
+    const classes = {
+      wrapper: [
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      label: [
+        ...this.additionalClasses.label
+      ].join(' '),
+      input: [
+        ...this.additionalClasses.input
+      ].join(' '),
+      caption: [
+        ...this.additionalClasses.caption
+      ].join(' ')
+    }
+    return classes
+  };
+}

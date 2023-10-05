@@ -1,6 +1,13 @@
-import React from "react"
+import { GSizeEnum } from "../types"
 
 type InputTypePropTypes = 'text' | 'password' | 'email' | 'tel' | 'number'
+
+export type InputAdditionalClassesPropTypes = {
+  wrapper: string[]
+  label: string[]
+  input: string[]
+  caption: string[]
+}
 
 export type InputPropTypes = {
   type: InputTypePropTypes
@@ -14,7 +21,8 @@ export type InputPropTypes = {
   showPassword?: boolean
   disabled?: boolean
   pattern?: string
-  className?: string
+  size: GSizeEnum
+  additionalClasses?: InputAdditionalClassesPropTypes
 }
 
 export type InputWrapperStyledPropTypes = Readonly<Pick<InputPropTypes, 'error' | 'disabled'>>

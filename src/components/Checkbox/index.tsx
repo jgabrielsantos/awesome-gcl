@@ -8,7 +8,6 @@ export const Checkbox = ({
   handleClick,
   disabled = false,
   label,
-  error,
   additionalClasses = {
     wrapper: [],
     label: [],
