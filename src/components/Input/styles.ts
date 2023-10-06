@@ -33,10 +33,18 @@ export class InputStyles implements InputStyle {
         ...this.getSizeRules(size, 'label').values(),
         ...this.additionalClasses.label
       ].join(' '),
+      inputWrapperClass: [
+        ...Themes.inputWrapper().values()
+      ].join(' '),
       inputClass: [
         ...Themes.input().values(),
         ...this.getSizeRules(size, 'input').values(),
         ...this.additionalClasses.input
+      ].join(' '),
+      passwordButtonClass: [
+        ...Themes.passwordButton().values(),
+        ...this.getSizeRules(size, 'passwordButton').values(),
+        ...this.additionalClasses.passwordButton
       ].join(' '),
       captionClass: [
         ...Themes.caption().values(),

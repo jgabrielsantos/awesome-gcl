@@ -21,6 +21,7 @@ export const Input = ({
     wrapper: [],
     label: [],
     input: [],
+    passwordButton: [],
     caption: []
   }
 }: Readonly<InputPropTypes>) => {
@@ -29,7 +30,9 @@ export const Input = ({
   const {
     wrapperClass,
     labelClass,
+    inputWrapperClass,
     inputClass,
+    passwordButtonClass,
     captionClass
   } = styles.buildStyleRules({ size })
 
@@ -37,7 +40,7 @@ export const Input = ({
   try {
     new RegExp(pattern)
   } catch (e) {
-    throw new Error('pattern not acceptable. Please provide a valid regular expression (RegEx)')
+    throw new Error('Pattern not acceptable. Please provide a valid regular expression (RegEx)')
   }
 
   return (
@@ -53,28 +56,34 @@ export const Input = ({
           {label}
         </label>
       )}
-      <input
-        type={hook.hookType}
-        value={value}
-        onChange={onChange}
-        onKeyDown={onKeyDown}
-        placeholder={placeholder}
-        disabled={disabled}
-        pattern={pattern}
-        className={inputClass}
-        data-testid='input-input'
-      />
-      {/* {type === 'password' && (
-        <Styled.PasswordIconStyled
-          onClick={hook.hookSetPasswordVisible}
-          data-testid='input-password-icon'
-        >
-          <FontAwesomeIcon
-            icon={hook.hookPasswordVisible? faEye : faEyeSlash}
-            data-testid='input-password-font-awesome-icon'
-          />
-        </Styled.PasswordIconStyled>
-      )} */}
+      <div
+        className={inputWrapperClass}
+        data-testid='input-password-wrapper'
+      >
+        <input
+          type={hook.hookType}
+          value={value}
+          onChange={onChange}
+          onKeyDown={onKeyDown}
+          placeholder={placeholder}
+          disabled={disabled}
+          pattern={pattern}
+          className={inputClass}
+          data-testid='input-input'
+        />
+        {type === 'password' && (
+          <button
+            onClick={hook.hookSetPasswordVisible}
+            className={passwordButtonClass}
+            data-testid='input-password-icon'
+          >
+            <FontAwesomeIcon
+              icon={hook.hookPasswordVisible? faEye : faEyeSlash}
+              data-testid='input-password-font-awesome-icon'
+            />
+          </button>
+        )}
+      </div>
       {caption && (
         <p
           className={captionClass}

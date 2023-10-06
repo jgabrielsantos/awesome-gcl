@@ -8,12 +8,14 @@ type InputTypePropTypes = 'text'
 
 export type InputComponentsEnum = 'label'
 | 'input'
+| 'passwordButton'
 | 'caption'
 
 export type InputAdditionalClassesPropTypes = {
   wrapper: string[]
   label: string[]
   input: string[]
+  passwordButton: string[]
   caption: string[]
 }
 

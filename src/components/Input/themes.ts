@@ -15,6 +15,10 @@ const label = () => new Map([
   ['disabled-color', 'peer-disabled/input:text-grayscale-60']
 ])
 
+const inputWrapper = () => new Map([
+  ['position', 'relative']
+])
+
 const input = () => new Map([
   ['peer', ' peer/input'], // for customizing the caption color when input is invalid
   ['border-width', 'border'],
@@ -47,7 +51,12 @@ const input = () => new Map([
   ['placeholder-font-size', 'text-base'],
 
   // Password type
-  ['after-icon', 'after:content: \'\f023\'']
+  ['after-icon', 'after:content: "\f002"']
+])
+
+const passwordButton = () => new Map([
+  ['position', 'absolute'],
+  ['position-vertical', 'inset-y-0']
 ])
 
 const caption = () => new Map([
@@ -61,6 +70,8 @@ const caption = () => new Map([
 export default {
   wrapper,
   label,
+  inputWrapper,
   input,
+  passwordButton,
   caption
 }

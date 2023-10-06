@@ -7,6 +7,9 @@ const large = () => ({
     ['padding-horizontal', 'px-4'],
     ['font-size', 'text-base'],
   ]),
+  passwordButton: new Map([
+    ['right', 'right-4']
+  ]),
   caption: new Map([
     ['font-size', 'text-sm']
   ])
@@ -21,6 +24,9 @@ const medium = () => ({
     ['padding-horizontal', 'px-4'],
     ['font-size', 'text-sm'],
   ]),
+  passwordButton: new Map([
+    ['right', 'right-4']
+  ]),
   caption: new Map([
     ['font-size', 'text-xs']
   ])
@@ -34,6 +40,9 @@ const small = () => ({
     ['padding-vertical', 'py-2'],
     ['padding-horizontal', 'px-3'],
     ['font-size', 'text-xs'],
+  ]),
+  passwordButton: new Map([
+    ['right', 'right-3.5']
   ]),
   caption: new Map([
     ['font-size', 'text-xs']
