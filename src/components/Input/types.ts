@@ -1,6 +1,14 @@
 import { GSizeEnum } from "../types"
 
-type InputTypePropTypes = 'text' | 'password' | 'email' | 'tel' | 'number'
+type InputTypePropTypes = 'text'
+| 'password'
+| 'email'
+| 'tel'
+| 'number'
+
+export type InputComponentsEnum = 'label'
+| 'input'
+| 'caption'
 
 export type InputAdditionalClassesPropTypes = {
   wrapper: string[]
@@ -15,17 +23,14 @@ export type InputPropTypes = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   label?: string
+  caption?: string
   placeholder?: string
-  error?: boolean
-  errorMessage?: string
   showPassword?: boolean
   disabled?: boolean
   pattern?: string
   size: GSizeEnum
   additionalClasses?: InputAdditionalClassesPropTypes
 }
-
-export type InputWrapperStyledPropTypes = Readonly<Pick<InputPropTypes, 'error' | 'disabled'>>
 
 export type UseInputPropTypes = Readonly<Pick<InputPropTypes, 'type' | 'showPassword'>>
 

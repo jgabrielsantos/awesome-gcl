@@ -1,9 +1,9 @@
 import React from "react"
-import * as Styled from './styles'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 import { InputPropTypes } from "./types"
 import { useInput } from "./hooks"
+import { InputStyles } from './styles'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 
 export const Input = ({
   type = 'text',
@@ -11,62 +11,78 @@ export const Input = ({
   onChange,
   onKeyDown,
   label,
+  caption,
   placeholder,
-  error = false,
-  errorMessage,
   showPassword = false,
   disabled = false,
   pattern,
-  className
+  size,
+  additionalClasses={
+    wrapper: [],
+    label: [],
+    input: [],
+    caption: []
+  }
 }: Readonly<InputPropTypes>) => {
   const hook = useInput({ type, showPassword })
+  const styles = new InputStyles(additionalClasses)
+  const {
+    wrapperClass,
+    labelClass,
+    inputClass,
+    captionClass
+  } = styles.buildStyleRules({ size })
+
+  if (pattern)
+  try {
+    new RegExp(pattern)
+  } catch (e) {
+    throw new Error('pattern not acceptable. Please provide a valid regular expression (RegEx)')
+  }
 
   return (
-    <Styled.WrapperStyled
-      className={className}
+    <div
+      className={wrapperClass}
       data-testid='input-wrapper'
     >
       {label && (
-        <Styled.LabelStyled
+        <label
+          className={labelClass}
           data-testid='input-label'
         >
           {label}
-        </Styled.LabelStyled>
+        </label>
       )}
-      <Styled.InputWrapperStyled
-        error={error}
+      <input
+        type={hook.hookType}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+        placeholder={placeholder}
         disabled={disabled}
-        data-testid='input-input-wrapper'
-      >
-        <Styled.InputStyled
-          type={hook.hookType}
-          value={value}
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          placeholder={placeholder}
-          disabled={disabled}
-          pattern={pattern}
-          data-testid='input-input'
-        />
-        {type === 'password' && (
-          <Styled.PasswordIconStyled
-            onClick={hook.hookSetPasswordVisible}
-            data-testid='input-password-icon'
-          >
-            <FontAwesomeIcon
-              icon={hook.hookPasswordVisible? faEye : faEyeSlash}
-              data-testid='input-password-font-awesome-icon'
-            />
-          </Styled.PasswordIconStyled>
-        )}
-      </Styled.InputWrapperStyled>
-      {error && errorMessage && (
-        <Styled.ErrorMessageStyled
+        pattern={pattern}
+        className={inputClass}
+        data-testid='input-input'
+      />
+      {/* {type === 'password' && (
+        <Styled.PasswordIconStyled
+          onClick={hook.hookSetPasswordVisible}
+          data-testid='input-password-icon'
+        >
+          <FontAwesomeIcon
+            icon={hook.hookPasswordVisible? faEye : faEyeSlash}
+            data-testid='input-password-font-awesome-icon'
+          />
+        </Styled.PasswordIconStyled>
+      )} */}
+      {caption && (
+        <p
+          className={captionClass}
           data-testid='input-error-message'
         >
-          {errorMessage}
-        </Styled.ErrorMessageStyled>
+          {caption}
+        </p>
       )}
-    </Styled.WrapperStyled>
+    </div>
   )
 }
