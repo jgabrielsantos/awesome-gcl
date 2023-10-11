@@ -13,8 +13,8 @@ export const SelectMulti = ({
   label,
   selected,
   disabled = false,
+  size,
   placeholder,
-  className
 }: SelectMultiPropTypes) => {
   const hook = useSelectMulti({
     selectedList: selected || [],
@@ -23,7 +23,6 @@ export const SelectMulti = ({
 
   return (
     <Styled.Wrapper
-      className={className}
       data-testid='select-multi-wrapper'
     >
       {label && (
@@ -81,6 +80,7 @@ export const SelectMulti = ({
             data-testid='select-multi-options-item'
           >
             <Checkbox
+              size={size}
               checked={hook.hookMarkCheckbox(option) ? true : false || false}
               label={option.label}
             />

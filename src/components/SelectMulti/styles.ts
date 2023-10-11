@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { toRem } from "../../utils";
 import { colors } from "../../styles";
-import { StyledPropTypes } from "./types";
+import { SelectMultiComponentsEnum, StyledPropTypes } from "./types";
+import { GSizeEnum } from "../types";
+import Sizes from './sizes'
 
 export const Wrapper = styled.div`
   width: 100%;
@@ -89,3 +91,39 @@ export const OptionItemStyled = styled.li`
   white-space: nowrap;
   text-overflow: ellipsis;
 `
+
+interface SelectStyle {
+  buildStyleRules: () => Record<string, string>
+}
+
+export class SelectStyles implements SelectStyle {
+  private additionalClasses
+  private sizes: Record<GSizeEnum, Record<SelectMultiComponentsEnum, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
+
+  constructor(additionalClasses: Record<string, string>) {
+    this.additionalClasses = additionalClasses
+  }
+
+  private getSizeRules(size: GSizeEnum, component: SelectMultiComponentsEnum) {
+    return this.sizes[size][component]
+  }
+
+  buildStyleRules() {
+    const classes = {
+      wrapperClass: [].join(' '),
+      labelClass: [].join(' '),
+      inputClass: [].join(' '),
+      placeholderClass: [].join(' '),
+      selectedItemClass: [].join(' '),
+      selectedListClass: [].join(' '),
+      optionItemClass: [].join(' '),
+      optionListClass: [].join(' '),
+    }
+
+    return classes
+  }
+}
