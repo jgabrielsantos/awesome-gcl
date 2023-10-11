@@ -1,19 +1,29 @@
-import styled from "styled-components";
-import { colors } from "../../styles";
-import { ModalStyledPropTypes } from "./types";
-import { toRem } from "../../utils";
+import { ModalAdditionalClassesPropTypes, ModalPropTypes } from "./types";
+import Themes from './themes'
 
-export const ModalStyled = styled.dialog.withConfig({
-  shouldForwardProp: (prop) => !['isOpen'].includes(prop)
-})<ModalStyledPropTypes>`
-  position: absolute;
-  right: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  display: ${({ isOpen }) => isOpen ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid ${colors.grayscale[10]};
-  border-radius: ${toRem(6)};
-`
+interface ModalStyle {
+  buildStyleRules: ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => Record<string, string>
+}
+
+export class ModalStyles implements ModalStyle {
+  private additionalClasses: ModalAdditionalClassesPropTypes
+
+  constructor(additionalClasses: ModalAdditionalClassesPropTypes) {
+    this.additionalClasses = additionalClasses
+  }
+
+  buildStyleRules({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) {
+    const classes = {
+      wrapperClass: [
+        ...Themes.wrapper({ isOpen }).values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      dialogClass: [
+        ...Themes.dialog({ isOpen }).values(),
+        ...this.additionalClasses.dialog
+      ].join(' ')
+    }
+
+    return classes
+  }
+}

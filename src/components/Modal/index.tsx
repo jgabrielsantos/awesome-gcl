@@ -1,17 +1,28 @@
 import React from "react";
-import * as Styled from './styles'
 import { ModalPropTypes } from "./types";
+import { ModalStyles } from "./styles";
 
 export const Modal = ({
   isOpen,
   children,
-  className
-}: ModalPropTypes) => (
-  <Styled.ModalStyled
-    isOpen={isOpen}
-    className={className}
-    data-testid='modal'
-  >
-    {children}
-  </Styled.ModalStyled>
-)
+  additionalClasses={
+    wrapper: [],
+    dialog: []
+  }
+}: ModalPropTypes) => {
+  const styles = new ModalStyles(additionalClasses)
+  const { wrapperClass, dialogClass } = styles.buildStyleRules({ isOpen })
+
+  return (
+    <div
+      className={wrapperClass}
+    >
+      <dialog
+        className={dialogClass}
+        data-testid='modal'
+      >
+        {children}
+      </dialog>
+    </div>
+  )
+}
