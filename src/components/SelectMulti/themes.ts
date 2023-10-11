@@ -1,8 +1,7 @@
-import { SelectMultiPropTypes } from "./types"
-
 const wrapper = () => new Map([
   ['width', 'w-full'],
   ['display', 'flex'],
+  ['flex-direction', 'flex-col'],
   ['align-items', 'items-start'],
   ['justify-content', 'justify-center'],
   ['gap', 'gap-1.5'],
@@ -14,7 +13,7 @@ const label = () => new Map([
   ['color', 'text-grayscale-100']
 ])
 
-const input = ({ disabled }: Pick<SelectMultiPropTypes, 'disabled'>) => new Map([
+const input = (disabled: boolean) => new Map([
   ['width', 'w-full'],
   ['display', 'flex'],
   ['align-items', 'items-center'],
@@ -24,7 +23,10 @@ const input = ({ disabled }: Pick<SelectMultiPropTypes, 'disabled'>) => new Map(
   ['border-color', 'border-grayscale-40'],
   ['border-radius', 'rounded-md'],
   ['cursor', disabled ? 'cursor-not-allowed' : 'cursor-pointer'],
-  ['background-color', disabled ? 'bg-grayscale-0' : 'bg-white-100']
+  ['background-color', disabled ? 'bg-grayscale-0' : 'bg-white-100'],
+
+  // Hover state
+  ['hover-border-color', 'hover:border-primary-50']
 ])
 
 const placeholder = () => new Map([
@@ -64,7 +66,6 @@ const optionList = (isOpen: boolean) => new Map([
   ['border-color', 'border-grayscale-40'],
   ['border-radius', 'rounded-lg'],
   ['position', 'absolute'],
-  ['bottom', 'bottom-0'],
   ['right', 'right-0'],
   ['background-color', 'bg-white-100']
 ])
@@ -72,8 +73,22 @@ const optionList = (isOpen: boolean) => new Map([
 const optionItem = () => new Map([
   ['cursor', 'cursor-pointer'],
   ['width', 'w-full'],
+  ['display', 'flex'],
+  ['align-items', 'items-start'],
+  ['justify-content', 'justify-start'],
   ['color', 'text-color-grayscale-100'],
   ['overflow', 'overflow-hidden'],
   ['white-space', 'whitespace-nowrap'],
   ['text-overflow', 'text-ellipsis']
 ])
+
+export default {
+  wrapper,
+  label,
+  input,
+  placeholder,
+  selectedItem,
+  selectedList,
+  optionItem,
+  optionList
+}

@@ -1,4 +1,4 @@
-import { CheckboxAdditionalClassesPropTypes, CheckboxPropTypes } from "./types";
+import { CheckboxAdditionalClassesPropTypes, CheckboxComponentsEnum, CheckboxPropTypes } from "./types";
 import Sizes from './sizes'
 import Themes from './themes'
 import { GSizeEnum } from "../types";
@@ -11,16 +11,16 @@ import { GSizeEnum } from "../types";
  */
 
 interface ICheckboxStyle {
-  getSizeRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Map<string, string>
+  getSizeRules: (size: GSizeEnum, component: CheckboxComponentsEnum) => Map<string, string>
   buildStyleRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Record<string, string>
 }
 
 export class CheckboxStyles implements ICheckboxStyle {
   private additionalClasses: CheckboxAdditionalClassesPropTypes
-  private sizes: Record<GSizeEnum, Map<string, string>> = {
-    large: Sizes.largeSize,
-    medium: Sizes.mediumSize,
-    small: Sizes.smallSize
+  private sizes: Record<GSizeEnum, Record<CheckboxComponentsEnum, Map<string, string>>> = {
+    large: Sizes.largeSize(),
+    medium: Sizes.mediumSize(),
+    small: Sizes.smallSize()
   }
 
   constructor({ wrapper, label, input, icon }: CheckboxAdditionalClassesPropTypes) {
@@ -32,8 +32,8 @@ export class CheckboxStyles implements ICheckboxStyle {
     }
   }
 
-  getSizeRules({ size }: Pick<CheckboxPropTypes, 'size'>) {
-    return this.sizes[size]
+  getSizeRules(size: GSizeEnum, component: CheckboxComponentsEnum) {
+    return this.sizes[size][component]
   }
 
   buildStyleRules({ size }: Pick<CheckboxPropTypes, 'size'>) {
@@ -44,11 +44,12 @@ export class CheckboxStyles implements ICheckboxStyle {
       ].join(' '),
       labelClass: [
         ...Themes.labelRules().values(),
+        ...this.getSizeRules(size, 'label').values(),
         ...this.additionalClasses.label
       ].join(' '),
       inputClass: [
         ...Themes.inputRules().values(),
-        ...this.getSizeRules({ size }).values(),
+        ...this.getSizeRules(size, 'input').values(),
         ...this.additionalClasses.input
       ].join(' '),
       iconClass: [

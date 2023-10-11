@@ -34,10 +34,6 @@ export type SelectMultiPropTypes = {
   additionalClasses?: SelectMultiAdditionalClassesPropTypes
 }
 
-export type StyledPropTypes = Readonly<Pick<SelectMultiPropTypes, 'disabled'>> & {
-  isOpen: boolean
-}
-
 export type UseSelectMultiPropTypes = {
   isVisible: boolean
   setIsVisible: React.Dispatch<React.SetStateAction<boolean>>

@@ -70,8 +70,7 @@ const iconRules = ({ size }: Pick<CheckboxPropTypes, 'size'>) => {
 }
 
 const labelRules = () => new Map([
-  ['cursor', 'cursor-pointer'],
-  ['font-size', 'text-base']
+  ['cursor', 'cursor-pointer']
 ])
 
 export default {
