@@ -14,14 +14,7 @@ const wrapper = ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => new Map([
 ])
 
 const dialog = ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => new Map([
-  // ['position', 'absolute'],
-  // ['position-vertical', 'inset-y-0'],
-  // ['position-horizontal', 'inset-x-0'],
   ['display', isOpen ? 'block' : 'hidden'],
-  // ['display', 'flex'],
-  // ['flex-direction', 'flex-col'],
-  // ['align-items', 'items-center'],
-  // ['justify-content', 'justify-center'],
   ['border-size', 'border'],
   ['border-type', 'border-solid'],
   ['border-color', 'border-grayscale-10'],
