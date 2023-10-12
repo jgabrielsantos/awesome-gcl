@@ -63,7 +63,6 @@ export const SelectMulti = ({
       <div
         className={inputClass}
         onClick={hook.hookSetIsOptionListVisible}
-        // disabled={disabled}
         data-testid='select-multi-select-list-wrapper'
       >
         {placeholder && (selected?.length === 0 || selected === undefined) && (
@@ -102,7 +101,6 @@ export const SelectMulti = ({
 
       <ul
         className={optionListClass}
-        // isOpen={hook.hookIsOptionListVisible}
         data-testid='select-multi-options-list'
       >
         {options.map(option => (
