@@ -1,100 +1,8 @@
-import React, { useEffect, useMemo, useState } from "react";
-import { RowPropTypes, TablePropTypes } from "./types";
-import * as Styled from './styles'
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, faSort } from "@fortawesome/free-solid-svg-icons";
+import React, { useMemo, useState } from "react";
+import { TablePropTypes } from "./types";
 import { Checkbox } from "../Checkbox";
-
-const renderRows = ({
-  checkedArray,
-  headers,
-  headerCheck,
-  row,
-  index,
-  onRowClick,
-  details,
-}: RowPropTypes) => {
-  const [checked, setChecked] = useState(false)
-  const [detailsOpen, setDetailsOpen] = useState(false)
-
-  const rowMemoed = useMemo(() => ({
-    row,
-    index,
-    checked
-  }), [checked])
-
-  const rowMainOnClickHandler = () => {
-    if(onRowClick) onRowClick(rowMemoed.row)
-  }
-
-  const checkboxOnClickHandler = (event: React.MouseEvent<Element, MouseEvent>) => {
-    event.stopPropagation()
-    setChecked(!rowMemoed.checked)
-  }
-
-  useEffect(() => {
-    setChecked(headerCheck)
-  }, [headerCheck])
-
-  useEffect(() => {
-    rowMemoed.checked ?
-    checkedArray?.push(rowMemoed) :
-    checkedArray?.splice(rowMemoed.index, 1)
-
-    checkedArray?.sort((a, b) => a.index - b.index)
-  }, [rowMemoed.checked])
-
-  return (
-    <Styled.RowStyled
-      id={`row-${rowMemoed.index.toString()}`}
-      key={`row-${rowMemoed.index}`}
-      >
-      <Styled.RowMainStyled
-        id={`${rowMemoed.index.toString()}-default`}
-        key={`${rowMemoed.index}-default`}
-        onClick={rowMainOnClickHandler}
-        hasClickFunction={!!onRowClick}
-      >
-        {checkedArray && (
-          <div>
-            <Checkbox
-              checked={rowMemoed.checked}
-              handleClick={checkboxOnClickHandler}
-            />
-          </div>
-        )}
-        {headers.map(header => (
-          <Styled.DataStyled
-            key={`${rowMemoed.index}-data-${header.id}`}
-          >
-            {rowMemoed.row[header.id]}
-          </Styled.DataStyled>
-        ))}
-        <Styled.IconWrapper
-          onClick={(event) => {
-            event.stopPropagation()
-            setDetailsOpen(!detailsOpen)
-          }}
-        >
-          {details && (
-            <FontAwesomeIcon
-              icon={detailsOpen ? faChevronUp : faChevronDown}
-            />
-          )}
-        </Styled.IconWrapper>
-      </Styled.RowMainStyled>
-      <Styled.RowDetailStyled
-        className="row-details"
-        id={`${rowMemoed.index.toString()}-details`}
-        key={`${rowMemoed.index}-details`}
-        isOpen={detailsOpen}
-        onClick={() => setDetailsOpen(false)}
-      >
-        {details && details(row)}
-      </Styled.RowDetailStyled>
-    </Styled.RowStyled>
-  )
-}
+import { Headers, Rows } from "./Components";
+import { TableStyles } from "./styles";
 
 export const Table = ({
   headers,
@@ -102,8 +10,27 @@ export const Table = ({
   checkedArray,
   onRowClick,
   details,
-  className,
+  additionalClasses = {
+    table: [],
+    tableHead: [],
+    headerRow: [],
+    hiddenIconRep: [],
+    header: [],
+    row: [],
+    dataWrapper: [],
+    data: [],
+    details: [],
+    iconWrapper: [],
+    icon: []
+  },
 }: TablePropTypes) => {
+  const styles = new TableStyles(additionalClasses)
+  const {
+    tableClass,
+    tableHeadClass,
+    headerRowClass,
+    hiddenIconRepCLass
+  } = styles.buildStyleRules()
   const [headerCheck, setHeaderCheck] = useState(false)
 
   const onHeaderClickHandler = () => {
@@ -115,46 +42,64 @@ export const Table = ({
   }), [headerCheck])
 
   return (
-    <Styled.TableStyled
-      className={className}
+    <table
+      className={tableClass}
     >
-      <Styled.HeadStyled>
-        <Styled.RowStyled
-          isTableHeader
+      <thead
+        className={tableHeadClass}
+      >
+        <tr
+          className={headerRowClass}
         >
           {checkedArray && (
             <th>
               <Checkbox
+                size="medium"
                 checked={headerCheckMemoed.headerCheck}
                 handleClick={onHeaderClickHandler}
               />
             </th>
           )}
           {headers.map(header => (
-            <Styled.HeaderStyled
-              key={`header-${header.id}`}
-            >
-              {header.label}
-              <Styled.IconStyled
-                onClick={() => console.log(`${header.id} was clicked`)}
-                icon={faSort}
-              />
-            </Styled.HeaderStyled>
+            <Headers
+              id={header.id}
+              label={header.label}
+              additionalClasses={{
+                header: additionalClasses.header,
+                icon: additionalClasses.icon
+              }}
+            />
           ))}
-        </Styled.RowStyled>
-      </Styled.HeadStyled>
+          {details && (
+            <th>
+              <div
+                className={hiddenIconRepCLass}
+              />
+            </th>
+          )}
+        </tr>
+      </thead>
 
       <tbody>
-        {data.map((row, index) => renderRows({
-          headerCheck: headerCheckMemoed.headerCheck,
-          headers,
-          row,
-          index,
-          onRowClick,
-          details,
-          checkedArray
-        }))}
+        {data.map((row, index) => (
+          <Rows
+            headerCheck={headerCheckMemoed.headerCheck}
+            headers={headers}
+            row={row}
+            index={index}
+            onRowClick={onRowClick}
+            details={details}
+            checkedArray={checkedArray}
+            additionalClasses={{
+              row: additionalClasses.row,
+              dataWrapper: additionalClasses.dataWrapper,
+              data: additionalClasses.data,
+              details: additionalClasses.details,
+              iconWrapper: additionalClasses.iconWrapper
+            }}
+          />
+        ))}
       </tbody>
-    </Styled.TableStyled>
+    </table>
   )
 }
