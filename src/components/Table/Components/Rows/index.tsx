@@ -52,7 +52,6 @@ export const Rows = ({
         id={`${hook.rowMemoed.index.toString()}-default`}
         key={`${hook.rowMemoed.index}-default`}
         onClick={hook.dataWrapperOnClickHandler}
-        // hasClickFunction={!!onRowClick}
         className={dataWrapperClass}
       >
         {checkedArray && (

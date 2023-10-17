@@ -1,46 +1,70 @@
 import React from "react";
-import * as Styled from './styles'
 import { UserPropTypes } from "./types";
+import { UserStyles } from "./styles";
 
 export const User = ({
   profileImage,
   firstName,
   lastName,
   description,
-  className
-}: UserPropTypes) => (
-  <Styled.Wrapper
-    className={className}
-    data-testid='user-wrapper'
-  >
-    {profileImage ? (
-      <Styled.AvatarStyled
-        src={profileImage}
-        alt="user avatar"
-        data-testid='user-avatar'
-      />
-    ) : (
-      <Styled.InitialsStyled
-        data-testid='user-initials'
-      >
-        <p>{`${firstName[0]}${lastName[0]}`}</p>
-      </Styled.InitialsStyled>
-    )}
-    <Styled.UserInfoStyled
-      data-testid='user-info'
+  size,
+  additionalClasses = {
+    wrapper: [],
+    avatar: [],
+    initials: [],
+    info: [],
+    name: [],
+    description: []
+  }
+}: UserPropTypes) => {
+  const styles = new UserStyles(additionalClasses)
+  const {
+    wrapperClass,
+    avatarClass,
+    initialsClass,
+    infoClass,
+    nameClass,
+    descriptionClass
+  } = styles.buildStyleRules(size)
+  return (
+    <div
+      className={wrapperClass}
+      data-testid='user-wrapper'
     >
-      <Styled.UserNameStyled
-        data-testid='user-name'
-      >
-        {`${firstName} ${lastName}`}
-      </Styled.UserNameStyled>
-      {description && (
-        <Styled.UserDescriptionStyled
-          data-testid='user-description'
+      {profileImage ? (
+        <img
+          src={profileImage}
+          alt="user avatar"
+          className={avatarClass}
+          data-testid='user-avatar'
+        />
+      ) : (
+        <div
+          className={initialsClass}
+          data-testid='user-initials'
         >
-          {description}
-        </Styled.UserDescriptionStyled>
+          <p>{`${firstName[0]}${lastName[0]}`}</p>
+        </div>
       )}
-    </Styled.UserInfoStyled>
-  </Styled.Wrapper>
-)
+      <div
+        className={infoClass}
+        data-testid='user-info'
+      >
+        <p
+          className={nameClass}
+          data-testid='user-name'
+        >
+          {`${firstName} ${lastName}`}
+        </p>
+        {description && (
+          <p
+            className={descriptionClass}
+            data-testid='user-description'
+          >
+            {description}
+          </p>
+        )}
+      </div>
+    </div>
+  )
+}

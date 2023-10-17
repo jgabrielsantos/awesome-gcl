@@ -42,6 +42,6 @@ export type RowClickPropTypes = {
 }
 
 export type CheckboxClickPropTypes = {
-  setChecked?: React.Dispatch<React.SetStateAction<boolean>>
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>
   checked: boolean
 }
