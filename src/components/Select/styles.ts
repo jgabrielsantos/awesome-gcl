@@ -1,56 +1,64 @@
-import styled from "styled-components";
-import { toRem } from "../../utils";
-import { colors } from "../../styles";
-import { SelectOptionListPropTypes } from "./types";
+import {
+  SelectAdditionalClassesPropTypes,
+  SelectBuildStylesPropTypes,
+  SelectSizeComponentEnums
+} from "./types";
+import Sizes from './sizes'
+import Themes from './themes'
+import { GSizeEnum } from "../types";
 
-export const WrapperStyled = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: ${toRem(6)};
-`
+interface SelectStyle {
+  buildStyleRules: ({ disabled, isOpen }: SelectBuildStylesPropTypes) => Record<string, string>
+}
 
-export const LabelStyled = styled.label`
-  font-size: 1rem;
-  width: 100%;
-  color: ${colors.grayscale[100]};
-`
+export class SelectStyles implements SelectStyle {
+  private additionalClasses: SelectAdditionalClassesPropTypes
+  private sizes: Record<GSizeEnum, Record<SelectSizeComponentEnums, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
 
-export const InputStyled = styled.input`
-  cursor: inherit;
-  color: ${colors.grayscale[100]};
-  font-size: 1rem;
-  border: none;
-  background-color: transparent;
-`
+  constructor(additionalClasses: SelectAdditionalClassesPropTypes) {
+    this.additionalClasses = additionalClasses
+  }
 
-export const OptionListStyled = styled.ul.withConfig({
-  shouldForwardProp: (prop) => !['isOpen'].includes(prop)
-})<Readonly<SelectOptionListPropTypes>>`
-  width: 100%;
-  display: ${({ isOpen }) => isOpen ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: ${toRem(8)};
-  border: 1px solid ${colors.grayscale[40]};
-  border-radius: ${toRem(8)};
-  padding: ${toRem(12)} ${toRem(16)};
-  position: absolute;
-  right: 0;
-  top: 110%;
-  background-color: ${colors.white[100]};
-  z-index: 1;
-`
+  getSizeRules(size: GSizeEnum, component: SelectSizeComponentEnums) {
+    return this.sizes[size][component]
+  }
 
-export const OptionItemStyled = styled.li`
-  cursor: pointer;
-  width: 100%;
-  color: ${colors.grayscale[100]};
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`
+  buildStyleRules({ size, disabled, isOpen }: SelectBuildStylesPropTypes){
+    const classes = {
+      wrapperClass: [
+        ...Themes.wrapper().values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      labelClass: [
+        ...Themes.label().values(),
+        ...this.getSizeRules(size, 'label').values(),
+        ...this.additionalClasses.label
+      ].join(' '),
+      inputWrapperClass: [
+        ...Themes.inputWrapper(disabled).values(),
+        ...this.getSizeRules(size, 'inputWrapper').values(),
+        ...this.additionalClasses.inputWrapper
+      ].join(' '),
+      inputClass: [
+        ...Themes.input().values(),
+        ...this.getSizeRules(size, 'input').values(),
+        ...this.additionalClasses.input
+      ].join(' '),
+      optionListClass: [
+        ...Themes.optionList(isOpen).values(),
+        ...this.getSizeRules(size, 'optionList').values(),
+        ...this.additionalClasses.optionList
+      ].join(' '),
+      optionItemClass: [
+        ...Themes.optionItem().values(),
+        ...this.additionalClasses.optionItem
+      ].join(' ')
+    }
+
+    return classes
+  }
+}
