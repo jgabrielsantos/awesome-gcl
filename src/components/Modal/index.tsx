@@ -16,10 +16,11 @@ export const Modal = ({
   return (
     <div
       className={wrapperClass}
+      data-testid='modal-wrapper'
     >
       <dialog
         className={dialogClass}
-        data-testid='modal'
+        data-testid='modal-dialog'
       >
         {children}
       </dialog>

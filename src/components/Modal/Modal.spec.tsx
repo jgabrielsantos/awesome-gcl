@@ -1,45 +1,64 @@
 import React from "react";
 import { Modal } from './index'
 import { screen, render } from "@testing-library/react";
-import 'jest-styled-components'
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import { ModalStyles } from "./styles";
 
-describe('Component design', () => {
-  it('Modal', () => {
-    render(
-      <Modal
-        isOpen
-      >
-        content
-      </Modal>
-    )
+describe('Modal styles', () => {
+  describe('Themes', () => {
+    const additionalClasses = {
+      wrapper: [],
+      dialog: []
+    }
+    const styles = new ModalStyles(additionalClasses)
 
-    const modal = screen.getByTestId('modal')
+    describe('Wrapper', () => {
+      it('On truthy isOpen prop', () => {
+        const theme = styles.getThemeRules('wrapper', true)
 
-    expect(modal).toHaveStyleRule('position', 'absolute')
-    expect(modal).toHaveStyleRule('right', '50%')
-    expect(modal).toHaveStyleRule('top', '50%')
-    expect(modal).toHaveStyleRule('transform', 'translate(-50%, -50%)')
-    expect(modal).toHaveStyleRule('display', 'flex')
-    expect(modal).toHaveStyleRule('flex-direction', 'column')
-    expect(modal).toHaveStyleRule('align-items', 'center')
-    expect(modal).toHaveStyleRule('justify-content', 'center')
-    expect(modal).toHaveStyleRule('border', `1px solid ${colors.grayscale[10]}`)
-    expect(modal).toHaveStyleRule('border-radius', toRem(6))
-  })
+        expect(theme.get('display')).toBe('flex')
+      })
+      it('On falsy isOpen prop', () => {
+        const theme = styles.getThemeRules('wrapper', false)
+        
+        expect(theme.get('display')).toBe('hidden')
+      })
+      it('Default styles', () => {
+        // Doesn't matter the isOpen prop value as does not affect the listed style rules
+        const theme = styles.getThemeRules('wrapper', false)
 
-  it('Modal should not show up on false prop', () => {
-    render(
-      <Modal
-        isOpen={false}
-      >
-        content
-      </Modal>
-    )
-  
-    const modal = screen.getByTestId('modal')
+        expect(theme.get('position')).toBe('fixed')
+        expect(theme.get('top')).toBe('top-0')
+        expect(theme.get('left')).toBe('left-0')
+        expect(theme.get('width')).toBe('w-full')
+        expect(theme.get('height')).toBe('h-full')
+        expect(theme.get('background-color')).toBe('bg-transparent')
+        expect(theme.get('align-items')).toBe('items-center')
+        expect(theme.get('justify-content')).toBe('justify-center')
+        expect(theme.get('z-index')).toBe('z-0')
+      })
+    })
 
-    expect(modal).toHaveStyleRule('display', 'none')
+    describe('Dialog', () => {
+      it('On truthy isOpen prop', () => {
+        const theme = styles.getThemeRules('dialog', true)
+
+        expect(theme.get('display')).toBe('block')
+      })
+      it('On falsy isOpen prop', () => {
+        const theme = styles.getThemeRules('dialog', false)
+
+        expect(theme.get('display')).toBe('hidden')
+      })
+      it('Default styles', () => {
+        // Doesn't matter the isOpen prop value as does not affect the listed style rules
+        const theme = styles.getThemeRules('dialog', false)
+
+        expect(theme.get('border-size')).toBe('border')
+        expect(theme.get('border-type')).toBe('border-solid')
+        expect(theme.get('border-color')).toBe('border-grayscale-10')
+        expect(theme.get('border-radius')).toBe('rounded-md')
+        expect(theme.get('padding')).toBe('p-4')
+      })
+    })
   })
 })
