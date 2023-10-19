@@ -20,21 +20,19 @@ const inputWrapper = () => new Map([
 ])
 
 const input = () => new Map([
-  ['peer', ' peer/input'], // for customizing the caption color when input is invalid
+  ['peer', 'peer/input'], // for customizing the caption color when input is invalid
   ['border-width', 'border'],
   ['border-style', 'border-solid'],
   ['border-color', 'border-grayscale-40'],
   ['border-radius', 'rounded-md'],
   ['background-color', 'bg-white-100'],
-  ['padding-horizontal', 'px-3'],
-  ['padding-vertical', 'py-3'],
   ['color', 'text-grayscale-100'],
+  ['outline', 'outline-0'],
 
   // Hover state
   ['hover-border-color', 'hover:border-primary-50'],
   
   // Focus state
-  ['focus-border-width', 'focus:border'],
   ['focus-border-color', 'focus:border-primary-50'],
 
   // Disabled state
@@ -50,7 +48,7 @@ const input = () => new Map([
   ['placeholder-color', 'text-grayscale-80'],
   ['placeholder-font-size', 'text-base'],
 
-  // Password type
+  // Password Icon
   ['after-icon', 'after:content: "\f002"']
 ])
 

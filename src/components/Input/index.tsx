@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
 
 export const Input = ({
-  type = 'text',
+  type,
   value,
   onChange,
   onKeyDown,
@@ -87,7 +87,7 @@ export const Input = ({
       {caption && (
         <p
           className={captionClass}
-          data-testid='input-error-message'
+          data-testid='input-caption'
         >
           {caption}
         </p>

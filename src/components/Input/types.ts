@@ -6,7 +6,14 @@ type InputTypePropTypes = 'text'
 | 'tel'
 | 'number'
 
-export type InputComponentsEnum = 'label'
+export type InputSizeComponentsEnum = 'label'
+| 'input'
+| 'passwordButton'
+| 'caption'
+
+export type InputComponentsEnum = 'wrapper'
+| 'label'
+| 'inputWrapper'
 | 'input'
 | 'passwordButton'
 | 'caption'
@@ -34,7 +41,10 @@ export type InputPropTypes = {
   additionalClasses?: InputAdditionalClassesPropTypes
 }
 
-export type UseInputPropTypes = Readonly<Pick<InputPropTypes, 'type' | 'showPassword'>>
+export type UseInputPropTypes = {
+  type: InputTypePropTypes
+  showPassword: boolean
+}
 
 export type ShowPasswordValuePropTypes = {
   passwordVisible: boolean

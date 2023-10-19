@@ -1,172 +1,194 @@
 import React from "react";
-import 'jest-styled-components'
 import { render, screen, fireEvent } from "@testing-library/react";
 import { Input } from './index'
 import { setPasswordVisibleHandler } from "./hooks";
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import { InputStyles } from "./styles";
 
 const onChangeSpy = jest.fn()
 
-describe('Component design', () => {
-  it('Wrapper', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-      />
-    )
+describe('Input styles', () => {
+  const additionalClasses = {
+    wrapper: [],
+    label: [],
+    input: [],
+    passwordButton: [],
+    caption: []
+  }
+  const styles = new InputStyles(additionalClasses)
 
-    const wrapper = screen.getByTestId('input-wrapper')
+  describe('Sizes', () => {
+    describe('Large', () => {
+      it('Label', () => {
+        const theme = styles.getSizeRules('large', 'label')
 
-    expect(wrapper).toHaveStyleRule('width', '100%')
-    expect(wrapper).toHaveStyleRule('display', 'flex')
-    expect(wrapper).toHaveStyleRule('flex-direction', 'column')
-    expect(wrapper).toHaveStyleRule('align-items', 'flex-start')
-    expect(wrapper).toHaveStyleRule('justify-content', 'flex-start')
-    expect(wrapper).toHaveStyleRule('gap', toRem(6))
-  })
+        expect(theme.get('font-size')).toBe('text-base')
+      })
 
-  it('Label', () => {
-    render(
-      <Input
-        label="Input label"
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-      />
-    )
+      it('Input', () => {
+        const theme = styles.getSizeRules('large', 'input')
 
-    const label = screen.getByTestId('input-label')
+        expect(theme.get('padding-vertical')).toBe('py-3')
+        expect(theme.get('padding-horizontal')).toBe('px-4')
+        expect(theme.get('font-size')).toBe('text-base')
+      })
 
-    expect(label).toHaveStyleRule('width', '100%')
-    expect(label).toHaveStyleRule('color', colors.grayscale[100])
-    expect(label).toHaveStyleRule('font-size', '1rem')
-  })
+      it('Password Button', () => {
+        const theme = styles.getSizeRules('large', 'passwordButton')
 
-  it('Input Wrapper', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-      />
-    )
+        expect(theme.get('right')).toBe('right-4')
+      })
 
-    const inputWrapper = screen.getByTestId('input-input-wrapper')
+      it('Caption', () => {
+        const theme = styles.getSizeRules('large', 'caption')
 
-    expect(inputWrapper).toHaveStyleRule('width', '100%')
-    expect(inputWrapper).toHaveStyleRule('display', 'flex')
-    expect(inputWrapper).toHaveStyleRule('align-items', 'center')
-    expect(inputWrapper).toHaveStyleRule('justify-content', 'space-between')
-    expect(inputWrapper).toHaveStyleRule('gap', toRem(8))
-    expect(inputWrapper).toHaveStyleRule('padding', `${toRem(12)} ${toRem(16)}`)
-    expect(inputWrapper).toHaveStyleRule('border-radius', toRem(6))
-    expect(inputWrapper).toHaveStyleRule('border', `1px solid ${colors.grayscale[40]}`)
-    expect(inputWrapper).toHaveStyleRule('cursor', 'text')
-    expect(inputWrapper).toHaveStyleRule('background-color', colors.white[100])
-    expect(inputWrapper).toHaveStyleRule('border-color', colors.primary[50], {
-      modifier: ':focus-within'
+        expect(theme.get('font-size')).toBe('text-sm')
+      })
+    })
+
+    describe('Medium', () => {
+      it('Label', () => {
+        const theme = styles.getSizeRules('medium', 'label')
+
+        expect(theme.get('font-size')).toBe('text-sm')
+      })
+
+      it('Input', () => {
+        const theme = styles.getSizeRules('medium', 'input')
+
+        expect(theme.get('padding-vertical')).toBe('py-2.5')
+        expect(theme.get('padding-horizontal')).toBe('px-4')
+        expect(theme.get('font-size')).toBe('text-sm')
+      })
+
+      it('Password Button', () => {
+        const theme = styles.getSizeRules('medium', 'passwordButton')
+
+        expect(theme.get('right')).toBe('right-4')
+      })
+
+      it('Caption', () => {
+        const theme = styles.getSizeRules('medium', 'caption')
+
+        expect(theme.get('font-size')).toBe('text-xs')
+      })
+    })
+
+    describe('Small', () => {
+      it('Label', () => {
+        const theme = styles.getSizeRules('small', 'label')
+
+        expect(theme.get('font-size')).toBe('text-xs')
+      })
+
+      it('Input', () => {
+        const theme = styles.getSizeRules('small', 'input')
+
+        expect(theme.get('padding-vertical')).toBe('py-2')
+        expect(theme.get('padding-horizontal')).toBe('px-3')
+        expect(theme.get('font-size')).toBe('text-xs')
+      })
+
+      it('Password Button', () => {
+        const theme = styles.getSizeRules('small', 'passwordButton')
+
+        expect(theme.get('right')).toBe('right-3.5')
+      })
+
+      it('Caption', () => {
+        const theme = styles.getSizeRules('small', 'caption')
+
+        expect(theme.get('font-size')).toBe('text-xs')
+      })
     })
   })
 
-  it('Input', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        placeholder="placeholder"
-        onChange={onChangeSpy}
-      />
-    )
+  describe('Themes', () => {
+    it('Wrapper', () => {
+      const theme = styles.getThemeRules('wrapper')
 
-    const input = screen.getByTestId('input-input')
-    expect(input).toHaveStyleRule('width', '100%')
-    expect(input).toHaveStyleRule('color', colors.grayscale[80])
-    expect(input).toHaveStyleRule('font-size', '1rem')
-    expect(input).toHaveStyleRule('border', 'none')
-    expect(input).toHaveStyleRule('cursor', 'text')
-    // expect(input).toHaveStyleRule('color', colors.grayscale[40], {
-    //   modifier: '::placeholder'
-    // })
-    expect(input).toHaveStyleRule('color', colors.grayscale[60], {
-      modifier: ':disabled'
+      expect(theme.get('width')).toBe('w-full')
+      expect(theme.get('display')).toBe('flex')
+      expect(theme.get('flex-direction')).toBe('flex-col')
+      expect(theme.get('align-items')).toBe('items-start')
+      expect(theme.get('justify-content')).toBe('justify-center')
+      expect(theme.get('gap')).toBe('gap-1.5')
     })
-    expect(input).toHaveStyleRule('cursor', 'not-allowed', {
-      modifier: ':disabled'
+  
+    it('Label', () => {
+      const theme = styles.getThemeRules('label')
+
+      expect(theme.get('width')).toBe('w-full')
+      expect(theme.get('color')).toBe('text-grayscale-100')
+
+      // Disabled state
+      expect(theme.get('disabled-color')).toBe('peer-disabled/input:text-grayscale-60')
     })
-  })
+  
+    it('Input Wrapper', () => {
+      const theme = styles.getThemeRules('inputWrapper')
 
-  it('Password Icon', () => {
-    render(
-      <Input
-        type="password"
-        value=""
-        onChange={onChangeSpy}
-      />
-    )
+      expect(theme.get('position')).toBe('relative')
+    })
+  
+    it('Input', () => {
+      const theme = styles.getThemeRules('input')
 
-    const passwordIcon = screen.getByTestId('input-password-icon')
+      expect(theme.get('peer')).toBe('peer/input')
+      expect(theme.get('border-width')).toBe('border')
+      expect(theme.get('border-style')).toBe('border-solid')
+      expect(theme.get('border-color')).toBe('border-grayscale-40')
+      expect(theme.get('border-radius')).toBe('rounded-md')
+      expect(theme.get('background-color')).toBe('bg-white-100')
+      expect(theme.get('color')).toBe('text-grayscale-100')
+      expect(theme.get('outline')).toBe('outline-0')
 
-    expect(passwordIcon).toHaveStyleRule('cursor', 'pointer')
-  })
+      // Hover state
+      expect(theme.get('hover-border-color')).toBe('hover:border-primary-50')
 
-  it('Error Message', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-        error
-        errorMessage="Error message"
-      />
-    )
+      // Focus state
+      expect(theme.get('focus-border-color')).toBe('focus:border-primary-50')
 
-    const errorMessage = screen.getByTestId('input-error-message')
+      // Disabled state
+      expect(theme.get('disabled-cursor')).toBe('disabled:cursor-not-allowed')
+      expect(theme.get('disabled-border-color')).toBe('disabled:border-grayscale-60')
+      expect(theme.get('disabled-color')).toBe('disabled:text-grayscale-40')
+      expect(theme.get('disabled-background')).toBe('disabled:bg-grayscale-5')
 
-    expect(errorMessage).toHaveStyleRule('font-size', '1rem')
-    expect(errorMessage).toHaveStyleRule('color', colors.support.alert[50])
+      // Invalid (Alert) state
+      expect(theme.get('invalid-border-color')).toBe('invalid:border-support-alert-50')
+
+      // Placeholder state
+      expect(theme.get('placeholder-color')).toBe('text-grayscale-80')
+      expect(theme.get('placeholder-font-size')).toBe('text-base')
+
+      // Password Icon
+      expect(theme.get('after-icon')).toBe('after:content: "\f002"')
+    })
+
+    it('Password Button', () => {
+      const theme = styles.getThemeRules('passwordButton')
+
+      expect(theme.get('position')).toBe('absolute')
+      expect(theme.get('position-vertical')).toBe('inset-y-0')
+    })
+  
+    it('Caption', () => {
+      const theme = styles.getThemeRules('caption')
+
+      // Disabled state
+      expect(theme.get('disabled-color')).toBe('peer-disabled/input:text-grayscale-60')
+
+      // Invalid state
+      expect(theme.get('invalid-color')).toBe('peer-invalid/input:text-support-alert-50')
+    })
   })
 })
 
-describe('Component designs for optional props', () => {
-  it('Error', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-        error
-      />
-    )
-
-    const inputWrapper = screen.getByTestId('input-input-wrapper')
-
-    expect(inputWrapper).toHaveStyleRule('border', `1px solid ${colors.support.alert[50]}`)
-  })
-
-  it('Disabled', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-        disabled
-      />
-    )
-
-    const inputWrapper = screen.getByTestId('input-input-wrapper')
-
-    expect(inputWrapper).toHaveStyleRule('cursor', 'not-allowed')
-    expect(inputWrapper).toHaveStyleRule('background-color', colors.grayscale[5])
-  })
-})
-
-describe('Component types should be exclusively ', () => {
+describe('Component types', () => {
   it('Should render type text', () => {
     render(
       <Input
+        size="medium"
         type="text"
         value=""
         onChange={onChangeSpy}
@@ -181,6 +203,7 @@ describe('Component types should be exclusively ', () => {
   it('Should render type password', () => {
     render(
       <Input
+        size="medium"
         type="password"
         value=""
         onChange={onChangeSpy}
@@ -195,6 +218,7 @@ describe('Component types should be exclusively ', () => {
   it('Should render type email', () => {
     render(
       <Input
+        size="medium"
         type="email"
         value=""
         onChange={onChangeSpy}
@@ -209,6 +233,7 @@ describe('Component types should be exclusively ', () => {
   it('Should render type tel', () => {
     render(
       <Input
+        size="medium"
         type="tel"
         value=""
         onChange={onChangeSpy}
@@ -223,6 +248,7 @@ describe('Component types should be exclusively ', () => {
   it('Should render type number', () => {
     render(
       <Input
+        size="medium"
         type="number"
         value=""
         onChange={onChangeSpy}
@@ -239,6 +265,7 @@ describe('Password type input', () => {
   it('Should render icon', () => {
     render(
       <Input
+        size="medium"
         type="password"
         value=""
         onChange={onChangeSpy}
@@ -253,6 +280,7 @@ describe('Password type input', () => {
   it('Icon wrapper should change the icon rendered on click', () => {
     render(
       <Input
+        size="medium"
         type="password"
         value=""
         onChange={onChangeSpy}
@@ -268,21 +296,92 @@ describe('Password type input', () => {
   })
 })
 
-describe('Error message', () => {
-  it('Error message should be rendered only when component has error flag', () => {
-    render(
-      <Input
-        type="text"
-        value=""
-        onChange={onChangeSpy}
-        error
-        errorMessage="Error message"
-      />
-    )
+describe('Regex pattern', () => {
+  it('Should throw error upon invalid regex', () => {
+    const regexError = 'Pattern not acceptable. Please provide a valid regular expression (RegEx)'
 
-    const errorMessage = screen.getByTestId('input-error-message')
+    const consoleErrorSpy = jest.spyOn(console, 'error')
+    consoleErrorSpy.mockImplementation(() => {})
 
-    expect(errorMessage).toBeTruthy()
+    try {
+      render(
+        <Input
+          size="medium"
+          type="text"
+          value=""
+          onChange={onChangeSpy}
+          pattern="["
+        />
+      )
+    } catch (error: any) {
+      expect(error.message).toBe(regexError)
+    } finally {
+      consoleErrorSpy.mockRestore()
+    }
+  })
+})
+
+describe('Conditional component rendering', () => {
+  describe('Label', () => {
+    it('Should render', () => {
+      render(
+        <Input
+          size="medium"
+          type="text"
+          value=""
+          onChange={onChangeSpy}
+          label="Label"
+        />
+      )
+
+      const labels = screen.queryAllByTestId('input-label')
+      expect(labels.length).toBe(1)
+    })
+
+    it('Should not render', () => {
+      render(
+        <Input
+          size="medium"
+          type="text"
+          value=""
+          onChange={onChangeSpy}
+        />
+      )
+
+      const labels = screen.queryAllByTestId('input-label')
+      expect(labels.length).toBe(0)
+    })
+  })
+
+  describe('Caption', () => {
+    it('Should render', () => {
+      render(
+        <Input
+          size="medium"
+          type="text"
+          value=""
+          onChange={onChangeSpy}
+          caption='Caption'
+        />
+      )
+
+      const captions = screen.queryAllByTestId('input-caption')
+      expect(captions.length).toBe(1)
+    })
+
+    it('Should not render', () => {
+      render(
+        <Input
+          size="medium"
+          type="text"
+          value=""
+          onChange={onChangeSpy}
+        />
+      )
+
+      const captions = screen.queryAllByTestId('input-caption')
+      expect(captions.length).toBe(0)
+    })
   })
 })
 
@@ -292,25 +391,51 @@ describe('setPasswordVisibleHandler', () => {
   const setPasswordVisibleSpy = jest.fn()
   const setTypeSpy = jest.fn()
 
-  beforeAll(() => {
-    sut = setPasswordVisibleHandler({
-      passwordVisible: false,
-      setPasswordVisible: setPasswordVisibleSpy,
-      setType: setTypeSpy
+  describe('Show Password prop as false', () => {
+    beforeAll(() => {
+      sut = setPasswordVisibleHandler({
+        passwordVisible: false,
+        setPasswordVisible: setPasswordVisibleSpy,
+        setType: setTypeSpy
+      })
+    })
+
+    it('Should call setPasswordVisible with correct params', () => {
+      sut()
+
+      expect(setPasswordVisibleSpy).toBeCalledTimes(1)
+      expect(setPasswordVisibleSpy).toBeCalledWith(true)
+    })
+
+    it('Should call setType with correct params', () => {
+      sut()
+
+      expect(setTypeSpy).toBeCalledTimes(1)
+      expect(setTypeSpy).toBeCalledWith('text')
     })
   })
 
-  it('Should call setPasswordVisible with correct params', () => {
-    sut()
+  describe('Show Password prop as true', () => {
+    beforeAll(() => {
+      sut = setPasswordVisibleHandler({
+        passwordVisible: true,
+        setPasswordVisible: setPasswordVisibleSpy,
+        setType: setTypeSpy
+      })
+    })
 
-    expect(setPasswordVisibleSpy).toBeCalledTimes(1)
-    expect(setPasswordVisibleSpy).toBeCalledWith(true)
-  })
+    it('Should call setPasswordVisible with correct params', () => {
+      sut()
 
-  it('Should call setType with correct params', () => {
-    sut()
+      expect(setPasswordVisibleSpy).toBeCalledTimes(1)
+      expect(setPasswordVisibleSpy).toBeCalledWith(false)
+    })
 
-    expect(setTypeSpy).toBeCalledTimes(1)
-    expect(setTypeSpy).toBeCalledWith('text')
+    it('Should call setType with correct params', () => {
+      sut()
+
+      expect(setTypeSpy).toBeCalledTimes(1)
+      expect(setTypeSpy).toBeCalledWith('password')
+    })
   })
 })
