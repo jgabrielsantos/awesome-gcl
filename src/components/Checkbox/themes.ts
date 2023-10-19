@@ -1,6 +1,4 @@
-import { CheckboxPropTypes } from "./types"
-
-const wrapperRules = () => new Map([
+const wrapper = () => new Map([
   ['display', 'flex'],
   ['flex-shrink', 'shrink-0'],
   ['justify-content', 'justify-center'],
@@ -9,7 +7,7 @@ const wrapperRules = () => new Map([
   ['position', 'relative']
 ])
 
-const inputRules = () => new Map([
+const input = () => new Map([
   ['cursor', 'cursor-pointer'],
   ['border-width', 'border'],
   ['border-style', 'border-solid'],
@@ -39,43 +37,20 @@ const inputRules = () => new Map([
   ['combined-checked-disabled-background-color', 'checked:disabled:bg-grayscale-40'],
 ])
 
-const iconRules = ({ size }: Pick<CheckboxPropTypes, 'size'>) => {
-  const sizes = {
-    large: {
-      left: 'left-2px',
-      width: 'w-5',
-      height: 'h-5'
-    },
-    medium: {
-      left: 'left-0.5',
-      width: 'w-4',
-      height: 'h-4'
-    },
-    small: {
-      left: 'left-2px',
-      width: 'w-3',
-      height: 'h-3'
-    },
-  }
+const icon = () => new Map([
+  ['cursor', 'cursor-pointer'],
+  ['position', 'absolute'],
+  ['color', 'text-white-100'],
+  ['flex-shrink', 'shrink-0']
+])
 
-  return new Map([
-    ['cursor', 'cursor-pointer'],
-    ['position', 'absolute'],
-    ['color', 'text-white-100'],
-    ['flex-shrink', 'shrink-0'],
-    ['left', sizes[size].left],
-    ['height', sizes[size].height],
-    ['width', sizes[size].width]
-  ])
-}
-
-const labelRules = () => new Map([
+const label = () => new Map([
   ['cursor', 'cursor-pointer']
 ])
 
 export default {
-  wrapperRules,
-  inputRules,
-  iconRules,
-  labelRules
+  wrapper,
+  input,
+  icon,
+  label
 }

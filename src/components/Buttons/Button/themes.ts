@@ -10,6 +10,8 @@ const defaultRules = () => new Map([
   ['border-styled', 'border-solid'],
   ['border-radius', 'rounded-md'],
   ['font-weight', 'font-medium'],
+
+  // Disabled state
   ['disabled-cursor', 'disabled:cursor-not-allowed'],
   ['disabled-border-color', 'disabled:border-grayscale-40'],
   ['disabled-color', 'disabled:text-grayscale-60'],
@@ -19,8 +21,12 @@ const primaryRules = () => new Map([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-primary-50'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-primary-100'],
   ['hover-background-color', 'hover:bg-primary-100'],
+
+  // Disable state
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
@@ -28,8 +34,12 @@ const secondaryRules = () => new Map([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-primary-50'],
   ['background-color', 'bg-white-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-primary-50'],
   ['hover-background-color', 'hover:bg-primary-0'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
@@ -37,8 +47,12 @@ const tertiaryRules = () => new Map([
   ['border-color', 'border-grayscale-40'],
   ['text-color', 'text-grayscale-100'],
   ['background-color', 'bg-white-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-grayscale-100'],
   ['hover-background-color', 'hover:bg-white-100'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
@@ -46,8 +60,12 @@ const destructivePrimaryRules = () => new Map ([
   ['border-color', 'border-support-alert-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-support-alert-50'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-support-alert-100'],
   ['hover-background-color', 'hover:bg-support-alert-100'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
@@ -55,8 +73,12 @@ const destructiveSecondaryRules = () => new Map ([
   ['border-color', 'border-support-alert-50'],
   ['text-color', 'text-support-alert-50'],
   ['background-color', 'bg-white-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-support-alert-50'],
   ['hover-background-color', 'hover:bg-support-alert-5'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
@@ -64,8 +86,12 @@ const successPrimaryRules = () => new Map ([
   ['border-color', 'border-support-success-50'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-support-success-50'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-support-success-100'],
   ['hover-background-color', 'hover:bg-support-success-100'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
@@ -73,8 +99,12 @@ const successSecondaryRules = () => new Map ([
   ['border-color', 'border-support-success-50'],
   ['text-color', 'text-support-success-50'],
   ['background-color', 'bg-white-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-support-success-50'],
   ['hover-background-color', 'hover:bg-support-success-5'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 
@@ -82,8 +112,12 @@ const contrastPrimaryRules = () => new Map ([
   ['border-color', 'border-primary-50'],
   ['text-color', 'text-primary-50'],
   ['background-color', 'bg-white-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-primary-50'],
   ['hover-background-color', 'hover:bg-primary-0'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-grayscale-5']
 ])
 
@@ -91,8 +125,12 @@ const contrastSecondaryRules = () => new Map ([
   ['border-color', 'border-white-100'],
   ['text-color', 'text-white-100'],
   ['background-color', 'bg-grayscale-100'],
+
+  // Hover state
   ['hover-border-color', 'hover:border-white-100'],
   ['hover-background-color', 'hover:bg-white-40'],
+
+  // Disabled state
   ['disabled-background-color', 'disabled:bg-white-0']
 ])
 

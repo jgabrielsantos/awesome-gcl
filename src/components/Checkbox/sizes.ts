@@ -5,6 +5,11 @@ const largeSize = () => ({
   ]),
   label: new Map([
     ['font-size', 'text-base']
+  ]),
+  icon: new Map([
+    ['left', 'left-2px'],
+    ['height', 'h-5'],
+    ['width', 'w-5']
   ])
 })
 const mediumSize = () => ({
@@ -14,6 +19,11 @@ const mediumSize = () => ({
   ]),
   label: new Map([
     ['font-size', 'text-sm']
+  ]),
+  icon: new Map([
+    ['left', 'left-0.5'],
+    ['height', 'h-4'],
+    ['width', 'w-4']
   ])
 })
 const smallSize = () => ({
@@ -23,6 +33,11 @@ const smallSize = () => ({
   ]),
   label: new Map([
     ['font-size', 'text-xs']
+  ]),
+  icon: new Map([
+    ['left', 'left-2px'],
+    ['height', 'h-3'],
+    ['width', 'w-3']
   ])
 })
 

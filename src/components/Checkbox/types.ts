@@ -1,7 +1,13 @@
 import { GSizeEnum } from "../types"
 
-export type CheckboxComponentsEnum = 'input'
+export type CheckboxComponentsEnum = 'wrapper'
+| 'input'
+| 'icon'
 | 'label'
+
+export type CheckboxSizeComponentsEnum = 'input'
+| 'label'
+| 'icon'
 
 export type CheckboxAdditionalClassesPropTypes = {
   wrapper: string[]
