@@ -1,3 +1,7 @@
+export type FigureComponentEnums = 'figure'
+| 'image'
+| 'caption'
+
 export type FigureAdditionalClassesPropTypes = {
   figure: string[]
   image: string[]

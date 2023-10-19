@@ -1,19 +1,19 @@
-const figureRule = () => new Map([
+const figure = () => new Map([
   ['width', 'w-full'],
   ['height', 'h-full'],
 ])
 
-const imageRule = () => new Map([
+const image = () => new Map([
   ['width', 'w-full'],
   ['height', 'h-full'],
 ])
 
-const captionRule = () => new Map([
+const caption = () => new Map([
   ['font-size', 'text-base']
 ])
 
 export default {
-  figureRule,
-  imageRule,
-  captionRule
+  figure,
+  image,
+  caption
 }

@@ -1,45 +1,66 @@
 import React from "react"
 import { Figure } from "./index"
 import { render, screen } from "@testing-library/react"
-import 'jest-styled-components'
+import { FigureStyles } from "./styles"
 
-describe('Figure layout and styles', () => {
-  const srcMock = 'https://cctech.io/images/cctech-logo-black.webp'
-  const altMock = 'cctech logo'
+const srcMock = 'https://cctech.io/images/cctech-logo-black.webp'
+const altMock = 'cctech logo'
+const captionMock = 'figure caption'
 
-  it('Should match designs', () => {
+describe('Figure styles', () => {
+  const additionalClasses = {
+    figure: [],
+    image: [],
+    caption: []
+  }
+  const styles = new FigureStyles(additionalClasses)
+
+  describe('Themes', () =>{
+    it('Figure', () => {
+      const theme = styles.getThemeRules('figure')
+
+      expect(theme.get('width')).toBe('w-full')
+      expect(theme.get('height')).toBe('h-full')
+    })
+
+    it('Image', () => {
+      const theme = styles.getThemeRules('image')
+
+      expect(theme.get('width')).toBe('w-full')
+      expect(theme.get('height')).toBe('h-full')
+    })
+
+    it('Caption', () => {
+      const theme = styles.getThemeRules('caption')
+
+      expect(theme.get('font-size')).toBe('text-base')
+    })
+  })
+})
+
+describe('Figure layout', () => {
+  it('Should not render caption component', () => {
     render(
       <Figure
         src={srcMock}
         alt={altMock}
-        caption="Convergence Logo"
       />
     )
 
-    const wrapper = screen.getByTestId('figure-wrapper')
-
-    expect(wrapper).toHaveStyleRule('width', '100%')
-    expect(wrapper).toHaveStyleRule('height', '100%')
-
-    const image = screen.getByTestId('figure-image')
-    expect(image).toHaveStyleRule('width', '100%')
-    expect(image).toHaveStyleRule('height', '100%')
-
-    const caption = screen.getByTestId('figure-caption')
-    expect(caption).toHaveStyleRule('font-size', '1rem')
+    const caption = screen.queryAllByTestId('figure-caption')
+    expect(caption.length).toBe(0)
   })
 
-  it('Should render figure width based on the prop', () => {
+  it('Should render caption component', () => {
     render(
       <Figure
         src={srcMock}
         alt={altMock}
-        width="200px"
+        caption={captionMock}
       />
     )
 
-    const wrapper = screen.getByTestId('figure-wrapper')
-
-    expect(wrapper).toHaveStyleRule('width', '200px')
+    const caption = screen.queryAllByTestId('figure-caption')
+    expect(caption.length).toBe(1)
   })
 })

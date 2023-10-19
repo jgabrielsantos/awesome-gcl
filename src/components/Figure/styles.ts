@@ -1,12 +1,18 @@
-import { FigureAdditionalClassesPropTypes } from "./types";
+import { FigureAdditionalClassesPropTypes, FigureComponentEnums } from "./types";
 import Themes from './themes'
 
 interface FigureStyle {
+  getThemeRules: (components: FigureComponentEnums) => Map<string, string>
   buildStyleRules: () => Record<string, string>
 }
 
 export class FigureStyles implements FigureStyle {
   private additionalClasses: FigureAdditionalClassesPropTypes
+  private themes: Record<FigureComponentEnums, Map<string, string>> = {
+    figure: Themes.figure(),
+    image: Themes.image(),
+    caption: Themes.caption()
+  }
 
   constructor({ figure, image, caption }: FigureAdditionalClassesPropTypes) {
     this.additionalClasses = {
@@ -16,18 +22,22 @@ export class FigureStyles implements FigureStyle {
     }
   }
 
+  getThemeRules(components: FigureComponentEnums) {
+    return this.themes[components]
+  }
+
   buildStyleRules() {
     const classes = {
       figureClass: [
-        ...Themes.figureRule().values(),
+        ...this.getThemeRules('figure').values(),
         ...this.additionalClasses.figure
       ].join(' '),
       imageClass: [
-        ...Themes.imageRule().values(),
+        ...this.getThemeRules('image').values(),
         ...this.additionalClasses.image
       ].join(' '),
       captionClass: [
-        ...Themes.captionRule().values(),
+        ...this.getThemeRules('caption').values(),
         ...this.additionalClasses.caption
       ].join(' ')
     }
