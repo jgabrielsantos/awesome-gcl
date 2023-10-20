@@ -1,11 +1,14 @@
 import {
   ToastAdditionalClassesPropTypes,
   ToastBuilStylePropTypes,
+  ToastComponentsEnum,
   ToastTypeEnums
 } from "./types";
 import Themes from './themes'
 
 interface ToastStyle {
+  getTypeRules: (type: ToastTypeEnums) => string
+  getDisplayRules: (isOpen: boolean) => string
   buildStyleRules: ({
     type,
     isOpen
@@ -14,12 +17,15 @@ interface ToastStyle {
 
 export class ToastStyles implements ToastStyle {
   private additionalClasses: ToastAdditionalClassesPropTypes
+  private themes: Record<ToastComponentsEnum, Map<string, string>> = {
+    toast: Themes.toast()
+  }
 
   constructor(additionalClasses: ToastAdditionalClassesPropTypes) {
     this.additionalClasses = additionalClasses
   }
 
-  private getTypeRules(type: ToastTypeEnums): string {
+  getTypeRules(type: ToastTypeEnums): string {
     switch(type) {
       case 'info':
         return 'bg-primary-5'
@@ -32,10 +38,19 @@ export class ToastStyles implements ToastStyle {
     }
   }
 
+  getDisplayRules(isOpen: boolean): string {
+    return isOpen ? 'flex' : 'hidden'
+  }
+
+  getThemeRules(component: ToastComponentsEnum) {
+    return this.themes[component]
+  }
+
   buildStyleRules({ type, isOpen }: ToastBuilStylePropTypes) {
     const classes = {
       toastClass: [
-        ...Themes.toast(isOpen, type).values(),
+        ...this.getThemeRules('toast').values(),
+        this.getDisplayRules(isOpen),
         this.getTypeRules(type),
         ...this.additionalClasses
       ].join(' ')

@@ -1,5 +1,7 @@
 import { ToastComponentPropTypes } from "./Components/Toast/types"
 
+export type ToastListComponentsEnum = 'wrapper'
+
 export type ToastListComponentPropType = {
   toastList: ToastComponentPropTypes[]
   additionalClasses?: string[]

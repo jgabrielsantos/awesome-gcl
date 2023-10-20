@@ -1,5 +1,3 @@
-import { GSizeEnum } from "../../../types"
-
 export type ToastTypeEnums = 'info'
 | 'success'
 | 'fail'
@@ -20,3 +18,5 @@ export type ToastComponentPropTypes = {
   children: React.ReactNode
   additionalClasses?: ToastAdditionalClassesPropTypes
 }
+
+export type ToastComponentsEnum = 'toast'
