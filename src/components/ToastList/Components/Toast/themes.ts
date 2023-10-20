@@ -6,7 +6,7 @@ const toast = () => new Map([
   ['padding-vertical', 'py-2.5'],
   ['padding-horizontal', 'px-3'],
   ['gap', 'gap-2'],
-  ['border-radius', 'rounded-lg'],
+  ['border-radius', 'rounded-lg']
 ])
 
 export default {

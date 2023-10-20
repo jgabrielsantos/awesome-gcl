@@ -6,14 +6,16 @@ import { ToastStyles } from "./styles";
 
 export const Toast = ({
   id,
-  type,
+  useCase,
   isOpen,
   handleClose,
   children,
-  additionalClasses = []
+  additionalClasses = {
+    toast: []
+  }
 }: Readonly<ToastComponentPropTypes>) => {
-  const style = new ToastStyles(additionalClasses)
-  const { toastClass } = style.buildStyleRules({ type, isOpen })
+  const style = new ToastStyles({additionalClasses, useCase, isOpen})
+  const { toastClass } = style.buildStyleRules()
 
   return (
     <output

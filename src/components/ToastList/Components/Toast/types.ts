@@ -1,19 +1,22 @@
-export type ToastTypeEnums = 'info'
+export type ToastUseCaseEnums = 'primary'
 | 'success'
 | 'fail'
 | 'warning'
 
-export type ToastAdditionalClassesPropTypes = string[]
-
-export type ToastBuilStylePropTypes = {
-  type: ToastTypeEnums
-  isOpen: boolean
+export type ToastAdditionalClassesPropTypes = {
+  toast: string[]
 }
+
+export type ToastConstructorStylePropTypes = Pick<ToastComponentPropTypes,
+  'useCase'
+  | 'isOpen'
+  | 'additionalClasses'
+>
 
 export type ToastComponentPropTypes = {
   id: string
-  type: ToastTypeEnums
-  isOpen: boolean
+  useCase?: ToastUseCaseEnums
+  isOpen?: boolean
   handleClose: React.MouseEventHandler<SVGSVGElement>
   children: React.ReactNode
   additionalClasses?: ToastAdditionalClassesPropTypes

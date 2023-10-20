@@ -9,7 +9,7 @@ type TestThemePropTypes = {
 
 describe('Toast List styles', () => {
   describe('Components', () => {
-    const testThemes = ({
+    const testStyleRuleBuilder = ({
       additionalClasses,
       componentName
     }: TestThemePropTypes) => {
@@ -23,11 +23,11 @@ describe('Toast List styles', () => {
       expect(themes[`${componentName}Class`]).toEqual(expectedResult.join(' '))
     }
     describe('Wrapper', () => {
-      it('Default classes', () => testThemes({
+      it('Default classes', () => testStyleRuleBuilder({
         componentName: 'wrapper'
       }))
 
-      it('Additional classes', () => testThemes({
+      it('Additional classes', () => testStyleRuleBuilder({
         additionalClasses: [
           'outline-0',
           'box-shadow-0'
@@ -35,9 +35,5 @@ describe('Toast List styles', () => {
         componentName: 'wrapper'
       }))
     })
-  })
-
-  describe('Style Builder', () => {
-    
   })
 })
