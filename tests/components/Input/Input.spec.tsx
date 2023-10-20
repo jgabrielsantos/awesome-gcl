@@ -1,8 +1,8 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Input } from './index'
-import { setPasswordVisibleHandler } from "./hooks";
-import { InputStyles } from "./styles";
+import { Input } from '../../../src/components/Input/index'
+import { setPasswordVisibleHandler } from "../../../src/components/Input/hooks";
+import { InputStyles } from "../../../src/components/Input/styles";
 
 const onChangeSpy = jest.fn()
 

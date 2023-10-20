@@ -1,7 +1,7 @@
 import React from "react";
 import { screen, render, fireEvent } from "@testing-library/react";
-import { Checkbox } from "./index";
-import { CheckboxStyles } from "./styles";
+import { Checkbox } from "../../../src/components/Checkbox/index";
+import { CheckboxStyles } from "../../../src/components/Checkbox/styles";
 
 const handleClickSpy = jest.fn()
 

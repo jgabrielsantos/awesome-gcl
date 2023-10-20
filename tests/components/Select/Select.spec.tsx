@@ -1,10 +1,10 @@
 import React from "react"
 import 'jest-styled-components'
 import { render, screen, fireEvent } from "@testing-library/react"
-import { Select } from "./index"
-import { toRem } from "../../utils"
-import { colors } from "../../styles"
-import { toggleOptionListVisibility } from "./hooks"
+import { Select } from "../../../src/components/Select/index"
+import { toRem } from "../../../src/utils"
+import { colors } from "../../../src/styles"
+import { toggleOptionListVisibility } from "../../../src/components/Select/hooks"
 
 const labelMock = 'Label'
 const optionsMock = [

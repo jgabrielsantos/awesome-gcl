@@ -1,7 +1,7 @@
 import React from 'react'
-import { Toast } from './index'
-import { ToastStyles } from "./styles"
-import { ToastTypeEnums } from "./types"
+import { Toast } from '../../../../../src/components/ToastList/Components/Toast/index'
+import { ToastStyles } from "../../../../../src/components/ToastList/Components/Toast/styles"
+import { ToastTypeEnums } from "../../../../../src/components/ToastList/Components/Toast/types"
 import { fireEvent, render, screen } from "@testing-library/react"
 
 type TestTypePropTypes = {

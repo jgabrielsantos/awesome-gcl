@@ -1,7 +1,7 @@
 import React from "react";
-import { Modal } from './index'
+import { Modal } from '../../../src/components/Modal/index'
 import { screen, render } from "@testing-library/react";
-import { ModalStyles } from "./styles";
+import { ModalStyles } from "../../../src/components/Modal/styles";
 
 describe('Modal styles', () => {
   describe('Themes', () => {

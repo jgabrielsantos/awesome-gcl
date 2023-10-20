@@ -1,7 +1,7 @@
 import React from "react"
-import { Figure } from "./index"
+import { Figure } from "../../../src/components/Figure/index"
 import { render, screen } from "@testing-library/react"
-import { FigureStyles } from "./styles"
+import { FigureStyles } from "../../../src/components/Figure/styles"
 
 const srcMock = 'https://cctech.io/images/cctech-logo-black.webp'
 const altMock = 'cctech logo'

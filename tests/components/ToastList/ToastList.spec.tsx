@@ -1,6 +1,6 @@
-import { ToastListStyles } from "./styles";
-import Themes from "./themes";
-import { ToastListComponentsEnum } from "./types";
+import { ToastListStyles } from "../../../src/components/ToastList/styles";
+import Themes from "../../../src/components/ToastList/themes";
+import { ToastListComponentsEnum } from "../../../src/components/ToastList/types";
 
 type TestThemePropTypes = {
   additionalClasses?: string[]

@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent, render, screen } from '@testing-library/react'
-import { Button } from "./index";
-import { ButtonStyles } from "./styles";
-import Themes from "./themes";
+import { IconButton } from "../../../../src/components/Buttons/IconButton/index";
+import { ButtonStyles } from "../../../../src/components/Buttons/IconButton/styles";
+import Themes from '../../../../src/components/Buttons/IconButton/themes'
 
 const handleClickMock = jest.fn()
 const buttonChildMock = 'button rendered for test purposes'
@@ -10,14 +10,14 @@ const buttonChildMock = 'button rendered for test purposes'
 describe('Button handleClick function', () => {
   it('Should be fired only once upon click', () => {
     render(
-      <Button
+      <IconButton
         type="button"
         size="medium"
         theme="primary"
         handleClick={handleClickMock}
       >
         {buttonChildMock}
-      </Button>
+      </IconButton>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
@@ -35,24 +35,21 @@ describe('Button styles', () => {
       const size = styles.getSizeRules('large')
 
       expect(size.get('font-size')).toBe('text-base')
-      expect(size.get('padding-vertical')).toBe('py-3')
-      expect(size.get('padding-horizontal')).toBe('px-6')
+      expect(size.get('padding')).toBe('p-3')
     })
     
     it('Medium', () => {
       const size = styles.getSizeRules('medium')
 
       expect(size.get('font-size')).toBe('text-sm')
-      expect(size.get('padding-vertical')).toBe('py-2.5')
-      expect(size.get('padding-horizontal')).toBe('px-5')
+      expect(size.get('padding')).toBe('p-2.5')
     })
 
     it('Small', () => {
       const size = styles.getSizeRules('small')
 
       expect(size.get('font-size')).toBe('text-xs')
-      expect(size.get('padding-vertical')).toBe('py-2')
-      expect(size.get('padding-horizontal')).toBe('px-3')
+      expect(size.get('padding')).toBe('p-2')
     })
   })
 
@@ -224,14 +221,14 @@ describe('Button styles', () => {
 describe('Button types', () => {
   it('Should have button type', () => {
     render(
-      <Button
+      <IconButton
         size="medium"
         type="button"
         theme="primary"
         handleClick={handleClickMock}
       >
         {buttonChildMock}
-      </Button>
+      </IconButton>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
@@ -240,14 +237,14 @@ describe('Button types', () => {
 
   it('Should have reset type', () => {
     render(
-      <Button
+      <IconButton
         size="medium"
         type="reset"
         theme="primary"
         handleClick={handleClickMock}
       >
         {buttonChildMock}
-      </Button>
+      </IconButton>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
@@ -256,14 +253,14 @@ describe('Button types', () => {
 
   it('Should have submit type', () => {
     render(
-      <Button
+      <IconButton
         size="medium"
         type="submit"
         theme="primary"
         handleClick={handleClickMock}
       >
         {buttonChildMock}
-      </Button>
+      </IconButton>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')
@@ -274,7 +271,7 @@ describe('Button types', () => {
 describe('Button disabled prop', () => {
   it('Should not fire the handleClick function', () => {
     render(
-      <Button
+      <IconButton
         size="medium"
         type="button"
         theme="primary"
@@ -282,7 +279,7 @@ describe('Button disabled prop', () => {
         handleClick={handleClickMock}
       >
         {buttonChildMock}
-      </Button>
+      </IconButton>
     )
 
     const button = screen.getByTestId('awesome-gcl-button-component')

@@ -1,9 +1,9 @@
 import React from "react";
-import { User } from "./index";
+import { User } from "../../../src/components/User/index";
 import { render, screen } from '@testing-library/react'
 import 'jest-styled-components'
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import { colors } from "../../../src/styles";
+import { toRem } from "../../../src/utils";
 
 describe('Component designs', () => {
   it('Wrapper', () => {

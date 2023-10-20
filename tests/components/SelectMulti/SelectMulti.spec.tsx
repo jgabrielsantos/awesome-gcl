@@ -1,9 +1,9 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import { SelectMulti } from "./index";
-import { toggleOptionsListVisibility, markCheckbox } from "./hooks";
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import { SelectMulti } from "../../../src/components/SelectMulti/index";
+import { toggleOptionsListVisibility, markCheckbox } from "../../../src/components/SelectMulti/hooks";
+import { colors } from "../../../src/styles";
+import { toRem } from "../../../src/utils";
 import 'jest-styled-components'
 
 const optionsMock = [

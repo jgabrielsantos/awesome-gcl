@@ -1,8 +1,8 @@
 import React from "react";
 import { fireEvent, render, screen } from '@testing-library/react'
-import { TextButton } from "./index";
-import { ButtonStyles } from "./styles";
-import Themes from './themes'
+import { TextButton } from "../../../../src/components/Buttons/TextButton/index";
+import { ButtonStyles } from "../../../../src/components/Buttons/TextButton/styles";
+import Themes from '../../../../src/components/Buttons/TextButton/themes'
 
 const handleClickMock = jest.fn()
 const buttonChildMock = 'button rendered for test purposes'
