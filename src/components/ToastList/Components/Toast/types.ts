@@ -15,8 +15,8 @@ export type ToastConstructorStylePropTypes = Pick<ToastComponentPropTypes,
 
 export type ToastComponentPropTypes = {
   id: string
-  useCase?: ToastUseCaseEnums
-  isOpen?: boolean
+  useCase: ToastUseCaseEnums
+  isOpen: boolean
   handleClose: React.MouseEventHandler<SVGSVGElement>
   children: React.ReactNode
   additionalClasses?: ToastAdditionalClassesPropTypes

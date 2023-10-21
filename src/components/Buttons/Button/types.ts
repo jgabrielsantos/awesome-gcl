@@ -1,26 +1,38 @@
 import React from 'react'
 import { GSizeEnum } from '../../types'
 
-type ButtonTypeEnum = 'button'
+type ButtonTypesEnum = 'button'
 | 'submit'
 | 'reset'
 
-export type ButtonThemeEnum = 'primary'
+export type ButtonThemesEnum = 'primary'
 | 'secondary'
 | 'tertiary'
-| 'destructive-primary'
-| 'destructive-secondary'
-| 'success-primary'
-| 'success-secondary'
-| 'contrast-primary'
-| 'contrast-secondary'
+| 'destructivePrimary'
+| 'destructiveSecondary'
+| 'successPrimary'
+| 'successSecondary'
+| 'contrastPrimary'
+| 'contrastSecondary'
+
+export type ButtonAdditionalClassesPropTypes = {
+  button: string[]
+}
+
+export type ButtonConstructorPropTypes = Pick<ButtonComponentPropTypes,
+  'additionalClasses'
+  | 'theme'
+  | 'size'
+>
 
 export type ButtonComponentPropTypes = {
   children: React.ReactNode
-  type: ButtonTypeEnum
+  type: ButtonTypesEnum
   size: GSizeEnum
-  theme: ButtonThemeEnum
+  theme: ButtonThemesEnum
   handleClick: React.MouseEventHandler<HTMLButtonElement>
-  additionalClasses?: string[]
+  additionalClasses?: ButtonAdditionalClassesPropTypes
   disabled?: boolean
 }
+
+export type ButtonComponentsEnum = 'button'

@@ -9,15 +9,23 @@ export const Button = ({
   theme,
   handleClick,
   disabled = false,
-  additionalClasses = []
+  additionalClasses = {
+    button: []
+  }
 }: Readonly<ButtonComponentPropTypes>) => {
-  const styles = new ButtonStyles(additionalClasses)
+  const styles = new ButtonStyles({
+    additionalClasses,
+    theme,
+    size
+  })
+  const { buttonClass } = styles.buildStyleRules()
+
   return (
     <button
       type={type}
       onClick={handleClick}
       disabled={disabled}
-      className={styles.buildStyleRules({theme, size})}
+      className={buttonClass}
       data-testid='awesome-gcl-button-component'
     >
       {children}

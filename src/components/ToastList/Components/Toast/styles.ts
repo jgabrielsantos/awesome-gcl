@@ -22,8 +22,8 @@ export class ToastStyles implements ToastStyle {
     additionalClasses = {
       toast: []
     },
-    useCase = 'primary',
-    isOpen = false
+    useCase,
+    isOpen
   }: ToastConstructorStylePropTypes) {
     this.additionalClasses = additionalClasses
     this.useCase = useCase
