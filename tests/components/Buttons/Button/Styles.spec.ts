@@ -33,7 +33,6 @@ describe('Button styles', () => {
       ...Themes.base().values(),
       ...Sizes[size]().values(),
       ...Themes[theme]().values(),
-      additionalClasses?.button
     ]
 
     if (additionalClasses !== undefined) expectedStyle.push(...additionalClasses[component])

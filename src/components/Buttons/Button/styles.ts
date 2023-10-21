@@ -62,7 +62,7 @@ export class ButtonStyles implements IButtonStyle {
         ...Themes.base().values(),
         ...this.getSizeRules().values(),
         ...this.getThemeRules().values(),
-        this.additionalClasses.button
+        ...this.additionalClasses.button
       ]. join(' ')
     }
 
