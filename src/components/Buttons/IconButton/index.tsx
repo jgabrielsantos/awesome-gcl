@@ -1,6 +1,6 @@
 import React from 'react'
-import { ButtonStyles } from './styles'
-import { ButtonComponentPropTypes } from './types'
+import { IconButtonStyles } from './styles'
+import { IconButtonComponentPropTypes } from './types'
 
 export const IconButton = ({
   children,
@@ -9,15 +9,22 @@ export const IconButton = ({
   theme,
   handleClick,
   disabled = false,
-  additionalClasses = []
-}: Readonly<ButtonComponentPropTypes>) => {
-  const styles = new ButtonStyles(additionalClasses)
+  additionalClasses
+}: Readonly<IconButtonComponentPropTypes>) => {
+  const styles = new IconButtonStyles({
+    additionalClasses,
+    theme,
+    size
+  })
+
+  const { buttonClass } = styles.buildStyleRules()
+
   return (
     <button
       type={type}
       onClick={handleClick}
       disabled={disabled}
-      className={styles.buildStyleRules({theme, size})}
+      className={buttonClass}
       data-testid='awesome-gcl-button-component'
     >
       {children}

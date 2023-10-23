@@ -1,4 +1,4 @@
-import { ButtonAdditionalClassesPropTypes, ButtonConstructorPropTypes, ButtonThemesEnum } from './types';
+import { ButtonAdditionalClassesPropTypes, ButtonComponentsEnum, ButtonConstructorPropTypes, ButtonThemesEnum } from './types';
 import Sizes from './sizes'
 import Themes from './themes';
 import { GSizeEnum } from '../../types';
@@ -12,7 +12,7 @@ import { GSizeEnum } from '../../types';
 */
 
 export interface IButtonStyle {
-  buildStyleRules: () => Record<string, string>
+  buildStyleRules: () => Record<`${ButtonComponentsEnum}Class`, string>
 }
 
 export class ButtonStyles implements IButtonStyle {

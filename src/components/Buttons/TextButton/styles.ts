@@ -1,7 +1,8 @@
-import { ButtonComponentPropTypes, ButtonThemeEnum } from './types';
+
 import Sizes from './sizes'
 import Themes from './themes';
 import { GSizeEnum } from '../../types';
+import { TextButtonAdditionalClassesPropTypes, TextButtonComponentsEnum, TextButtonConstructorPropTypes, TextButtonThemeEnum } from './types';
 
 /**
  * @param size          controls the font-size, line-height and padding
@@ -11,47 +12,57 @@ import { GSizeEnum } from '../../types';
  * @see                 Button
 */
 
-export interface IButtonStyle {
-  getThemeRules: (theme: ButtonThemeEnum) => Map<string, string>
-  getSizeRules: (size: GSizeEnum) => Map<string, string>
-  buildStyleRules: ({theme, size}: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) => string
+export interface ITextButtonStyle {
+  buildStyleRules: () => Record<`${TextButtonComponentsEnum}Class`, string>
 }
 
-export class ButtonStyles implements IButtonStyle {
-  private className: string[]
+export class TextButtonStyles implements ITextButtonStyle {
+  private additionalClasses: TextButtonAdditionalClassesPropTypes
+  private size: GSizeEnum
   private sizes: Record<GSizeEnum, Map<string, string>> = {
-    large: Sizes.largeSize(),
-    medium: Sizes.mediumSize(),
-    small: Sizes.smallSize()
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
   }
-  private themes: Record<ButtonThemeEnum, Map<string, string>> = {
-    primary: Themes.primaryRules(),
-    secondary: Themes.secondaryRules(),
-    destructive: Themes.destructiveRules(),
-    success: Themes.successRules(),
-    contrast: Themes.contrastRules(),
-  }
-
-  constructor(className: string[]) {
-    this.className = className
+  private theme: TextButtonThemeEnum
+  private themes: Record<TextButtonThemeEnum, Map<string, string>> = {
+    primary: Themes.primary(),
+    secondary: Themes.secondary(),
+    destructive: Themes.destructive(),
+    success: Themes.success(),
+    contrast: Themes.contrast(),
   }
 
-  getThemeRules(theme: ButtonThemeEnum) {
-    return this.themes[theme]
+  constructor({
+    additionalClasses = {
+      button: []
+    },
+    theme,
+    size
+  }: TextButtonConstructorPropTypes) {
+    this.additionalClasses = additionalClasses
+    this.theme = theme,
+    this.size = size
   }
 
-  getSizeRules(size: GSizeEnum) {
-    return this.sizes[size]
+  private getThemeRules() {
+    return this.themes[this.theme]
   }
 
-  buildStyleRules({ theme = 'primary', size = 'medium' }: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) {
-    const classes = [
-      ...Themes.defaultRules().values(),
-      ...this.getSizeRules(size).values(),
-      ...this.getThemeRules(theme).values(),
-      this.className.join(" ")
-    ]
+  private getSizeRules() {
+    return this.sizes[this.size]
+  }
 
-    return classes.join(" ")
+  buildStyleRules() {
+    const classes = {
+      buttonClass: [
+      ...Themes.base().values(),
+      ...this.getSizeRules().values(),
+      ...this.getThemeRules().values(),
+      ...this.additionalClasses.button
+    ].join(' ')
+  }
+
+    return classes
   }
 }

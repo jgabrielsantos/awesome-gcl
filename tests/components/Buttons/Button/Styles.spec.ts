@@ -32,7 +32,7 @@ describe('Button styles', () => {
     const expectedStyle = [
       ...Themes.base().values(),
       ...Sizes[size]().values(),
-      ...Themes[theme]().values(),
+      ...Themes[theme]().values()
     ]
 
     if (additionalClasses !== undefined) expectedStyle.push(...additionalClasses[component])
@@ -58,6 +58,10 @@ describe('Button styles', () => {
   })
 
   describe('Themes', () => {
+    it('Should pass base theme classes', () => testTheme({
+      component: 'button'
+    }))
+
     it('Should pass primary theme classes', () => testTheme({
       component: 'button',
       theme: 'primary'
@@ -102,5 +106,24 @@ describe('Button styles', () => {
       component: 'button',
       theme: 'contrastSecondary'
     }))
+  })
+
+  describe('Additional Classes', () => {
+    it('Should not have additional classes', () => {
+      testTheme({
+        component: 'button',
+      })
+    })
+
+    it('Should pass additional classes', () => {
+      testTheme({
+        component: 'button',
+        additionalClasses: {
+          button: [
+            'outline-0'
+          ]
+        }
+      })
+    })
   })
 })

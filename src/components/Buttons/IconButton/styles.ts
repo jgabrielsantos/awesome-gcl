@@ -1,4 +1,4 @@
-import { ButtonComponentPropTypes, ButtonThemeEnum } from './types';
+import { IconButtonAdditionalClassesPropTypes, IconButtonComponentsEnum, IconButtonConstructorPropTypes, IconButtonThemesEnum } from './types';
 import Sizes from './sizes'
 import Themes from './themes';
 import { GSizeEnum } from '../../types';
@@ -11,51 +11,61 @@ import { GSizeEnum } from '../../types';
  * @see                 Button
 */
 
-export interface IButtonStyle {
-  getThemeRules: (theme: ButtonThemeEnum) => Map<string, string>
-  getSizeRules: (size: GSizeEnum) => Map<string, string>
-  buildStyleRules: ({theme, size}: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) => string
+export interface IIconButtonStyle {
+  buildStyleRules: () => Record<`${IconButtonComponentsEnum}Class`, string>
 }
 
-export class ButtonStyles implements IButtonStyle {
-  private className: string[]
+export class IconButtonStyles implements IIconButtonStyle {
+  private additionalClasses: IconButtonAdditionalClassesPropTypes
+  private size: GSizeEnum
   private sizes: Record<GSizeEnum, Map<string, string>> = {
-    large: Sizes.largeSize(),
-    medium: Sizes.mediumSize(),
-    small: Sizes.smallSize()
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
   }
-  private themes: Record<ButtonThemeEnum, Map<string, string>> = {
-    primary: Themes.primaryRules(),
-    secondary: Themes.secondaryRules(),
-    tertiary: Themes.tertiaryRules(),
-    "destructive-primary": Themes.destructivePrimaryRules(),
-    "destructive-secondary": Themes.destructiveSecondaryRules(),
-    "success-primary": Themes.successPrimaryRules(),
-    "success-secondary": Themes.successSecondaryRules(),
-    "contrast-primary": Themes.contrastPrimaryRules(),
-    "contrast-secondary": Themes.contrastSecondaryRules()
-  }
-
-  constructor(className: string[]) {
-    this.className = className
+  private theme: IconButtonThemesEnum
+  private themes: Record<IconButtonThemesEnum, Map<string, string>> = {
+    primary: Themes.primary(),
+    secondary: Themes.secondary(),
+    tertiary: Themes.tertiary(),
+    "destructivePrimary": Themes.destructivePrimary(),
+    "destructiveSecondary": Themes.destructiveSecondary(),
+    "successPrimary": Themes.successPrimary(),
+    "successSecondary": Themes.successSecondary(),
+    "contrastPrimary": Themes.contrastPrimary(),
+    "contrastSecondary": Themes.contrastSecondary()
   }
 
-  getThemeRules(theme: ButtonThemeEnum) {
-    return this.themes[theme]
+  constructor({
+    additionalClasses = {
+      button: []
+    },
+    theme,
+    size
+  }: IconButtonConstructorPropTypes) {
+    this.additionalClasses = additionalClasses
+    this.theme = theme
+    this.size = size
   }
 
-  getSizeRules(size: GSizeEnum) {
-    return this.sizes[size]
+  private getThemeRules() {
+    return this.themes[this.theme]
   }
 
-  buildStyleRules({ theme = 'primary', size = 'medium' }: Pick<ButtonComponentPropTypes, 'theme' | 'size'>) {
-    const classes = [
-      ...Themes.defaultRules().values(),
-      ...this.getSizeRules(size).values(),
-      ...this.getThemeRules(theme).values(),
-      this.className.join(" ")
-    ]
+  private getSizeRules() {
+    return this.sizes[this.size]
+  }
 
-    return classes.join(" ")
+  buildStyleRules() {
+    const classes = {
+      buttonClass: [
+        ...Themes.base().values(),
+        ...this.getSizeRules().values(),
+        ...this.getThemeRules().values(),
+        ...this.additionalClasses.button
+      ].join(' ')
+    }
+
+    return classes
   }
 }

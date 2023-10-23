@@ -9,9 +9,7 @@ export const Button = ({
   theme,
   handleClick,
   disabled = false,
-  additionalClasses = {
-    button: []
-  }
+  additionalClasses
 }: Readonly<ButtonComponentPropTypes>) => {
   const styles = new ButtonStyles({
     additionalClasses,

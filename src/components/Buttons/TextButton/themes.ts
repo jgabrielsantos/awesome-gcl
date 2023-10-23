@@ -1,4 +1,4 @@
-const defaultRules = () => new Map([
+const base = () => new Map([
   ['cursor', 'cursor-pointer'],
   ['border-width', 'border-b-2'],
   ['border-styled', 'border-solid'],
@@ -9,35 +9,35 @@ const defaultRules = () => new Map([
   ['disabled-color', 'disabled:text-grayscale-60'],
 ])
 
-const primaryRules = () => new Map([
+const primary = () => new Map([
   ['text-color', 'text-primary-50'],
 
   // Hover state
   ['hover-border-color', 'hover:border-primary-50'],
 ])
 
-const secondaryRules = () => new Map([
+const secondary = () => new Map([
   ['text-color', 'text-grayscale-100'],
 
   // Hover state
   ['hover-border-color', 'hover:border-grayscale-100'],
 ])
 
-const destructiveRules = () => new Map ([
+const destructive = () => new Map ([
   ['text-color', 'text-support-alert-50'],
 
   // Hover state
   ['hover-border-color', 'hover:border-support-alert-50'],
 ])
 
-const successRules = () => new Map ([
+const success = () => new Map ([
   ['text-color', 'text-support-success-50'],
 
   // Hover state
   ['hover-border-color', 'hover:border-support-success-50'],
 ])
 
-const contrastRules = () => new Map ([
+const contrast = () => new Map ([
   ['text-color', 'text-white-100'],
 
   // Hover state
@@ -46,10 +46,10 @@ const contrastRules = () => new Map ([
 
 
 export default {
-  defaultRules,
-  primaryRules,
-  secondaryRules,
-  destructiveRules,
-  successRules,
-  contrastRules
+  base,
+  primary,
+  secondary,
+  destructive,
+  success,
+  contrast
 }
