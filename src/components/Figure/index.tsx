@@ -12,7 +12,7 @@ export const Figure = ({
     caption: []
   }
 }: Readonly<FigurePropTypes>) => {
-  const styles = new FigureStyles(additionalClasses)
+  const styles = new FigureStyles({ additionalClasses })
   const { figureClass, imageClass, captionClass} = styles.buildStyleRules()
 
   return (

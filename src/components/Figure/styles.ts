@@ -1,28 +1,31 @@
-import { FigureAdditionalClassesPropTypes, FigureComponentEnums } from "./types";
+import { FigureComponentEnums, FigureConstructorPropTypes } from "./types";
 import Themes from './themes'
 
 interface FigureStyle {
-  getThemeRules: (components: FigureComponentEnums) => Map<string, string>
-  buildStyleRules: () => Record<string, string>
+  buildStyleRules: () => Record<`${FigureComponentEnums}Class`, string>
 }
 
 export class FigureStyles implements FigureStyle {
-  private additionalClasses: FigureAdditionalClassesPropTypes
+  private additionalClasses: {
+    figure: string[]
+    image: string[]
+    caption: string[]
+  }
   private themes: Record<FigureComponentEnums, Map<string, string>> = {
     figure: Themes.figure(),
     image: Themes.image(),
     caption: Themes.caption()
   }
 
-  constructor({ figure, image, caption }: FigureAdditionalClassesPropTypes) {
+  constructor({ additionalClasses }: FigureConstructorPropTypes) {
     this.additionalClasses = {
-      figure,
-      image,
-      caption
+      figure: additionalClasses?.figure || [],
+      image: additionalClasses?.image || [],
+      caption: additionalClasses?.caption || []
     }
   }
 
-  getThemeRules(components: FigureComponentEnums) {
+  private getThemeRules(components: FigureComponentEnums) {
     return this.themes[components]
   }
 

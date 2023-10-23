@@ -3,10 +3,14 @@ export type FigureComponentEnums = 'figure'
 | 'caption'
 
 export type FigureAdditionalClassesPropTypes = {
-  figure: string[]
-  image: string[]
-  caption: string[]
+  figure?: string[]
+  image?: string[]
+  caption?: string[]
 }
+
+export type FigureConstructorPropTypes = Pick<FigurePropTypes,
+  'additionalClasses'
+>
 
 export type FigurePropTypes = {
   src: string

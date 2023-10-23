@@ -15,12 +15,12 @@ describe('Component logic', () => {
           handleClick={handleClickSpy}
         />
       )
-  
+
       const label = screen.queryAllByTestId('checkbox-label')
-  
+
       expect(label.length).toBe(1)
     })
-  
+
     it('Should not render mark svg icon', () => {
       render(
         <Checkbox
@@ -29,9 +29,9 @@ describe('Component logic', () => {
           handleClick={handleClickSpy}
         />
       )
-  
+
       const label = screen.queryAllByTestId('checkbox-label')
-  
+
       expect(label.length).toBe(0)
     })
   })
@@ -45,12 +45,12 @@ describe('Component logic', () => {
           handleClick={handleClickSpy}
         />
       )
-  
+
       const mark = screen.queryAllByTestId('checkbox-mark')
-  
+
       expect(mark.length).toBe(1)
     })
-  
+
     it('Should not render mark svg icon', () => {
       render(
         <Checkbox
@@ -59,9 +59,9 @@ describe('Component logic', () => {
           handleClick={handleClickSpy}
         />
       )
-  
+
       const mark = screen.queryAllByTestId('checkbox-mark')
-  
+
       expect(mark.length).toBe(0)
     })
   })
