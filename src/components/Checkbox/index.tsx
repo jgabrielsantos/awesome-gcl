@@ -8,15 +8,13 @@ export const Checkbox = ({
   handleClick,
   disabled = false,
   label,
-  additionalClasses = {
-    wrapper: [],
-    label: [],
-    icon: [],
-    input: []
-  }
+  additionalClasses
 }: CheckboxPropTypes) => {
-  const styles = new CheckboxStyles(additionalClasses)
-  const { wrapperClass, inputClass, labelClass, iconClass } = styles.buildStyleRules({ size })
+  const styles = new CheckboxStyles({
+    additionalClasses,
+    size
+  })
+  const { wrapperClass, inputClass, labelClass, iconClass } = styles.buildStyleRules()
 
   return (
     <div

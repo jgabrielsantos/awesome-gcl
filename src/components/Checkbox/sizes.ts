@@ -1,4 +1,4 @@
-const largeSize = () => ({
+const large = () => ({
   input: new Map([
     ['width', 'w-6'], // width: 1.5rem (24px)
     ['height', 'h-6'] // height: 1.5re, (24px)
@@ -12,7 +12,7 @@ const largeSize = () => ({
     ['width', 'w-5']
   ])
 })
-const mediumSize = () => ({
+const medium = () => ({
   input: new Map([
    ['width', 'w-5'], // width: 1.25rem (20px)
    ['height', 'h-5'] // height: 1.25rem (20px)
@@ -26,7 +26,7 @@ const mediumSize = () => ({
     ['width', 'w-4']
   ])
 })
-const smallSize = () => ({
+const small = () => ({
   input: new Map([
     ['width', 'w-4'], // width: 1rem (16px)
     ['height', 'h-4'] // height: 1rem (16px)
@@ -42,7 +42,7 @@ const smallSize = () => ({
 })
 
 export default {
-  largeSize,
-  mediumSize,
-  smallSize
+  large,
+  medium,
+  small
 }

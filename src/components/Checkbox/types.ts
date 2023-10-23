@@ -10,11 +10,16 @@ export type CheckboxSizeComponentsEnum = 'input'
 | 'icon'
 
 export type CheckboxAdditionalClassesPropTypes = {
-  wrapper: string[]
-  label: string[]
-  input: string[]
-  icon: string[]
+  wrapper?: string[]
+  label?: string[]
+  input?: string[]
+  icon?: string[]
 }
+
+export type CheckboxConstructorPropTypes = Pick<CheckboxPropTypes,
+  'additionalClasses'
+  | 'size'
+>
 
 export type CheckboxPropTypes = {
   checked: boolean

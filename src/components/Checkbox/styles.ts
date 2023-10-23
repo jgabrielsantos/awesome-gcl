@@ -1,8 +1,11 @@
-import { CheckboxAdditionalClassesPropTypes, CheckboxComponentsEnum, CheckboxPropTypes, CheckboxSizeComponentsEnum } from "./types";
+import {
+  CheckboxComponentsEnum,
+  CheckboxConstructorPropTypes,
+  CheckboxSizeComponentsEnum
+} from "./types";
 import Sizes from './sizes'
 import Themes from './themes'
 import { GSizeEnum } from "../types";
-import themes from "./themes";
 
 /**
  * @param size      controls the width and height
@@ -12,17 +15,21 @@ import themes from "./themes";
  */
 
 interface ICheckboxStyle {
-  getThemeRules: (component: CheckboxComponentsEnum) => Map<string, string>
-  getSizeRules: (size: GSizeEnum, component: CheckboxSizeComponentsEnum) => Map<string, string>
-  buildStyleRules: ({ size }: Pick<CheckboxPropTypes, 'size'>) => Record<string, string>
+  buildStyleRules: () => Record<`${CheckboxComponentsEnum}Class`, string>
 }
 
 export class CheckboxStyles implements ICheckboxStyle {
-  private additionalClasses: CheckboxAdditionalClassesPropTypes
+  private additionalClasses: {
+    wrapper: string[]
+    label: string[]
+    input: string[]
+    icon: string[]
+  }
+  private size: GSizeEnum
   private sizes: Record<GSizeEnum, Record<CheckboxSizeComponentsEnum, Map<string, string>>> = {
-    large: Sizes.largeSize(),
-    medium: Sizes.mediumSize(),
-    small: Sizes.smallSize()
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
   }
   private themes: Record<CheckboxComponentsEnum, Map<string,string>> = {
     wrapper: Themes.wrapper(),
@@ -31,19 +38,28 @@ export class CheckboxStyles implements ICheckboxStyle {
     label: Themes.label()
   }
 
-  constructor(additionalClasses: CheckboxAdditionalClassesPropTypes) {
-    this.additionalClasses = additionalClasses
+  constructor({
+    additionalClasses,
+    size
+  }: CheckboxConstructorPropTypes) {
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      label: additionalClasses?.label || [],
+      input: additionalClasses?.input || [],
+      icon: additionalClasses?.icon || []
+    }
+    this.size = size
   }
 
-  getThemeRules(component: CheckboxComponentsEnum) {
+  private getThemeRules(component: CheckboxComponentsEnum) {
     return this.themes[component]
   }
 
-  getSizeRules(size: GSizeEnum, component: CheckboxSizeComponentsEnum) {
-    return this.sizes[size][component]
+  private getSizeRules(component: CheckboxSizeComponentsEnum) {
+    return this.sizes[this.size][component]
   }
 
-  buildStyleRules({ size }: Pick<CheckboxPropTypes, 'size'>) {
+  buildStyleRules() {
     const classes = {
       wrapperClass: [
         ...this.getThemeRules('wrapper').values(),
@@ -51,12 +67,12 @@ export class CheckboxStyles implements ICheckboxStyle {
       ].join(' '),
       labelClass: [
         ...this.getThemeRules('label').values(),
-        ...this.getSizeRules(size, 'label').values(),
+        ...this.getSizeRules('label').values(),
         ...this.additionalClasses.label
       ].join(' '),
       inputClass: [
         ...this.getThemeRules('input').values(),
-        ...this.getSizeRules(size, 'input').values(),
+        ...this.getSizeRules('input').values(),
         ...this.additionalClasses.input
       ].join(' '),
       iconClass: [
