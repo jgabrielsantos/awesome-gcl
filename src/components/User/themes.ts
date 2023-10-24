@@ -28,7 +28,9 @@ const info = () => new Map([
   ['justify-content', 'justify-between']
 ])
 
-const name = () => new Map([])
+const name = () => new Map([
+  ['', '']
+])
 
 const description = () => new Map([
   ['overflow', 'overflow-hidden'],

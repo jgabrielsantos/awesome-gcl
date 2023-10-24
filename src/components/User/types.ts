@@ -1,5 +1,12 @@
 import { GSizeEnum } from "../types"
 
+export type UserComponentsEnum = 'wrapper'
+| 'avatar'
+| 'initials'
+| 'info'
+| 'name'
+| 'description'
+
 export type UserSizeComponentsEnum = 'avatar'
 | 'initials'
 | 'info'
@@ -7,12 +14,17 @@ export type UserSizeComponentsEnum = 'avatar'
 | 'description'
 
 export type UserAdditionalClassesPropTypes = {
-  wrapper: string[]
-  avatar: string[]
-  initials: string[]
-  info: string[]
-  name: string[]
-  description: string[]
+  wrapper?: string[]
+  avatar?: string[]
+  initials?: string[]
+  info?: string[]
+  name?: string[]
+  description?: string[]
+}
+
+export type UserConstructorPropTypes = {
+  additionalClasses?: UserAdditionalClassesPropTypes
+  size: GSizeEnum
 }
 
 export type UserPropTypes = {

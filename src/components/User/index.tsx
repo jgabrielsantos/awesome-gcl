@@ -8,16 +8,12 @@ export const User = ({
   lastName,
   description,
   size,
-  additionalClasses = {
-    wrapper: [],
-    avatar: [],
-    initials: [],
-    info: [],
-    name: [],
-    description: []
-  }
+  additionalClasses
 }: UserPropTypes) => {
-  const styles = new UserStyles(additionalClasses)
+  const styles = new UserStyles({
+    additionalClasses,
+    size
+  })
   const {
     wrapperClass,
     avatarClass,
@@ -25,7 +21,7 @@ export const User = ({
     infoClass,
     nameClass,
     descriptionClass
-  } = styles.buildStyleRules(size)
+  } = styles.buildStyleRules()
   return (
     <div
       className={wrapperClass}

@@ -1,5 +1,6 @@
 import {
-  UserAdditionalClassesPropTypes,
+  UserComponentsEnum,
+  UserConstructorPropTypes,
   UserSizeComponentsEnum
 } from "./types";
 import { GSizeEnum } from "../types";
@@ -7,54 +8,81 @@ import Sizes from './sizes'
 import Themes from './themes'
 
 interface UserStyle {
-  buildStyleRules: (size: GSizeEnum) => Record<string, string>
+  buildStyleRules: (size: GSizeEnum) => Record<`${UserComponentsEnum}Class`, string>
 }
 
 export class UserStyles implements UserStyle {
-  private additionalClasses: UserAdditionalClassesPropTypes
+  private size: GSizeEnum
   private sizes: Record<GSizeEnum, Record<UserSizeComponentsEnum, Map<string, string>>> = {
     large: Sizes.large(),
     medium: Sizes.medium(),
     small: Sizes.small()
   }
-
-  constructor(additionalClasses: UserAdditionalClassesPropTypes) {
-    this.additionalClasses = additionalClasses
+  private themes: Record<UserComponentsEnum, Map<string, string>> = {
+    wrapper: Themes.wrapper(),
+    avatar: Themes.avatar(),
+    initials: Themes.initials(),
+    info: Themes.info(),
+    name: Themes.name(),
+    description: Themes.description()
+  }
+  private additionalClasses: {
+    wrapper: string[]
+    avatar: string[]
+    initials: string[]
+    info: string[]
+    name: string[]
+    description: string[]
   }
 
-  private getSizeRules (size: GSizeEnum, component: UserSizeComponentsEnum) {
-    return this.sizes[size][component]
+  constructor({
+    additionalClasses,
+    size
+  }: UserConstructorPropTypes) {
+    this.size = size
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      avatar: additionalClasses?.avatar || [],
+      initials: additionalClasses?.initials || [],
+      info: additionalClasses?.info || [],
+      name: additionalClasses?.name || [],
+      description: additionalClasses?.description || []
+    }
   }
 
-  buildStyleRules(size: GSizeEnum) {
+  private getSizeRules (component: UserSizeComponentsEnum) {
+    return this.sizes[this.size][component]
+  }
+
+  buildStyleRules() {
     const classes = {
       wrapperClass: [
-        ...Themes.wrapper().values(),
+        ...this.themes.wrapper.values(),
         ...this.additionalClasses.wrapper
       ].join(' '),
       avatarClass: [
-        ...Themes.avatar().values(),
-        ...this.getSizeRules(size, 'avatar').values(),
+        ...this.themes.avatar.values(),
+        ...this.getSizeRules('avatar').values(),
         ...this.additionalClasses.avatar
       ].join(' '),
       initialsClass: [
-        ...Themes.initials().values(),
-        ...this.getSizeRules(size, 'initials').values(),
+        ...this.themes.initials.values(),
+        ...this.getSizeRules('initials').values(),
         ...this.additionalClasses.initials
       ].join(' '),
       infoClass: [
-        ...Themes.info().values(),
-        ...this.getSizeRules(size, 'info').values(),
+        ...this.themes.info.values(),
+        ...this.getSizeRules('info').values(),
         ...this.additionalClasses.info
       ].join(' '),
       nameClass: [
-        ...Themes.name().values(),
-        ...this.getSizeRules(size, 'name').values(),
+        ...this.themes.name.values(),
+        ...this.getSizeRules('name').values(),
         ...this.additionalClasses.name
       ].join(' '),
       descriptionClass: [
-        ...Themes.description().values(),
-        ...this.getSizeRules(size, 'description').values(),
+        ...this.themes.description.values(),
+        ...this.getSizeRules('description').values(),
         ...this.additionalClasses.description
       ].join(' ')
     }
