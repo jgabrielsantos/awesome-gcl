@@ -13,7 +13,7 @@ const label = () => new Map([
   ['color', 'text-grayscale-100']
 ])
 
-const inputWrapper = (disabled: boolean) => new Map([
+const inputWrapper = () => new Map([
   ['width', 'w-full'],
   ['display', 'flex'],
   ['align-items', 'items-center'],
@@ -21,9 +21,7 @@ const inputWrapper = (disabled: boolean) => new Map([
   ['border-width', 'border'],
   ['border-type', 'border-solid'],
   ['border-color', 'border-grayscale-40'],
-  ['border-color', 'rounded-md'],
-  ['cursor', disabled ? 'cursor-not-allowed' : 'cursor-pointer'],
-  ['background-color', disabled ? 'bg-grayscale-0' : 'bg-white-100']
+  ['border-color', 'rounded-md']
 ])
 
 const input = () => new Map([
@@ -37,9 +35,8 @@ const input = () => new Map([
   ['focus-visible-outline', 'focus-visible:outline-0']
 ])
 
-const optionList = (isOpen: boolean) => new Map([
+const optionList = () => new Map([
   ['width', 'w-full'],
-  ['display', isOpen ? 'flex' : 'hidden'],
   ['flex-direction', 'flex-col'],
   ['align-items', 'items-start'],
   ['justify-content', 'justify-center'],

@@ -1,29 +1,39 @@
 import { IconDefinition } from "@fortawesome/free-solid-svg-icons"
 import { GSizeEnum } from "../types"
 
+export type SelectComponentsEnum = 'wrapper'
+| 'label'
+| 'inputWrapper'
+| 'input'
+| 'optionList'
+| 'optionItem'
+
 export type SelectSizeComponentEnums = 'label'
 | 'inputWrapper'
 | 'input'
 | 'optionList'
 
 export type SelectAdditionalClassesPropTypes = {
-  wrapper: string[],
-  label: string[],
-  inputWrapper: string[],
-  input: string[],
-  optionList: string[],
-  optionItem: string[]
+  wrapper?: string[],
+  label?: string[],
+  inputWrapper?: string[],
+  input?: string[],
+  optionList?: string[],
+  optionItem?: string[]
 }
 
-export type SelectBuildStylesPropTypes = {
+export type SelectConstructorPropTypes = {
+  additionalClasses?: SelectAdditionalClassesPropTypes
   size: GSizeEnum
-  disabled: boolean
+  disabled?: boolean
   isOpen: boolean
 }
 
 export type SelectPropTypes = {
   label?: string
-  selected?: Record<string, any>
+  selected?: Record<string, any> & {
+    label: string
+  }
   placeholder?: string
   options: Record<string, any>[]
   onChange: (option: Record<string, any>) => void

@@ -24,7 +24,12 @@ export const Select = ({
   }
 }: Readonly<SelectPropTypes>) => {
   const hook = useSelect()
-  const styles = new SelectStyles(additionalClasses)
+  const styles = new SelectStyles({
+    additionalClasses,
+    size,
+    disabled,
+    isOpen: hook.hookIsOptionListVisible
+  })
   const {
     wrapperClass,
     labelClass,
@@ -32,7 +37,7 @@ export const Select = ({
     inputClass,
     optionListClass,
     optionItemClass
-  } = styles.buildStyleRules({ size, disabled, isOpen: hook.hookIsOptionListVisible })
+  } = styles.buildStyleRules()
 
   return (
     <div
@@ -50,6 +55,7 @@ export const Select = ({
       <div
         className={inputWrapperClass}
         onClick={disabled ? undefined : hook.hookSetIsOptionListVisible}
+        data-testid='select-input-wrapper'
       >
         <input
           type='text'
