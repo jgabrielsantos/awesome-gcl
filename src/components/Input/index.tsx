@@ -17,16 +17,13 @@ export const Input = ({
   disabled = false,
   pattern,
   size,
-  additionalClasses={
-    wrapper: [],
-    label: [],
-    input: [],
-    passwordButton: [],
-    caption: []
-  }
+  additionalClasses
 }: Readonly<InputPropTypes>) => {
   const hook = useInput({ type, showPassword })
-  const styles = new InputStyles(additionalClasses)
+  const styles = new InputStyles({
+    additionalClasses,
+    size
+  })
   const {
     wrapperClass,
     labelClass,
@@ -34,7 +31,7 @@ export const Input = ({
     inputClass,
     passwordButtonClass,
     captionClass
-  } = styles.buildStyleRules({ size })
+  } = styles.buildStyleRules()
 
   if (pattern)
   try {

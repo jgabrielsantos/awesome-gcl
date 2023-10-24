@@ -18,12 +18,18 @@ export type InputComponentsEnum = 'wrapper'
 | 'passwordButton'
 | 'caption'
 
+export type InputConstructorPropTypes = Pick<InputPropTypes,
+  'additionalClasses'
+  | 'size'
+>
+
 export type InputAdditionalClassesPropTypes = {
-  wrapper: string[]
-  label: string[]
-  input: string[]
-  passwordButton: string[]
-  caption: string[]
+  wrapper?: string[]
+  label?: string[]
+  inputWrapper?: string[]
+  input?: string[]
+  passwordButton?: string[]
+  caption?: string[]
 }
 
 export type InputPropTypes = {
