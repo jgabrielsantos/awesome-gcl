@@ -5,13 +5,13 @@ import { ModalStyles } from "./styles";
 export const Modal = ({
   isOpen,
   children,
-  additionalClasses={
-    wrapper: [],
-    dialog: []
-  }
+  additionalClasses
 }: ModalPropTypes) => {
-  const styles = new ModalStyles(additionalClasses)
-  const { wrapperClass, dialogClass } = styles.buildStyleRules({ isOpen })
+  const styles = new ModalStyles({
+    additionalClasses,
+    isOpen
+  })
+  const { wrapperClass, dialogClass } = styles.buildStyleRules()
 
   return (
     <div

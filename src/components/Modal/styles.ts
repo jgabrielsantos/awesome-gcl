@@ -1,34 +1,44 @@
-import { ModalAdditionalClassesPropTypes, ModalComponentsEnum, ModalPropTypes } from "./types";
+import { ModalComponentsEnum, ModalConstructorPropTypes, ModalPropTypes } from "./types";
 import Themes from './themes'
 
 interface ModalStyle {
-  getThemeRules: (component: ModalComponentsEnum, isOpen: boolean) => Map<string, string>
-  buildStyleRules: ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => Record<string, string>
+  buildStyleRules: () => Record<`${ModalComponentsEnum}Class`, string>
 }
 
 export class ModalStyles implements ModalStyle {
-  private additionalClasses: ModalAdditionalClassesPropTypes
+  private additionalClasses: {
+    wrapper: string[]
+    dialog: string[]
+  }
+  private isOpen: boolean
   private themes: Record<ModalComponentsEnum, ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => Map<string, string>> = {
     wrapper: Themes.wrapper,
     dialog: Themes.dialog
   }
 
-  constructor(additionalClasses: ModalAdditionalClassesPropTypes) {
-    this.additionalClasses = additionalClasses
+  constructor({
+    additionalClasses,
+    isOpen
+  }: ModalConstructorPropTypes) {
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      dialog: additionalClasses?.dialog || []
+    }
+    this.isOpen = isOpen
   }
 
-  getThemeRules(component: ModalComponentsEnum, isOpen: boolean) {
-    return this.themes[component]({ isOpen })
+  private getThemeRules(component: ModalComponentsEnum) {
+    return this.themes[component]({ isOpen: this.isOpen })
   }
 
-  buildStyleRules({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) {
+  buildStyleRules() {
     const classes = {
       wrapperClass: [
-        ...this.getThemeRules('wrapper', isOpen).values(),
+        ...this.getThemeRules('wrapper').values(),
         ...this.additionalClasses.wrapper
       ].join(' '),
       dialogClass: [
-        ...this.getThemeRules('dialog', isOpen).values(),
+        ...this.getThemeRules('dialog').values(),
         ...this.additionalClasses.dialog
       ].join(' ')
     }
