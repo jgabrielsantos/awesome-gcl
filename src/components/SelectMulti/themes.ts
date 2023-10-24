@@ -13,7 +13,7 @@ const label = () => new Map([
   ['color', 'text-grayscale-100']
 ])
 
-const input = (disabled: boolean) => new Map([
+const input = () => new Map([
   ['width', 'w-full'],
   ['display', 'flex'],
   ['align-items', 'items-center'],
@@ -22,8 +22,6 @@ const input = (disabled: boolean) => new Map([
   ['border-type', 'border-solid'],
   ['border-color', 'border-grayscale-40'],
   ['border-radius', 'rounded-md'],
-  ['cursor', disabled ? 'cursor-not-allowed' : 'cursor-pointer'],
-  ['background-color', disabled ? 'bg-grayscale-0' : 'bg-white-100'],
 
   // Hover state
   ['hover-border-color', 'hover:border-primary-50']
@@ -55,9 +53,8 @@ const selectedList = () => new Map([
   ['flex-wrap', 'flex-wrap']
 ])
 
-const optionList = (isOpen: boolean) => new Map([
+const optionList = () => new Map([
   ['width', 'w-full'],
-  ['display', isOpen ? 'flex' : 'hidden'],
   ['flex-direction', 'flex-col'],
   ['align-items', 'items-start'],
   ['justify-content', 'justify-center'],

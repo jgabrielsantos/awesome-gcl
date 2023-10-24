@@ -1,5 +1,5 @@
 import React from "react";
-import { SelectStyles } from './styles'
+import { SelectMultiStyles } from './styles'
 import { SelectMultiPropTypes } from "./types";
 import { Checkbox } from "../Checkbox";
 import { useSelectMulti } from "./hooks";
@@ -15,23 +15,19 @@ export const SelectMulti = ({
   disabled = false,
   size,
   placeholder,
-  additionalClasses = {
-    wrapper: [],
-    label: [],
-    input: [],
-    placeholder: [],
-    selectedItem: [],
-    selectedList: [],
-    optionItem: [],
-    optionList: []
-  }
+  additionalClasses
 }: SelectMultiPropTypes) => {
   const hook = useSelectMulti({
     selectedList: selected || [],
     disabled
   })
 
-  const styles = new SelectStyles(additionalClasses)
+  const styles = new SelectMultiStyles({
+    additionalClasses,
+    disabled,
+    size,
+    isOpen: hook.hookIsOptionListVisible
+  })
   const {
     wrapperClass,
     labelClass,
@@ -41,11 +37,7 @@ export const SelectMulti = ({
     selectedListClass,
     optionItemClass,
     optionListClass
-  } = styles.buildStyleRules({
-    disabled,
-    size,
-    isOpen: hook.hookIsOptionListVisible
-  })
+  } = styles.buildStyleRules()
 
   return (
     <div
@@ -62,7 +54,7 @@ export const SelectMulti = ({
       )}
       <div
         className={inputClass}
-        onClick={hook.hookSetIsOptionListVisible}
+        onClick={(event) => hook.hookSetIsOptionListVisible(event)}
         data-testid='select-multi-select-list-wrapper'
       >
         {placeholder && (selected?.length === 0 || selected === undefined) && (
@@ -80,7 +72,6 @@ export const SelectMulti = ({
           {selected?.map(item => (
             <div
               className={selectedItemClass}
-              onClick={(event) => event.stopPropagation()}
               key={item.id}
               data-testid='select-multi-selected-item'
             >

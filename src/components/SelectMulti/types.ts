@@ -5,21 +5,37 @@ export type ListItemPropTypes = {
   label: string
 }
 
-export type SelectMultiComponentsEnum = 'label'
+export type SelectMultiComponentsEnum = 'wrapper'
+| 'label'
+| 'input'
+| 'placeholder'
+| 'selectedItem'
+| 'selectedList'
+| 'optionItem'
+| 'optionList'
+
+export type SelectMultiSizeComponentsEnum = 'label'
 | 'input'
 | 'selectedItem'
 | 'selectedList'
 | 'optionList'
 
 export type SelectMultiAdditionalClassesPropTypes = {
-  wrapper: string[]
-  label: string[]
-  input: string[]
-  placeholder: string[]
-  selectedItem: string[]
-  selectedList: string[]
-  optionItem: string[]
-  optionList: string[]
+  wrapper?: string[]
+  label?: string[]
+  input?: string[]
+  placeholder?: string[]
+  selectedItem?: string[]
+  selectedList?: string[]
+  optionItem?: string[]
+  optionList?: string[]
+}
+
+export type SelectMultiConstructorPropTypes = {
+  additionalClasses?: SelectMultiAdditionalClassesPropTypes
+  size: GSizeEnum
+  disabled?: boolean
+  isOpen: boolean
 }
 
 export type SelectMultiPropTypes = {

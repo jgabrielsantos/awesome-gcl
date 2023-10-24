@@ -5,7 +5,8 @@ export const toggleOptionsListVisibility = ({
   isVisible,
   setIsVisible,
   disabled
-}: Readonly<Pick<UseSelectMultiPropTypes, 'isVisible' | 'setIsVisible' | 'disabled'>>) => () => {
+}: Readonly<Pick<UseSelectMultiPropTypes, 'isVisible' | 'setIsVisible' | 'disabled'>>) => (event: React.MouseEvent) => {
+  event.stopPropagation()
   if (disabled) return
   setIsVisible(!isVisible)
 }
@@ -31,6 +32,6 @@ export const useSelectMulti = ({
     }),
     hookMarkCheckbox: markCheckbox({
       selectedList
-    }),
+    })
   }
 }
