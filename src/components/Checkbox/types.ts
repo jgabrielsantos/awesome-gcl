@@ -1,9 +1,31 @@
-export type CheckboxPropTypes = {
-  checked: boolean
-  handleClick?: React.MouseEventHandler
-  disabled?: boolean
-  label?: string
-  className?: string
+import { GSizeEnum } from "../types"
+
+export type CheckboxComponentsEnum = 'wrapper'
+| 'input'
+| 'icon'
+| 'label'
+
+export type CheckboxSizeComponentsEnum = 'input'
+| 'label'
+| 'icon'
+
+export type CheckboxAdditionalClassesPropTypes = {
+  wrapper?: string[]
+  label?: string[]
+  input?: string[]
+  icon?: string[]
 }
 
-export type StyledPropTypes = Readonly<Pick<CheckboxPropTypes, 'checked'>>
+export type CheckboxConstructorPropTypes = Pick<CheckboxPropTypes,
+  'additionalClasses'
+  | 'size'
+>
+
+export type CheckboxPropTypes = {
+  checked: boolean
+  size: GSizeEnum
+  handleClick?: React.MouseEventHandler<HTMLDivElement>
+  disabled?: boolean
+  label?: string
+  additionalClasses?: CheckboxAdditionalClassesPropTypes
+}

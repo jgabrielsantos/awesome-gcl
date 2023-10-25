@@ -1,16 +1,50 @@
-import styled from "styled-components";
-import { FigurePropTypes } from "./types";
+import { FigureComponentEnums, FigureConstructorPropTypes } from "./types";
+import Themes from './themes'
 
-export const WrapperStyled = styled.figure<Readonly<Pick<FigurePropTypes, 'width' | 'height'>>>`
-  width: ${({ width }) => width || '100%' };
-  height: ${({ height }) => height || '100%' };
-`
+interface FigureStyle {
+  buildStyleRules: () => Record<`${FigureComponentEnums}Class`, string>
+}
 
-export const ImageStyled = styled.img`
-  width: 100%;
-  height: 100%;
-`
+export class FigureStyles implements FigureStyle {
+  private additionalClasses: {
+    figure: string[]
+    image: string[]
+    caption: string[]
+  }
+  private themes: Record<FigureComponentEnums, Map<string, string>> = {
+    figure: Themes.figure(),
+    image: Themes.image(),
+    caption: Themes.caption()
+  }
 
-export const CaptionStyled = styled.figcaption`
-  font-size: 1rem;
-`
+  constructor({ additionalClasses }: FigureConstructorPropTypes) {
+    this.additionalClasses = {
+      figure: additionalClasses?.figure || [],
+      image: additionalClasses?.image || [],
+      caption: additionalClasses?.caption || []
+    }
+  }
+
+  private getThemeRules(components: FigureComponentEnums) {
+    return this.themes[components]
+  }
+
+  buildStyleRules() {
+    const classes = {
+      figureClass: [
+        ...this.getThemeRules('figure').values(),
+        ...this.additionalClasses.figure
+      ].join(' '),
+      imageClass: [
+        ...this.getThemeRules('image').values(),
+        ...this.additionalClasses.image
+      ].join(' '),
+      captionClass: [
+        ...this.getThemeRules('caption').values(),
+        ...this.additionalClasses.caption
+      ].join(' ')
+    }
+
+    return classes
+  }
+}

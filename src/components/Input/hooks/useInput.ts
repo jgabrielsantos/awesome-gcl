@@ -12,7 +12,7 @@ export const setPasswordVisibleHandler = ({
 
 export const useInput = ({
   type,
-  showPassword = false
+  showPassword
 }: UseInputPropTypes) => {
   const [passwordVisible, setPasswordVisible] = useState<boolean>(showPassword)
   const [inputType, setInputType] = useState(type)

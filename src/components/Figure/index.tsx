@@ -1,32 +1,38 @@
 import React from "react";
-import * as Styled from './styles'
+import { FigureStyles } from './styles'
 import { FigurePropTypes } from './types'
 
 export const Figure = ({
   src,
   alt,
   caption,
-  width,
-  height,
-  className
-}: Readonly<FigurePropTypes>) => (
-  <Styled.WrapperStyled
-    className={className}
-    width={width}
-    height={height}
+  additionalClasses = {
+    figure: [],
+    image: [],
+    caption: []
+  }
+}: Readonly<FigurePropTypes>) => {
+  const styles = new FigureStyles({ additionalClasses })
+  const { figureClass, imageClass, captionClass} = styles.buildStyleRules()
+
+  return (
+  <figure
+    className={figureClass}
     data-testid='figure-wrapper'
   >
-    <Styled.ImageStyled
+    <img
       src={src}
       alt={alt}
+      className={imageClass}
       data-testid='figure-image'
     />
     {caption && (
-      <Styled.CaptionStyled
+      <figcaption
+        className={captionClass}
         data-testid='figure-caption'
       >
         {caption}
-      </Styled.CaptionStyled>
+      </figcaption>
     )}
-  </Styled.WrapperStyled>
-)
+  </figure>
+)}

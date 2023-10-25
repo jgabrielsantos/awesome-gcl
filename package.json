@@ -1,12 +1,11 @@
 {
   "name": "awesome-gcl",
   "description": "React component library",
-  "version": "0.0.19",
+  "version": "1.0.0",
   "author": "Joao Gabriel Santos",
   "license": "MIT",
   "types": "dist/index.d.ts",
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist"
   ],
@@ -29,9 +28,9 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "rollup": "rollup -c",
-    "test:watch": "jest --watchAll ./src/components",
-    "test:coverage": "jest --coverage ./src"
+    "publish:rollup": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c && npm publish",
+    "test:watch": "jest --watchAll ./src/components ./tests",
+    "test:coverage": "jest --coverage"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",
@@ -50,21 +49,21 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup": "^3.28.0",
-    "rollup-plugin-copy": "^3.4.0",
     "rollup-plugin-css-only": "^4.3.0",
     "rollup-plugin-dts": "^5.3.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-replace": "^2.2.0",
+    "styled-components": "^6.0.7",
     "ts-jest": "^29.1.1",
     "tslib": "^2.6.1",
-    "typescript": "^5.1.6",
-    "styled-components": "^6.0.7"
+    "typescript": "^5.1.6"
   },
   "peerDependencies": {
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "dependencies": {
+    "tailwindcss": "^3.3.3",
     "@fortawesome/free-solid-svg-icons": "^6.4.2",
     "@fortawesome/react-fontawesome": "^0.2.0"
   }

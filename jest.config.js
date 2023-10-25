@@ -2,9 +2,11 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  moduleNameMapper: {
-    ".+\\.(webp|svg)$": "<rootDir>/src/utils/mockImage.ts"
-  },
   clearMocks: true,
   setupFilesAfterEnv: ["jest-styled-components"],
+  collectCoverageFrom: [
+    '<rootDir>/src/**/*.{ts, tsx}',
+    '!<rootDir>/src/**/index.ts', // component export file
+    '!<rootDir>/src/**/theme.ts' // project theme definition
+  ]
 };

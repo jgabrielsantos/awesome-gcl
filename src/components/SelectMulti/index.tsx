@@ -1,10 +1,10 @@
 import React from "react";
-import * as Styled from './styles'
+import { SelectMultiStyles } from './styles'
 import { SelectMultiPropTypes } from "./types";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronDown, faChevronUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../Checkbox";
 import { useSelectMulti } from "./hooks";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown, faChevronUp, faTimes } from "@fortawesome/free-solid-svg-icons";
 
 export const SelectMulti = ({
   options,
@@ -13,44 +13,65 @@ export const SelectMulti = ({
   label,
   selected,
   disabled = false,
+  size,
   placeholder,
-  className
+  additionalClasses
 }: SelectMultiPropTypes) => {
   const hook = useSelectMulti({
     selectedList: selected || [],
     disabled
   })
 
+  const styles = new SelectMultiStyles({
+    additionalClasses,
+    disabled,
+    size,
+    isOpen: hook.hookIsOptionListVisible
+  })
+  const {
+    wrapperClass,
+    labelClass,
+    inputClass,
+    placeholderClass,
+    selectedItemClass,
+    selectedListClass,
+    optionItemClass,
+    optionListClass
+  } = styles.buildStyleRules()
+
   return (
-    <Styled.Wrapper
-      className={className}
+    <div
+      className={wrapperClass}
       data-testid='select-multi-wrapper'
     >
       {label && (
-        <Styled.LabelStyled
+        <label
+          className={labelClass}
           data-testid='select-multi-label'
         >
           {label}
-        </Styled.LabelStyled>
+        </label>
       )}
-      <Styled.ListWrapper
-        onClick={hook.hookSetIsOptionListVisible}
-        disabled={disabled}
+      <div
+        className={inputClass}
+        onClick={(event) => hook.hookSetIsOptionListVisible(event)}
         data-testid='select-multi-select-list-wrapper'
       >
         {placeholder && (selected?.length === 0 || selected === undefined) && (
-          <Styled.PlaceholderStyled
-          data-testid='select-multi-placeholder'
+          <p
+            className={placeholderClass}
+            data-testid='select-multi-placeholder'
           >
             {placeholder}
-          </Styled.PlaceholderStyled>
+          </p>
         )}
-        <Styled.SelectedListStyled
+        <div
+          className={selectedListClass}
           data-testid='select-multi-selected-list'
         >
           {selected?.map(item => (
-            <Styled.SelectedStyled
-              onClick={(event) => event.stopPropagation()}
+            <div
+              className={selectedItemClass}
               key={item.id}
               data-testid='select-multi-selected-item'
             >
@@ -60,33 +81,35 @@ export const SelectMulti = ({
                 icon={faTimes}
                 data-testid='select-multi-remove-icon'
               />
-            </Styled.SelectedStyled>
+            </div>
           ))}
-        </Styled.SelectedListStyled>
+        </div>
         <FontAwesomeIcon
           icon={hook.hookIsOptionListVisible ? faChevronUp : faChevronDown}
           data-testid='select-multi-toggle-options-list-icon'
         />
-      </Styled.ListWrapper>
+      </div>
 
-      <Styled.OptionListStyled
-        isOpen={hook.hookIsOptionListVisible}
+      <ul
+        className={optionListClass}
         data-testid='select-multi-options-list'
       >
         {options.map(option => (
-          <Styled.OptionItemStyled
+          <li
+            className={optionItemClass}
             key={option.id}
             value={option.id}
             onClick={() => hook.hookMarkCheckbox(option) ? removeOption(option) : addOption(option)}
             data-testid='select-multi-options-item'
           >
             <Checkbox
+              size={size}
               checked={hook.hookMarkCheckbox(option) ? true : false || false}
               label={option.label}
             />
-          </Styled.OptionItemStyled>
+          </li>
         ))}
-      </Styled.OptionListStyled>
-    </Styled.Wrapper>
+      </ul>
+    </div>
   )
 }

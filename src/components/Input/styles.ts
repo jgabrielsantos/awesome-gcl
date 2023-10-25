@@ -1,64 +1,89 @@
-import styled from "styled-components";
-import { toRem } from "../../utils";
-import { colors } from "../../styles";
-import { InputWrapperStyledPropTypes } from "./types";
+import { InputSizeComponentsEnum, InputComponentsEnum, InputConstructorPropTypes } from "./types";
+import { GSizeEnum } from "../types";
+import Sizes from './sizes'
+import Themes from './themes'
+interface InputStyle {
+  buildStyleRules: () => Record<`${InputComponentsEnum}Class`, string>
+}
 
-export const WrapperStyled = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: ${toRem(6)};
-`
-
-export const LabelStyled = styled.label`
-  width: 100%;
-  color: ${colors.grayscale[100]};
-  font-size: 1rem;
-`
-
-export const InputWrapperStyled = styled.div.withConfig({
-  shouldForwardProp: (prop) => !['error'].includes(prop)
-})<InputWrapperStyledPropTypes>`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: ${toRem(8)};
-  padding: ${toRem(12)} ${toRem(16)};
-  border-radius: ${toRem(6)};
-  border: 1px solid ${({ error }) => error ? colors.support.alert[50] : colors.grayscale[40]};
-  cursor: ${({ disabled }) => disabled ? 'not-allowed' : 'text'};
-  background-color: ${({ disabled }) => disabled ? colors.grayscale[5] : colors.white[100]};
-
-  &:focus-within {
-    border-color: ${colors.primary[50]}
+export class InputStyles implements InputStyle {
+  private additionalClasses: {
+    wrapper: string[]
+    label: string[]
+    inputWrapper: string[]
+    input: string[]
+    passwordButton: string[]
+    caption: string[]
   }
-`
-
-export const InputStyled = styled.input`
-  width: 100%;
-  color: ${colors.grayscale[80]};
-  font-size: 1rem;
-  border: none;
-  cursor: text;
-
-  ::placeholder {
-    color: ${colors.grayscale[40]};
+  private size: GSizeEnum
+  private sizes: Record<GSizeEnum, Record<InputSizeComponentsEnum, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
+  private themes: Record<InputComponentsEnum, Map<string, string>> = {
+    wrapper: Themes.wrapper(),
+    label: Themes.label(),
+    inputWrapper: Themes.inputWrapper(),
+    input: Themes.input(),
+    passwordButton: Themes.passwordButton(),
+    caption: Themes.caption()
   }
 
-  &:disabled {
-    cursor: not-allowed;
-    color: ${colors.grayscale[60]};
+  constructor({
+    additionalClasses,
+    size
+  }: InputConstructorPropTypes) {
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      label: additionalClasses?.label || [],
+      inputWrapper: additionalClasses?.inputWrapper || [],
+      input: additionalClasses?.input || [],
+      passwordButton: additionalClasses?.passwordButton || [],
+      caption: additionalClasses?.caption || [],
+    }
+    this.size = size
   }
-`
 
-export const PasswordIconStyled = styled.button`
-  cursor: pointer;
-`
+  private getThemeRules(component: InputComponentsEnum) {
+    return this.themes[component]
+  }
 
-export const ErrorMessageStyled = styled.span`
-  font-size: 1rem;
-  color: ${colors.support.alert[50]};
-`
+  private getSizeRules(component: InputSizeComponentsEnum) {
+    return this.sizes[this.size][component]
+  };
+
+  buildStyleRules() {
+    const classes = {
+      wrapperClass: [
+        ...this.getThemeRules('wrapper').values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      labelClass: [
+        ...this.getThemeRules('label').values(),
+        ...this.getSizeRules('label').values(),
+        ...this.additionalClasses.label
+      ].join(' '),
+      inputWrapperClass: [
+        ...this.getThemeRules('inputWrapper').values(),
+        ...this.additionalClasses.inputWrapper
+      ].join(' '),
+      inputClass: [
+        ...this.getThemeRules('input').values(),
+        ...this.getSizeRules('input').values(),
+        ...this.additionalClasses.input
+      ].join(' '),
+      passwordButtonClass: [
+        ...this.getThemeRules('passwordButton').values(),
+        ...this.getSizeRules('passwordButton').values(),
+        ...this.additionalClasses.passwordButton
+      ].join(' '),
+      captionClass: [
+        ...this.getThemeRules('caption').values(),
+        ...this.getSizeRules('caption').values(),
+        ...this.additionalClasses.caption
+      ].join(' ')
+    }
+    return classes
+  };
+}

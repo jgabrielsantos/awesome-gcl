@@ -1,6 +1,36 @@
-import React from "react"
+import { GSizeEnum } from "../types"
 
-type InputTypePropTypes = 'text' | 'password' | 'email' | 'tel' | 'number'
+type InputTypePropTypes = 'text'
+| 'password'
+| 'email'
+| 'tel'
+| 'number'
+
+export type InputSizeComponentsEnum = 'label'
+| 'input'
+| 'passwordButton'
+| 'caption'
+
+export type InputComponentsEnum = 'wrapper'
+| 'label'
+| 'inputWrapper'
+| 'input'
+| 'passwordButton'
+| 'caption'
+
+export type InputConstructorPropTypes = Pick<InputPropTypes,
+  'additionalClasses'
+  | 'size'
+>
+
+export type InputAdditionalClassesPropTypes = {
+  wrapper?: string[]
+  label?: string[]
+  inputWrapper?: string[]
+  input?: string[]
+  passwordButton?: string[]
+  caption?: string[]
+}
 
 export type InputPropTypes = {
   type: InputTypePropTypes
@@ -8,18 +38,19 @@ export type InputPropTypes = {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   label?: string
+  caption?: string
   placeholder?: string
-  error?: boolean
-  errorMessage?: string
   showPassword?: boolean
   disabled?: boolean
   pattern?: string
-  className?: string
+  size: GSizeEnum
+  additionalClasses?: InputAdditionalClassesPropTypes
 }
 
-export type InputWrapperStyledPropTypes = Readonly<Pick<InputPropTypes, 'error' | 'disabled'>>
-
-export type UseInputPropTypes = Readonly<Pick<InputPropTypes, 'type' | 'showPassword'>>
+export type UseInputPropTypes = {
+  type: InputTypePropTypes
+  showPassword: boolean
+}
 
 export type ShowPasswordValuePropTypes = {
   passwordVisible: boolean

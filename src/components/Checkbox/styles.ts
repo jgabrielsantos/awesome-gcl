@@ -1,42 +1,86 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import { StyledPropTypes } from "./types";
-import { colors } from "../../styles";
-import { toRem } from "../../utils";
+import {
+  CheckboxComponentsEnum,
+  CheckboxConstructorPropTypes,
+  CheckboxSizeComponentsEnum
+} from "./types";
+import Sizes from './sizes'
+import Themes from './themes'
+import { GSizeEnum } from "../types";
 
-export const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  gap: ${toRem(6)};
-  position: relative;
-`
+/**
+ * @param size      controls the width and height
+ * @param checked   controls the border color and background color
+ * @returns         string with all tailwind classes to be used in the component
+ * @see             Checkbox component
+ */
 
-export const InputStyled = styled.input<StyledPropTypes>`
-  width: ${toRem(20)};
-  height: ${toRem(20)};
-  border: 1px solid ${({ checked }) => checked ? colors.primary[50] : colors.grayscale[40]};
-  border-radius: ${toRem(4)};
-  background-color: ${({ checked }) => checked ? colors.primary[50] : colors.white[100]};
-  cursor: pointer;
+interface ICheckboxStyle {
+  buildStyleRules: () => Record<`${CheckboxComponentsEnum}Class`, string>
+}
 
-  &:disabled {
-    cursor: not-allowed;
-    border: 1px solid ${colors.grayscale[40]};
-    background-color: ${colors.grayscale[40]};
+export class CheckboxStyles implements ICheckboxStyle {
+  private additionalClasses: {
+    wrapper: string[]
+    label: string[]
+    input: string[]
+    icon: string[]
   }
-`
+  private size: GSizeEnum
+  private sizes: Record<GSizeEnum, Record<CheckboxSizeComponentsEnum, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
+  private themes: Record<CheckboxComponentsEnum, Map<string,string>> = {
+    wrapper: Themes.wrapper(),
+    input: Themes.input(),
+    icon: Themes.icon(),
+    label: Themes.label()
+  }
 
-export const IconStyled = styled(FontAwesomeIcon)`
-  width: ${toRem(16)};
-  display: flex;
-  color: ${colors.white[100]};
-  position: absolute;
-  left: 2px;
-  cursor: pointer;
-`
+  constructor({
+    additionalClasses,
+    size
+  }: CheckboxConstructorPropTypes) {
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      label: additionalClasses?.label || [],
+      input: additionalClasses?.input || [],
+      icon: additionalClasses?.icon || []
+    }
+    this.size = size
+  }
 
-export const LabelStyled = styled.label`
-  font-size: 1rem;
-`
+  private getThemeRules(component: CheckboxComponentsEnum) {
+    return this.themes[component]
+  }
+
+  private getSizeRules(component: CheckboxSizeComponentsEnum) {
+    return this.sizes[this.size][component]
+  }
+
+  buildStyleRules() {
+    const classes = {
+      wrapperClass: [
+        ...this.getThemeRules('wrapper').values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      labelClass: [
+        ...this.getThemeRules('label').values(),
+        ...this.getSizeRules('label').values(),
+        ...this.additionalClasses.label
+      ].join(' '),
+      inputClass: [
+        ...this.getThemeRules('input').values(),
+        ...this.getSizeRules('input').values(),
+        ...this.additionalClasses.input
+      ].join(' '),
+      iconClass: [
+        ...this.getThemeRules('icon').values(),
+        ...this.additionalClasses.icon
+      ].join(' ')
+    }
+
+    return classes
+  };
+}

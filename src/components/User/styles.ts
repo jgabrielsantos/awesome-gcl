@@ -1,48 +1,92 @@
-import styled from "styled-components";
-import { toRem } from "../../utils";
-import { colors } from "../../styles";
+import {
+  UserComponentsEnum,
+  UserConstructorPropTypes,
+  UserSizeComponentsEnum
+} from "./types";
+import { GSizeEnum } from "../types";
+import Sizes from './sizes'
+import Themes from './themes'
 
-export const Wrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-`
+interface UserStyle {
+  buildStyleRules: (size: GSizeEnum) => Record<`${UserComponentsEnum}Class`, string>
+}
 
-export const AvatarStyled = styled.img`
-  padding: ${toRem(8)};
-  width: 80px;
-  height: auto;
-  border-radius: 100%;
-`
+export class UserStyles implements UserStyle {
+  private size: GSizeEnum
+  private sizes: Record<GSizeEnum, Record<UserSizeComponentsEnum, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
+  private themes: Record<UserComponentsEnum, Map<string, string>> = {
+    wrapper: Themes.wrapper(),
+    avatar: Themes.avatar(),
+    initials: Themes.initials(),
+    info: Themes.info(),
+    name: Themes.name(),
+    description: Themes.description()
+  }
+  private additionalClasses: {
+    wrapper: string[]
+    avatar: string[]
+    initials: string[]
+    info: string[]
+    name: string[]
+    description: string[]
+  }
 
-export const InitialsStyled = styled.div`
-  width: 40px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 100%;
-  color: ${colors.white[100]};
-  background-color: ${colors.grayscale[40]};
-`
+  constructor({
+    additionalClasses,
+    size
+  }: UserConstructorPropTypes) {
+    this.size = size
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      avatar: additionalClasses?.avatar || [],
+      initials: additionalClasses?.initials || [],
+      info: additionalClasses?.info || [],
+      name: additionalClasses?.name || [],
+      description: additionalClasses?.description || []
+    }
+  }
 
-export const UserInfoStyled = styled.div`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: ${toRem(6)};
-`
+  private getSizeRules (component: UserSizeComponentsEnum) {
+    return this.sizes[this.size][component]
+  }
 
-export const UserNameStyled = styled.p`
-  font-size: ${toRem(16)};
-`
+  buildStyleRules() {
+    const classes = {
+      wrapperClass: [
+        ...this.themes.wrapper.values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      avatarClass: [
+        ...this.themes.avatar.values(),
+        ...this.getSizeRules('avatar').values(),
+        ...this.additionalClasses.avatar
+      ].join(' '),
+      initialsClass: [
+        ...this.themes.initials.values(),
+        ...this.getSizeRules('initials').values(),
+        ...this.additionalClasses.initials
+      ].join(' '),
+      infoClass: [
+        ...this.themes.info.values(),
+        ...this.getSizeRules('info').values(),
+        ...this.additionalClasses.info
+      ].join(' '),
+      nameClass: [
+        ...this.themes.name.values(),
+        ...this.getSizeRules('name').values(),
+        ...this.additionalClasses.name
+      ].join(' '),
+      descriptionClass: [
+        ...this.themes.description.values(),
+        ...this.getSizeRules('description').values(),
+        ...this.additionalClasses.description
+      ].join(' ')
+    }
 
-export const UserDescriptionStyled = styled.p`
-  font-size: ${toRem(12)};
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`
+    return classes
+  }
+}

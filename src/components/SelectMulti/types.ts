@@ -1,6 +1,41 @@
+import { GSizeEnum } from "../types"
+
 export type ListItemPropTypes = {
   id: string
   label: string
+}
+
+export type SelectMultiComponentsEnum = 'wrapper'
+| 'label'
+| 'input'
+| 'placeholder'
+| 'selectedItem'
+| 'selectedList'
+| 'optionItem'
+| 'optionList'
+
+export type SelectMultiSizeComponentsEnum = 'label'
+| 'input'
+| 'selectedItem'
+| 'selectedList'
+| 'optionList'
+
+export type SelectMultiAdditionalClassesPropTypes = {
+  wrapper?: string[]
+  label?: string[]
+  input?: string[]
+  placeholder?: string[]
+  selectedItem?: string[]
+  selectedList?: string[]
+  optionItem?: string[]
+  optionList?: string[]
+}
+
+export type SelectMultiConstructorPropTypes = {
+  additionalClasses?: SelectMultiAdditionalClassesPropTypes
+  size: GSizeEnum
+  disabled?: boolean
+  isOpen: boolean
 }
 
 export type SelectMultiPropTypes = {
@@ -11,11 +46,8 @@ export type SelectMultiPropTypes = {
   selected?: ListItemPropTypes[]
   disabled?: boolean
   placeholder?: string
-  className?: string
-}
-
-export type StyledPropTypes = Readonly<Pick<SelectMultiPropTypes, 'disabled'>> & {
-  isOpen: boolean
+  size: GSizeEnum
+  additionalClasses?: SelectMultiAdditionalClassesPropTypes
 }
 
 export type UseSelectMultiPropTypes = {

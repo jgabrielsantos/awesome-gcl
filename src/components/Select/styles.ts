@@ -1,56 +1,109 @@
-import styled from "styled-components";
-import { toRem } from "../../utils";
-import { colors } from "../../styles";
-import { SelectOptionListPropTypes } from "./types";
+import {
+  SelectComponentsEnum,
+  SelectConstructorPropTypes,
+  SelectSizeComponentEnums
+} from "./types";
+import Sizes from './sizes'
+import Themes from './themes'
+import { GSizeEnum } from "../types";
 
-export const WrapperStyled = styled.div`
-  width: 100%;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: ${toRem(6)};
-`
+interface SelectStyle {
+  buildStyleRules: () => Record<`${SelectComponentsEnum}Class`, string>
+}
 
-export const LabelStyled = styled.label`
-  font-size: 1rem;
-  width: 100%;
-  color: ${colors.grayscale[100]};
-`
+export class SelectStyles implements SelectStyle {
+  private disabled: boolean
+  private isOpen: boolean
+  private size: GSizeEnum
+  private sizes: Record<GSizeEnum, Record<SelectSizeComponentEnums, Map<string, string>>> = {
+    large: Sizes.large(),
+    medium: Sizes.medium(),
+    small: Sizes.small()
+  }
+  private themes: Record<SelectComponentsEnum, Map<string, string>> = {
+    wrapper: Themes.wrapper(),
+    label: Themes.label(),
+    inputWrapper: Themes.inputWrapper(),
+    input: Themes.input(),
+    optionItem: Themes.optionItem(),
+    optionList: Themes.optionList()
+  }
+  private additionalClasses: {
+    wrapper: string[],
+    label: string[],
+    inputWrapper: string[],
+    input: string[],
+    optionList: string[],
+    optionItem: string[]
+  }
 
-export const InputStyled = styled.input`
-  cursor: inherit;
-  color: ${colors.grayscale[100]};
-  font-size: 1rem;
-  border: none;
-  background-color: transparent;
-`
+  constructor({
+    additionalClasses,
+    size,
+    disabled,
+    isOpen
+  }: SelectConstructorPropTypes) {
+    this.additionalClasses = {
+      wrapper: additionalClasses?.wrapper || [],
+      label: additionalClasses?.label || [],
+      inputWrapper: additionalClasses?.inputWrapper || [],
+      input: additionalClasses?.input || [],
+      optionList: additionalClasses?.optionList || [],
+      optionItem: additionalClasses?.optionItem || []
+    }
+    this.size = size
+    this.disabled = disabled || false
+    this.isOpen = isOpen
+  }
 
-export const OptionListStyled = styled.ul.withConfig({
-  shouldForwardProp: (prop) => !['isOpen'].includes(prop)
-})<Readonly<SelectOptionListPropTypes>>`
-  width: 100%;
-  display: ${({ isOpen }) => isOpen ? 'flex' : 'none'};
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: ${toRem(8)};
-  border: 1px solid ${colors.grayscale[40]};
-  border-radius: ${toRem(8)};
-  padding: ${toRem(12)} ${toRem(16)};
-  position: absolute;
-  right: 0;
-  top: 110%;
-  background-color: ${colors.white[100]};
-  z-index: 1;
-`
+  private getDisabledRule(): void {
+    this.themes.inputWrapper.set('cursor', this.disabled ? 'cursor-not-allowed' : 'cursor-pointer')
+    this.themes.inputWrapper.set('background-color', this.disabled ? 'bg-grayscale-0' : 'bg-white-100')
+  }
 
-export const OptionItemStyled = styled.li`
-  cursor: pointer;
-  width: 100%;
-  color: ${colors.grayscale[100]};
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-`
+  private getDisplayRule(): void {
+    this.themes.optionList.set('display', this.isOpen ? 'flex' : 'hidden')
+  }
+
+  private getSizeRules(component: SelectSizeComponentEnums) {
+    return this.sizes[this.size][component]
+  }
+
+  buildStyleRules() {
+    this.getDisabledRule()
+    this.getDisplayRule()
+
+    const classes = {
+      wrapperClass: [
+        ...this.themes.wrapper.values(),
+        ...this.additionalClasses.wrapper
+      ].join(' '),
+      labelClass: [
+        ...this.themes.label.values(),
+        ...this.getSizeRules('label').values(),
+        ...this.additionalClasses.label
+      ].join(' '),
+      inputWrapperClass: [
+        ...this.themes.inputWrapper.values(),
+        ...this.getSizeRules('inputWrapper').values(),
+        ...this.additionalClasses.inputWrapper
+      ].join(' '),
+      inputClass: [
+        ...this.themes.input.values(),
+        ...this.getSizeRules('input').values(),
+        ...this.additionalClasses.input
+      ].join(' '),
+      optionListClass: [
+        ...this.themes.optionList.values(),
+        ...this.getSizeRules('optionList').values(),
+        ...this.additionalClasses.optionList
+      ].join(' '),
+      optionItemClass: [
+        ...this.themes.optionItem.values(),
+        ...this.additionalClasses.optionItem
+      ].join(' ')
+    }
+
+    return classes
+  }
+}

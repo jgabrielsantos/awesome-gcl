@@ -1,7 +1,18 @@
+export type ModalAdditionalClassesPropTypes = {
+  wrapper?: string[]
+  dialog?: string[]
+}
+
+export type ModalComponentsEnum = 'wrapper'
+| 'dialog'
+
+export type ModalConstructorPropTypes = Pick<ModalPropTypes,
+  'additionalClasses'
+  | 'isOpen'
+>
+
 export type ModalPropTypes = {
   isOpen: boolean
   children: React.ReactNode
-  className?: string
+  additionalClasses?: ModalAdditionalClassesPropTypes
 }
-
-export type ModalStyledPropTypes = Readonly<Pick<ModalPropTypes, 'isOpen'>>

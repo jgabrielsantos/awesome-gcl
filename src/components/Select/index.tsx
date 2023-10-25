@@ -1,10 +1,9 @@
 import React from 'react'
-import * as Styled from './styles'
 import { SelectPropTypes } from './types'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons'
 import { useSelect } from './hooks'
-import { InputWrapper } from './Components'
+import { SelectStyles } from './styles'
 
 export const Select = ({
   label,
@@ -14,63 +13,89 @@ export const Select = ({
   onChange,
   icon,
   disabled = false,
-  className
+  size,
+  additionalClasses = {
+    wrapper: [],
+    label: [],
+    inputWrapper: [],
+    input: [],
+    optionList: [],
+    optionItem: []
+  }
 }: Readonly<SelectPropTypes>) => {
   const hook = useSelect()
+  const styles = new SelectStyles({
+    additionalClasses,
+    size,
+    disabled,
+    isOpen: hook.hookIsOptionListVisible
+  })
+  const {
+    wrapperClass,
+    labelClass,
+    inputWrapperClass,
+    inputClass,
+    optionListClass,
+    optionItemClass
+  } = styles.buildStyleRules()
 
   return (
-    <Styled.WrapperStyled
-      className={className}
+    <div
+      className={wrapperClass}
       data-testid='select-wrapper'
     >
       {label && (
-        <Styled.LabelStyled
-        data-testid='select-label'
+        <label
+          className={labelClass}
+          data-testid='select-label'
         >
           {label}
-        </Styled.LabelStyled>
+        </label>
       )}
-      <InputWrapper
-        onClick={hook.hookSetIsOptionListVisible}
-        disabled={disabled}
+      <div
+        className={inputWrapperClass}
+        onClick={disabled ? undefined : hook.hookSetIsOptionListVisible}
+        data-testid='select-input-wrapper'
       >
-        <Styled.InputStyled
+        <input
           type='text'
           value={selected?.label || ''}
           placeholder={placeholder}
           data-testid='select-input'
           readOnly
+          className={inputClass}
         />
         {icon ? (
-          <i
-            className={icon}
+          <FontAwesomeIcon
+            icon={icon}
             data-testid='select-custom-icon'
-            />
+          />
         ) : (
           <FontAwesomeIcon
             icon={hook.hookIsOptionListVisible ? faChevronUp : faChevronDown}
             data-testid='select-default-icon'
           />
         )}
-      </InputWrapper>
-      <Styled.OptionListStyled
-        isOpen={hook.hookIsOptionListVisible}
+      </div>
+      <ul
+        className={optionListClass}
         data-testid='select-option-list'
       >
         {options.map(option => (
-          <Styled.OptionItemStyled
+          <li
             key={option.value}
             value={option.value}
             onClick={() => {
               onChange(option);
               hook.hookSetIsOptionListVisible()
             }}
+            className={optionItemClass}
             data-testid={`select-option-item-${option.value}`}
           >
             {option.label}
-          </Styled.OptionItemStyled>
+          </li>
         ))}
-      </Styled.OptionListStyled>
-    </Styled.WrapperStyled>
+      </ul>
+    </div>
   )
 }
