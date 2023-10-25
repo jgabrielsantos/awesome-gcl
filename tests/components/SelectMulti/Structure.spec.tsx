@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import { SelectMulti } from "../../../src/components/SelectMulti/index";
+import { SelectMulti } from "../../../src/components/SelectMulti";
 
 const optionsMock = [
   {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Toast } from '../../../../../src/components/ToastList/Components/Toast/index'
+import { Toast } from '../../../../../src/components/ToastList/Components/Toast'
 import { fireEvent, render, screen } from "@testing-library/react"
 
 describe('Component logic', () => {

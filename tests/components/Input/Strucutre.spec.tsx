@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { Input } from '../../../src/components/Input/index'
+import { Input } from '../../../src/components/Input'
 
 const onChangeSpy = jest.fn()
 

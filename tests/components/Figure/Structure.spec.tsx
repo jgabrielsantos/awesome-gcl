@@ -1,5 +1,5 @@
 import React from "react"
-import { Figure } from "../../../src/components/Figure/index"
+import { Figure } from "../../../src/components/Figure"
 import { render, screen } from "@testing-library/react"
 
 const srcMock = 'https://cctech.io/images/cctech-logo-black.webp'

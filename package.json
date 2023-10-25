@@ -30,7 +30,7 @@
     "dev": "nodemon",
     "publish:rollup": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c && npm publish",
     "test:watch": "jest --watchAll ./src/components ./tests",
-    "test:coverage": "jest --coverage ./tests"
+    "test:coverage": "jest --coverage"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.4",

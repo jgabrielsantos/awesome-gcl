@@ -1,6 +1,6 @@
 import React from "react"
 import { render, screen } from "@testing-library/react"
-import { Select } from "../../../src/components/Select/index"
+import { Select } from "../../../src/components/Select"
 import { faCloud } from "@fortawesome/free-solid-svg-icons"
 
 const labelMock = 'Label'

@@ -1,6 +1,6 @@
 import React from "react"
 import { render, screen, fireEvent } from "@testing-library/react"
-import { Select } from "../../../src/components/Select/index"
+import { Select } from "../../../src/components/Select"
 import { toggleOptionListVisibility } from "../../../src/components/Select/hooks"
 
 const optionsMock = [
