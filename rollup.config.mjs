@@ -30,7 +30,7 @@ export default [
     ],
   },
   {
-    input: "dist/types/index.d.ts",
+    input: "dist/types/src/index.d.ts",
     external: [
       /\.css$/
     ],
