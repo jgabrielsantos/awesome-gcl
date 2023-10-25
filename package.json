@@ -28,7 +28,7 @@
   ],
   "scripts": {
     "dev": "nodemon",
-    "publish:rollup": "npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c && npm publish",
+    "publish:rollup": "rm -rf dist && npx tailwindcss -i ./src/styles/styles.css -o ./dist/types/styles/styles.css && rollup -c && npm publish",
     "test:watch": "jest --watchAll ./src/components ./tests",
     "test:coverage": "jest --coverage"
   },
