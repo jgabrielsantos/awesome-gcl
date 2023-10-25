@@ -52,3 +52,19 @@ export type CheckboxClickPropTypes = {
   setChecked: React.Dispatch<React.SetStateAction<boolean>>
   checked: boolean
 }
+
+export type CreateRowMemoPropTypes = {
+  row: DataPropTypes
+  index: number
+  checked: boolean
+}
+
+export type UpdateRowMemoPropTypes = {
+  rowMemo: CreateRowMemoPropTypes
+  checkedArray: DataPropTypes[]
+}
+
+export type UpdateCheckedValuePropTypes = {
+  headerCheck: boolean
+  setChecked: React.Dispatch<React.SetStateAction<boolean>>
+}

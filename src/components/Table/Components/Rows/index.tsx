@@ -39,13 +39,13 @@ export const Row = ({
 
   return (
     <tr
-      id={`row-${hook.rowMemoed.index.toString()}`}
-      key={`row-${hook.rowMemoed.index}`}
+      id={`row-${hook.rowMemo.index.toString()}`}
+      key={`row-${hook.rowMemo.index}`}
       className={rowClass}
     >
       <td
-        id={`${hook.rowMemoed.index.toString()}-default`}
-        key={`${hook.rowMemoed.index}-default`}
+        id={`${hook.rowMemo.index.toString()}-default`}
+        key={`${hook.rowMemo.index}-default`}
         onClick={hook.dataWrapperOnClickHandler}
         className={dataWrapperClass}
       >
@@ -53,7 +53,7 @@ export const Row = ({
           <div>
             <Checkbox
               size='medium'
-              checked={hook.rowMemoed.checked}
+              checked={hook.rowMemo.checked}
               handleClick={hook.checkboxOnClickHandler}
             />
           </div>
@@ -61,9 +61,9 @@ export const Row = ({
         {headers.map(header => (
           <div
             className={dataClass}
-            key={`${hook.rowMemoed.index}-data-${header.id}`}
+            key={`${hook.rowMemo.index}-data-${header.id}`}
           >
-            {hook.rowMemoed.row[header.id]}
+            {hook.rowMemo.row[header.id]}
           </div>
         ))}
         <div
@@ -81,8 +81,8 @@ export const Row = ({
         </div>
       </td>
       <td
-        id={`${hook.rowMemoed.index.toString()}-details`}
-        key={`${hook.rowMemoed.index}-details`}
+        id={`${hook.rowMemo.index.toString()}-details`}
+        key={`${hook.rowMemo.index}-details`}
         className={detailsClass}
       >
         {details && details(row)}

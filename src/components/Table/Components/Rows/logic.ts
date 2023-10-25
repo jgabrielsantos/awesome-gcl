@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react"
-import { CheckboxClickPropTypes, RowClickPropTypes, UseRowPropTypes } from "./types"
+import { CheckboxClickPropTypes, RowClickPropTypes, CreateRowMemoPropTypes, UseRowPropTypes, UpdateRowMemoPropTypes, UpdateCheckedValuePropTypes } from "./types"
 
 export const rowOnClick = ({
   onRowClick,
@@ -16,6 +16,34 @@ export const checkboxOnClick = ({
   setChecked(!checked)
 }
 
+export const createRowMemo = ({
+  row,
+  index,
+  checked
+}: CreateRowMemoPropTypes) => () => ({
+  row,
+  index,
+  checked
+})
+
+export const updateCheckedValue = ({
+  headerCheck,
+  setChecked
+}: UpdateCheckedValuePropTypes) => () => {
+  setChecked(headerCheck)
+}
+
+export const updateRowMemo = ({
+  rowMemo,
+  checkedArray
+}: UpdateRowMemoPropTypes) => () => {
+  rowMemo.checked ?
+  checkedArray.push(rowMemo) :
+  checkedArray.splice(rowMemo.index, 1)
+
+  // checkedArray?.sort((a, b) => a.index - b.index)
+}
+
 export const useRows = ({
   row,
   index,
@@ -26,28 +54,26 @@ export const useRows = ({
   const [checked, setChecked] = useState(false)
   const [detailsOpen, setDetailsOpen] = useState(false)
 
-  const rowMemoed = useMemo(() => ({
+  const rowMemo = useMemo(createRowMemo({
     row,
     index,
     checked
   }), [checked])
 
-  useEffect(() => {
-    setChecked(headerCheck)
-  }, [headerCheck])
+  useEffect(updateCheckedValue({
+    headerCheck,
+    setChecked
+  }), [headerCheck])
 
-  useEffect(() => {
-    rowMemoed.checked ?
-    checkedArray?.push(rowMemoed) :
-    checkedArray?.splice(rowMemoed.index, 1)
-    
-    checkedArray?.sort((a, b) => a.index - b.index)
-  }, [rowMemoed.checked])
+  useEffect(updateRowMemo({
+    rowMemo,
+    checkedArray
+  }), [rowMemo.checked])
 
   return {
-    rowMemoed,
-    dataWrapperOnClickHandler: rowOnClick({onRowClick, row: rowMemoed.row }),
-    checkboxOnClickHandler: checkboxOnClick({ setChecked, checked: rowMemoed.checked }),
+    rowMemo,
+    dataWrapperOnClickHandler: rowOnClick({onRowClick, row: rowMemo.row }),
+    checkboxOnClickHandler: checkboxOnClick({ setChecked, checked: rowMemo.checked }),
     detailsOpen,
     setDetailsOpen
   }

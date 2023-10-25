@@ -24,7 +24,7 @@ export type TablePropTypes = {
   headers: HeaderPropTypes[]
   data: DataPropTypes[]
   onRowClick?: (row: DataPropTypes) => void
-  checkedArray?: DataPropTypes[]
+  checkedArray: DataPropTypes[]
   details?: (row: DataPropTypes) => React.ReactNode
   additionalClasses?: TableAdditionalClassesPropTypes
 }
