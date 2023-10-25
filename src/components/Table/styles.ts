@@ -1,32 +1,50 @@
 import Themes from "./themes";
-import { TableAdditionalClassesPropTypes } from "./types";
+import { TableComponentsEnum, TableConstructorPropTypes } from "./types";
 interface TableStyle {
-  buildStyleRules: () => Record<string, string>
+  buildStyleRules: () => Record<`${TableComponentsEnum}Class`, string>
 }
 
 export class TableStyles implements TableStyle {
-  private additionalClasses: TableAdditionalClassesPropTypes
+  private themes: Record<TableComponentsEnum, Map<string, string>> = {
+    table: Themes.table(),
+    tableHead: Themes.tableHead(),
+    headerRow: Themes.headerRow(),
+    hiddenIconRep: Themes.hiddenIconRep()
+  }
+  private additionalClasses: {
+    table: string[]
+    tableHead: string[]
+    headerRow: string[]
+    hiddenIconRep: string[]
+  }
 
-  constructor(additionalClasses: TableAdditionalClassesPropTypes) {
-    this.additionalClasses = additionalClasses
+  constructor({
+    additionalClasses
+  }: TableConstructorPropTypes) {
+    this.additionalClasses = {
+      table: additionalClasses?.table || [],
+      tableHead: additionalClasses?.tableHead || [],
+      headerRow: additionalClasses?.headerRow || [],
+      hiddenIconRep: additionalClasses?.hiddenIconRep || []
+    }
   }
 
   buildStyleRules() {
     const classes = {
       tableClass: [
-        ...Themes.table().values(),
+        ...this.themes.table.values(),
         ...this.additionalClasses.table
       ].join(' '),
       tableHeadClass: [
-        ...Themes.tableHead().values(),
+        ...this.themes.tableHead.values(),
         ...this.additionalClasses.tableHead
       ].join(' '),
       headerRowClass: [
-        ...Themes.headerRow().values(),
+        ...this.themes.headerRow.values(),
         ...this.additionalClasses.headerRow
       ].join(' '),
-      hiddenIconRepCLass: [
-        ...Themes.hiddenIconRep().values(),
+      hiddenIconRepClass: [
+        ...this.themes.hiddenIconRep.values(),
         ...this.additionalClasses.hiddenIconRep
       ].join(' ')
     }

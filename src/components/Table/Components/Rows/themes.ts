@@ -16,13 +16,12 @@ const row = () => new Map([
 ])
 
 // row main
-const dataWrapper = (hasClickFunction: boolean) => new Map([
+const dataWrapper = () => new Map([
   ['width', 'w-full'],
   ['display', 'flex'],
   ['align-items', 'items-center'],
   ['justify-content', 'justify-between'],
-  ['gap', 'gap-2.5'],
-  ['cursor', hasClickFunction ? 'cursor-pointer' : 'cursor-default'],
+  ['gap', 'gap-2.5']
 ])
 
 // data
@@ -42,15 +41,12 @@ const iconWrapper = () => new Map([
   ['padding', 'p-1.5'],
 
   // Hover state
-  ['hover-background-color', 'hover:bg-grayscale-5'],
+  ['hover-background-color', 'hover:bg-grayscale-5']
 ])
 
-const details = (isOpen: boolean) => new Map([
+const details = () => new Map([
   ['width', 'w-full'],
-  ['margin-top', isOpen ? 'mt-4' : 'mt-0'],
-  ['max-height', isOpen ? 'max-h-full' : 'max-h-0'],
   ['overflow', 'overflow-hidden'],
-  ['padding', isOpen ? 'p-4' : 'p-0'],
   ['transition-property', 'transition-all'],
   ['transition-durantion', 'duration-100'],
   ['transition-timing', 'ease-out'],

@@ -5,11 +5,20 @@ import { DataPropTypes, RowAdditionalClassesPropTypes } from "./Components/Rows/
 export type TableAdditionalClassesPropTypes = HeaderAdditionalClasses
 & RowAdditionalClassesPropTypes
 & {
-  table: string[]
-  tableHead: string[]
-  headerRow: string[]
-  hiddenIconRep: string[]
+  table?: string[]
+  tableHead?: string[]
+  headerRow?: string[]
+  hiddenIconRep?: string[]
 }
+
+export type TableConstructorPropTypes = {
+  additionalClasses?: TableAdditionalClassesPropTypes
+}
+
+export type TableComponentsEnum = 'table'
+| 'tableHead'
+| 'headerRow'
+| 'hiddenIconRep'
 
 export type TablePropTypes = {
   headers: HeaderPropTypes[]

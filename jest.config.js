@@ -6,5 +6,9 @@ module.exports = {
     ".+\\.(webp|svg)$": "<rootDir>/src/utils/mockImage.ts"
   },
   clearMocks: true,
-  setupFilesAfterEnv: ["jest-styled-components"]
+  setupFilesAfterEnv: ["jest-styled-components"],
+  transformIgnorePatterns: [
+    '/node_modules/',
+    '^.+\\.index\\.ts$'
+  ]
 };

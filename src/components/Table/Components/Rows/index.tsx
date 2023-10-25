@@ -6,7 +6,7 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../../../Checkbox";
 import { useRows } from "./logic";
 
-export const Rows = ({
+export const Row = ({
   checkedArray,
   headers,
   headerCheck,
@@ -14,13 +14,7 @@ export const Rows = ({
   index,
   onRowClick,
   details,
-  additionalClasses = {
-    row: [],
-    dataWrapper: [],
-    data: [],
-    details: [],
-    iconWrapper: []
-  }
+  additionalClasses
 }: RowPropTypes) => {
   const hook = useRows({
     row,
@@ -30,17 +24,18 @@ export const Rows = ({
     checkedArray
   })
 
-  const styles = new RowStyles(additionalClasses)
+  const styles = new RowStyles({
+    additionalClasses,
+    hasClickFunction: !!onRowClick,
+    isOpen: hook.detailsOpen
+  })
   const {
     rowClass,
     dataWrapperClass,
     dataClass,
     iconWrapperClass,
     detailsClass
-  } = styles.buildStyleRules({
-    hasClickFunction: !!onRowClick,
-    isOpen: hook.detailsOpen
-  })
+  } = styles.buildStyleRules()
 
   return (
     <tr

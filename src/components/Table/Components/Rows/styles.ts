@@ -1,44 +1,78 @@
 import Themes from "./themes";
-import { RowAdditionalClassesPropTypes, RowStyleClassPropTypes } from "./types";
+import { RowComponentsEnum, RowConstructorPropTypes } from "./types";
 
 interface RowStyle {
-  buildStyleRules: ({
-    hasClickFunction,
-    isOpen
-  }: RowStyleClassPropTypes) => Record<string, string>
+  buildStyleRules: () => Record<`${RowComponentsEnum}Class`, string>
 }
 
 export class RowStyles implements RowStyle {
-  private additionalClasses: RowAdditionalClassesPropTypes
-
-  constructor(additionalClasses: RowAdditionalClassesPropTypes) {
-    this.additionalClasses = additionalClasses
+  private hasClickFunction: boolean
+  private isOpen: boolean
+  private themes: Record<RowComponentsEnum, Map<string, string>> = {
+    row: Themes.row(),
+    dataWrapper: Themes.dataWrapper(),
+    data: Themes.data(),
+    iconWrapper: Themes.iconWrapper(),
+    details: Themes.details()
+  }
+  private additionalClasses: {
+    row: string[]
+    dataWrapper: string[]
+    data: string[]
+    details: string[]
+    iconWrapper: string[]
   }
 
-  buildStyleRules({
+  constructor({
+    additionalClasses,
     hasClickFunction,
     isOpen
-  }: RowStyleClassPropTypes) {
+  }: RowConstructorPropTypes) {
+    this.hasClickFunction = hasClickFunction
+    this.isOpen = isOpen
+    this.additionalClasses = {
+      row: additionalClasses?.row || [],
+      dataWrapper: additionalClasses?.dataWrapper || [],
+      data: additionalClasses?.data || [],
+      details: additionalClasses?.details || [],
+      iconWrapper: additionalClasses?.iconWrapper || []
+    }
+  }
+
+  private getHasClickFnRules() {
+    this.themes.dataWrapper.set('cursor', this.hasClickFunction ? 'cursor-pointer' : 'cursor-default')
+  }
+
+  private getIsOpenRules() {
+    this.themes.details.set('margin-top', this.isOpen ? 'mt-4' : 'mt-0')
+    this.themes.details.set('max-height', this.isOpen ? 'max-h-full' : 'max-h-0')
+    this.themes.details.set('padding', this.isOpen ? 'p-4' : 'p-0')
+  }
+
+  buildStyleRules() {
+    this.getHasClickFnRules()
+    this.getIsOpenRules()
+
     const classes = {
       rowClass: [
-        ...Themes.row().values(),
+        ...this.themes.row.values(),
         ...this.additionalClasses.row
       ].join(' '),
       dataWrapperClass: [
-        ...Themes.dataWrapper(hasClickFunction).values(),
-        ...this.additionalClasses.data
+        ...this.themes.dataWrapper.values(),
+        ...this.additionalClasses.dataWrapper
       ].join(' '),
       dataClass: [
-        ...Themes.data().values(),
+        ...this.themes.data.values(),
         ...this.additionalClasses.data
       ].join(' '),
       iconWrapperClass: [
-        ...Themes.iconWrapper().values(),
-        ...this.additionalClasses.data
+        ...this.themes.iconWrapper.values(),
+        ...this.additionalClasses.iconWrapper
       ].join(' '),
       detailsClass: [
-        ...Themes.details(isOpen).values(),
-        ...this.additionalClasses.data
+        ...this.themes.details.values(),
+        ...this.additionalClasses.details
       ].join(' ')
     }
 

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { TablePropTypes } from "./types";
 import { Checkbox } from "../Checkbox";
-import { Headers, Rows } from "./Components";
+import { Header, Row } from "./Components";
 import { TableStyles } from "./styles";
 
 export const Table = ({
@@ -10,26 +10,16 @@ export const Table = ({
   checkedArray,
   onRowClick,
   details,
-  additionalClasses = {
-    table: [],
-    tableHead: [],
-    headerRow: [],
-    hiddenIconRep: [],
-    header: [],
-    row: [],
-    dataWrapper: [],
-    data: [],
-    details: [],
-    iconWrapper: [],
-    icon: []
-  },
+  additionalClasses
 }: TablePropTypes) => {
-  const styles = new TableStyles(additionalClasses)
+  const styles = new TableStyles({
+    additionalClasses
+  })
   const {
     tableClass,
     tableHeadClass,
     headerRowClass,
-    hiddenIconRepCLass
+    hiddenIconRepClass
   } = styles.buildStyleRules()
   const [headerCheck, setHeaderCheck] = useState(false)
 
@@ -61,19 +51,19 @@ export const Table = ({
             </th>
           )}
           {headers.map(header => (
-            <Headers
+            <Header
               id={header.id}
               label={header.label}
               additionalClasses={{
-                header: additionalClasses.header,
-                icon: additionalClasses.icon
+                header: additionalClasses?.header || [],
+                icon: additionalClasses?.icon || []
               }}
             />
           ))}
           {details && (
             <th>
               <div
-                className={hiddenIconRepCLass}
+                className={hiddenIconRepClass}
               />
             </th>
           )}
@@ -82,7 +72,7 @@ export const Table = ({
 
       <tbody>
         {data.map((row, index) => (
-          <Rows
+          <Row
             headerCheck={headerCheckMemoed.headerCheck}
             headers={headers}
             row={row}
@@ -91,11 +81,11 @@ export const Table = ({
             details={details}
             checkedArray={checkedArray}
             additionalClasses={{
-              row: additionalClasses.row,
-              dataWrapper: additionalClasses.dataWrapper,
-              data: additionalClasses.data,
-              details: additionalClasses.details,
-              iconWrapper: additionalClasses.iconWrapper
+              row: additionalClasses?.row || [],
+              dataWrapper: additionalClasses?.dataWrapper || [],
+              data: additionalClasses?.data || [],
+              details: additionalClasses?.details || [],
+              iconWrapper: additionalClasses?.iconWrapper || []
             }}
           />
         ))}

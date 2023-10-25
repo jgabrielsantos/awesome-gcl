@@ -5,17 +5,24 @@ export type DataPropTypes = Record<string, any> & {
 }
 
 export type RowAdditionalClassesPropTypes = {
-  row: string[]
-  dataWrapper: string[]
-  data: string[]
-  details: string[]
-  iconWrapper: string[]
+  row?: string[]
+  dataWrapper?: string[]
+  data?: string[]
+  details?: string[]
+  iconWrapper?: string[]
 }
 
-export type RowStyleClassPropTypes = {
+export type RowConstructorPropTypes = {
+  additionalClasses?: RowAdditionalClassesPropTypes
   hasClickFunction: boolean
   isOpen: boolean
 }
+
+export type RowComponentsEnum = 'row'
+| 'dataWrapper'
+| 'data'
+| 'iconWrapper'
+| 'details'
 
 export type RowPropTypes = Pick<
 TablePropTypes, 'headers'

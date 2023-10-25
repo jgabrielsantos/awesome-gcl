@@ -1,14 +1,14 @@
 import { useEffect, useMemo, useState } from "react"
 import { CheckboxClickPropTypes, RowClickPropTypes, UseRowPropTypes } from "./types"
 
-const rowOnClick = ({
+export const rowOnClick = ({
   onRowClick,
   row
 }: RowClickPropTypes) => () => {
   if(onRowClick) onRowClick(row)
 }
 
-const checkboxOnClick = ({
+export const checkboxOnClick = ({
   setChecked,
   checked
 }: CheckboxClickPropTypes) => (event: React.MouseEvent<Element, MouseEvent>) => {
@@ -25,7 +25,7 @@ export const useRows = ({
 }: UseRowPropTypes) => {
   const [checked, setChecked] = useState(false)
   const [detailsOpen, setDetailsOpen] = useState(false)
-  
+
   const rowMemoed = useMemo(() => ({
     row,
     index,

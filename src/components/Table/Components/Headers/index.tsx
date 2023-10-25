@@ -2,15 +2,12 @@ import React from "react"
 import { HeaderStyles } from "./styles"
 import { HeaderPropTypes } from "./types"
 
-export const Headers = ({
+export const Header = ({
   id,
   label,
-  additionalClasses = {
-    header: [],
-    icon: []
-  }
+  additionalClasses
 }: HeaderPropTypes) => {
-  const styles = new HeaderStyles(additionalClasses)
+  const styles = new HeaderStyles({ additionalClasses })
   const { headerClass, iconClass } = styles.buildStyleRules()
 
   return (

@@ -1,25 +1,40 @@
 import Themes from "./themes"
-import { HeaderAdditionalClasses } from "./types"
+import {
+  HeaderComponentsEnum,
+  HeaderConstructorPropTypes
+} from "./types"
 
 interface HeaderStyle { 
-  buildStyleRules: () => Record<string, string>
+  buildStyleRules: () => Record<`${HeaderComponentsEnum}Class`, string>
 }
 
 export class HeaderStyles implements HeaderStyle {
-  private additionalClasses: HeaderAdditionalClasses
+  private themes: Record<HeaderComponentsEnum, Map<string, string>> = {
+    header: Themes.header(),
+    icon: Themes.icon(),
+  }
+  private additionalClasses: {
+    header: string[]
+    icon: string[]
+  }
 
-  constructor(additionalClasses: HeaderAdditionalClasses) {
-    this.additionalClasses = additionalClasses
+  constructor({
+    additionalClasses
+  }: HeaderConstructorPropTypes) {
+    this.additionalClasses = {
+      header: additionalClasses?.header || [],
+      icon: additionalClasses?.icon || []
+    }
   }
 
   buildStyleRules() {
     const classes = {
       headerClass: [
-        ...Themes.header().values(),
+        ...this.themes.header.values(),
         ...this.additionalClasses.header
       ].join(' '),
       iconClass: [
-        ...Themes.icon().values(),
+        ...this.themes.icon.values(),
         ...this.additionalClasses.icon
       ].join(' ')
     }
