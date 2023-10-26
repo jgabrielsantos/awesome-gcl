@@ -10,7 +10,7 @@ const wrapper = ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => new Map([
   ['background-color', 'bg-transparent'],
   ['align-items', 'items-center'],
   ['justify-content', 'justify-center'],
-  ['z-index', 'z-0']
+  ['z-index', 'z-[9999]']
 ])
 
 const dialog = ({ isOpen }: Pick<ModalPropTypes, 'isOpen'>) => new Map([
