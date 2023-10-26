@@ -26,7 +26,7 @@ export type IconButtonConstructorPropTypes = Pick<IconButtonComponentPropTypes,
 >
 
 export type IconButtonComponentPropTypes = {
-  children: React.ReactNode
+  children: React.ReactNode | Element
   type: IconButtonTypesEnum
   size: GSizeEnum
   theme: IconButtonThemesEnum

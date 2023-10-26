@@ -29,14 +29,16 @@ export type SelectConstructorPropTypes = {
   isOpen: boolean
 }
 
+type ItemPropTypes = Record<string, any> & {
+  label: string
+}
+
 export type SelectPropTypes = {
   label?: string
-  selected?: Record<string, any> & {
-    label: string
-  }
+  selected?: ItemPropTypes
   placeholder?: string
-  options: Record<string, any>[]
-  onChange: (option: Record<string, any>) => void
+  options: ItemPropTypes[]
+  onChange: (option: ItemPropTypes) => void
   icon?: IconDefinition
   disabled?: boolean
   size: GSizeEnum
