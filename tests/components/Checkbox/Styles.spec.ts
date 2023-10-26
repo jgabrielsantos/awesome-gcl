@@ -159,6 +159,26 @@ describe('Checkbox styles', () => {
         }))
       })
 
+      describe('Sizes', () => {
+        it('Should pass large size class', () => testTheme({
+          component: 'icon',
+          size: 'large',
+          sizeComponent: 'icon'
+        }))
+
+        it('Should pass medium size class', () => testTheme({
+          component: 'icon',
+          size: 'medium',
+          sizeComponent: 'icon'
+        }))
+
+        it('Should pass small size class', () => testTheme({
+          component: 'icon',
+          size: 'small',
+          sizeComponent: 'icon'
+        }))
+      })
+
       describe('Additional Classes', () => {
         it('Should pass additional Classes', () => testTheme({
           component: 'icon',
