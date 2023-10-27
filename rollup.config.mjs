@@ -30,6 +30,15 @@ export default [
     ],
   },
   {
+    input: 'tailwind.config.js',
+    output: [
+      {
+        file: 'dist/tailwind.config.js',
+        format: 'esm'
+      }
+    ]
+  },
+  {
     input: "dist/types/src/index.d.ts",
     external: [
       /\.css$/

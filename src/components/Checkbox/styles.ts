@@ -77,6 +77,7 @@ export class CheckboxStyles implements ICheckboxStyle {
       ].join(' '),
       iconClass: [
         ...this.getThemeRules('icon').values(),
+        ...this.getSizeRules('icon').values(),
         ...this.additionalClasses.icon
       ].join(' ')
     }

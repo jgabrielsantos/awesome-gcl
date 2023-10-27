@@ -21,33 +21,59 @@ import { Button } from 'awesome-gcl'
 import { Button } from 'awesome-gcl'
 ```
 
-## Components
-All components are built based on the styled-components library!
+**Remix:**
+```jsx
+'use client'
+import { Button } from 'awesome-gcl'
+```
+
+## Components directory
 - Button
+- Icon Button
+- Text Button
 - Checkbox
 - Figure
 - Input
 - Modal
 - Select
-- Toast
+- Select Multi
+- Table
+- Toast List
 - User
 
-### Customize a component
+## Customize a component
 Add new css rules or overwrite the existing ones
 
-**Import the [styled components](https://styled-components.com/docs/basics#installation) library**
+As GCL build its components with Tailwind CSS, it gets easier to custom the styles by simply passing custom css classes to the additional classes object available.
 
+### Custom classes
 ```jsx
-import styled from 'styled-components'
-import { Button } from 'awesgome-gcl'
+.modal-wrapper {
+  z-index: 999;
+}
 
-const customButton = styled(Button)`
-  width: 100%;
-`
+.modal-dialog {
+  background-color: beige;
+}
 ```
 
-## Customize the color set
-### Default
+### Component
+```jsx
+<Modal
+  isOpen={true}
+  additionalClasses={{
+    wrapper: [
+      'modal-wrapper'
+    ],
+    dialog: [
+      'modal-dialog'
+    ]
+  }}
+>
+</Modal>
+```
+
+## Library color set
 ```jsx
 let colors = {
   white: {
@@ -88,28 +114,6 @@ let colors = {
       50: '#DE1C22',
       5: '#FFD6D7',
     },
-  }
-}
-```
-### Take advange of the default colors found in the theme file
-```jsx
-import { setColor, colors } from 'awesome-gcl'
-
-const customColor = {
-  primary = {
-    ...colors.primary,
-    100: 'change this default color'
-  }
-}
-```
-
-### Add new colors
-```jsx
-import { setColor } from 'awesome-gcl'
-
-const customColor = {
-  black: {
-    100: '#000000'
   }
 }
 ```
