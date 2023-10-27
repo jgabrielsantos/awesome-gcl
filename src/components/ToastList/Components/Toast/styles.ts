@@ -31,11 +31,20 @@ export class ToastStyles implements ToastStyle {
   }
 
   private getBackgroundRules(): void {
-    const background = this.useCase === 'primary' ?
-    `bg-${this.useCase}-5` :
-    `bg-support-${this.useCase}-5`
-
-    this.themes.toast.set('background-color', background)
+    switch(this.useCase) {
+      case 'primary':
+        this.themes.toast.set('background-color', 'bg-primary-5')
+        break;
+      case 'success':
+        this.themes.toast.set('background-color', 'bg-support-success-5')
+        break;
+      case 'alert':
+        this.themes.toast.set('background-color', 'bg-support-alert-5')
+        break;
+      case 'warning':
+        this.themes.toast.set('background-color', 'bg-support-warning-5')
+        break;
+    }
   }
 
   private getDisplayRules(): void {
