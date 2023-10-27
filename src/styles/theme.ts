@@ -1,4 +1,4 @@
-export let colors = {
+const colors = {
   transparent: 'transparent',
   white: {
     100: '#FFFFFF',
@@ -41,9 +41,6 @@ export let colors = {
   }
 }
 
-export const setColor = (customColor: Record<string, any>) => {
-  colors = {
-    ...colors,
-    ...customColor
-  }
+export default {
+  colors
 }

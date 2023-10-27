@@ -155,7 +155,8 @@ describe('Checkbox styles', () => {
     describe('Icon', () => {
       describe('Themes', () => {
         it('Should pass icon class', () => testTheme({
-          component: 'icon'
+          component: 'icon',
+          sizeComponent: 'icon'
         }))
       })
 
@@ -182,6 +183,7 @@ describe('Checkbox styles', () => {
       describe('Additional Classes', () => {
         it('Should pass additional Classes', () => testTheme({
           component: 'icon',
+          sizeComponent: 'icon',
           additionalClasses: {
             icon: [
               'outline-0'

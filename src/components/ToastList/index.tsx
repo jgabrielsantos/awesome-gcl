@@ -17,6 +17,7 @@ export const ToastList = ({
     >
       {toastList.map((toast) => (
         <Toast
+          key={toast.id}
           id={toast.id}
           useCase={toast.useCase}
           isOpen={toast.isOpen}

@@ -52,6 +52,7 @@ export const Table = ({
           )}
           {headers.map(header => (
             <Header
+              key={header.id}
               id={header.id}
               label={header.label}
               additionalClasses={{
@@ -73,6 +74,7 @@ export const Table = ({
       <tbody>
         {data.map((row, index) => (
           <Row
+            key={index}
             headerCheck={headerCheckMemoed.headerCheck}
             headers={headers}
             row={row}
