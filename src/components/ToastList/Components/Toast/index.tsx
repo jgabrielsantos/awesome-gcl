@@ -16,7 +16,6 @@ export const Toast = ({
 }: Readonly<ToastComponentPropTypes>) => {
   const style = new ToastStyles({additionalClasses, useCase, isOpen})
   const { toastClass } = style.buildStyleRules()
-  console.log(toastClass)
 
   return (
     <output

@@ -1,6 +1,6 @@
 import { GSizeEnum } from "../types"
 
-type InputTypePropTypes = 'text'
+type InputTypesEnum = 'text'
 | 'password'
 | 'email'
 | 'tel'
@@ -33,7 +33,7 @@ export type InputAdditionalClassesPropTypes = {
 }
 
 export type InputPropTypes = {
-  type: InputTypePropTypes
+  type: InputTypesEnum
   value: string
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
   onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
@@ -48,12 +48,12 @@ export type InputPropTypes = {
 }
 
 export type UseInputPropTypes = {
-  type: InputTypePropTypes
+  type: InputTypesEnum
   showPassword: boolean
 }
 
 export type ShowPasswordValuePropTypes = {
   passwordVisible: boolean
   setPasswordVisible: React.Dispatch<React.SetStateAction<boolean>>
-  setType: React.Dispatch<React.SetStateAction<InputTypePropTypes>>
+  setType: React.Dispatch<React.SetStateAction<InputTypesEnum>>
 }

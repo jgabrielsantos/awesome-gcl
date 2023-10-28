@@ -60,7 +60,7 @@ describe('Toast styles', () => {
 
         it('Should pass bg-support-fail-5 class', () => testTheme({
           componentName: 'toast',
-          useCase: 'fail'
+          useCase: 'alert'
         }))
 
         it('Should pass bg-support-warning-5 class', () => testTheme({

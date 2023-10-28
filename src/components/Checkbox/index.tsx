@@ -6,31 +6,31 @@ import { CheckboxPropTypes } from './types'
  * Checkbox component
  * 
  * @param {CheckboxPropTypes} props
- * @param {boolean} props.checked - Determines whether the component should render the mark icon
- * @param {GSizeEnum} props.size - Large, Medium or Small size for box and icon
- * @param {React.MouseEventHandler<HTMLDivElement>} [props.handleClick] - Wrapper onClick function
- * @param {boolean} [props.disabled = false] - Defines the checkbox background-color and disable function
- * @param {string} [props.label] - Determines the value of label and if it should be rendered
- * @param {CheckboxAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tah
- * @param {string[]} [additionalClasses.wrapper] - CSS classes for checkbox-wrapper div HTML tag
- * @param {string[]} [additionalClasses.input] - CSS classes for checkbox-input input HTML tag
- * @param {string[]} [additionalClasses.label] - CSS classes for checkbox-label label HTML tag
- * @param {string[]} [additionalClasses.icon] - CSS classes for checkbox-mark svg HTML tag
+ * @property {boolean} props.checked - Determines whether the component should render the mark icon
+ * @property {GSizeEnum} props.size - Defines input and icon sizes and label font size
+ * @property {React.MouseEventHandler<HTMLDivElement>} [props.handleClick] - Wrapper onClick function
+ * @property {boolean} [props.disabled = false] - Defines the checkbox background-color and disable function
+ * @property {string} [props.label] - Determines the value of label and if it should be rendered
+ * @property {CheckboxAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tag
+ * @property {string[]} [additionalClasses.wrapper] - CSS classes for checkbox-wrapper div HTML tag
+ * @property {string[]} [additionalClasses.input] - CSS classes for checkbox-input input HTML tag
+ * @property {string[]} [additionalClasses.label] - CSS classes for checkbox-label label HTML tag
+ * @property {string[]} [additionalClasses.icon] - CSS classes for checkbox-mark svg HTML tag
  * @example
  * <Checkbox
  *  checked={isChecked}
  *  size='medium'
  *  handleClick={() => setIsChecked(!isChecked)}
  *  disabled={false}
- *  additionalClasses={
- *    wrapper: ['white-background'],
- *    input: ['no-border'],
+ *  additionalClasses = {{
+ *    wrapper: ['custom-background-color'],
+ *    input: ['custom-input-border'],
  *    label: ['large-font-size'],
- *    icon: ['black-icon-color'],
- *   }
+ *    icon: ['custom-background-constrast'],
+ *   }}
  * />
  * 
- * @returns {Checkbox}
+ * @returns {Checkbox} JXS Element
  */
 
 export const Checkbox = ({
