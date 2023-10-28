@@ -30,7 +30,7 @@ import { IconButtonComponentPropTypes } from './types'
  *  </svg>
  * </IconButton>
  * 
- * @returns {Button} JSX Element
+ * @returns {JSX.Element} Icon Button
  */
 
 export const IconButton = ({

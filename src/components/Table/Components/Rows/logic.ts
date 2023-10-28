@@ -40,8 +40,6 @@ export const updateRowMemo = ({
   rowMemo.checked ?
   checkedArray.push(rowMemo) :
   checkedArray.splice(rowMemo.index, 1)
-
-  // checkedArray?.sort((a, b) => a.index - b.index)
 }
 
 export const useRows = ({

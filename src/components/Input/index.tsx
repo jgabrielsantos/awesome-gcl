@@ -55,7 +55,7 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons"
  *  }}
  * />
  * 
- * @returns {Input} JSX Element
+ * @returns {JSX.Element} Input
  */
 
 export const Input = ({

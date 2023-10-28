@@ -28,7 +28,7 @@ import { ButtonComponentPropTypes } from './types'
  *  Click me!
  * </Button>
  * 
- * @returns {Button} JSX Element
+ * @returns {JSX.Element} Button
  */
 
 export const Button = ({

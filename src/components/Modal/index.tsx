@@ -22,14 +22,14 @@ import { ModalStyles } from "./styles";
  *  <p>Modal information</p>
  * </Modal>
  * 
- * @returns {Checkbox} JXS Element
+ * @returns {JSX.Element} Modal
  */
 
 export const Modal = ({
   isOpen,
   children,
   additionalClasses
-}: ModalPropTypes) => {
+}: ModalPropTypes): JSX.Element => {
   const styles = new ModalStyles({
     additionalClasses,
     isOpen

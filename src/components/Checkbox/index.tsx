@@ -30,7 +30,7 @@ import { CheckboxPropTypes } from './types'
  *   }}
  * />
  * 
- * @returns {Checkbox} JXS Element
+ * @returns {JSX.Element} Checkbox
  */
 
 export const Checkbox = ({

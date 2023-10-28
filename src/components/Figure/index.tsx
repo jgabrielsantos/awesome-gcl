@@ -25,7 +25,7 @@ import { FigurePropTypes } from './types'
  *  }}
  * />
  * 
- * @returns {Figure} - JSX Element
+ * @returns {JSX.Element} - Figure
  */
 
 export const Figure = ({
