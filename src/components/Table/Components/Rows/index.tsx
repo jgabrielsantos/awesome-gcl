@@ -6,6 +6,70 @@ import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { Checkbox } from "../../../Checkbox";
 import { useRows } from "./logic";
 
+/**
+ * Table Row component
+ * 
+ * @param {RowPropTypes} props
+ * @property {DataPropTypes[]} checkedArray - Determines which rows change a marked checkbox
+ * @property {HeaderPropTypes[]} headers - Determines what data should be rendered based on the header
+ * @property {boolean} headerChecked - Determines if all rows have the marked checkbox
+ * @property {DataPropTypes} row - Information to be passed
+ * @property {number} index - Determines if all rows have the marked checkbox
+ * @property {function} onRowClick - Function to retrieve row information
+ * @param {DataPropTypes} onRowClick.row - Row clicked
+ * @property {function} details - Function to render a ReactNode based on the row information
+ * @param {DataPropTypes} details.row - Row clicked
+ * @property {RowAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tah
+ * @property {string[]} [additionalClasses.row] - CSS classes for row tr HTML tag
+ * @property {string[]} [additionalClasses.dataWrapper] - CSS classes for data wrapper td HTML tag
+ * @property {string[]} [additionalClasses.data] - CSS classes for data div th HTML tag
+ * @property {string[]} [additionalClasses.details] - CSS classes for details td HTML tag
+ * @property {string[]} [additionalClasses.iconWrapper] - CSS classes for icon wrapper div th HTML tag
+ * @example
+ * <Row
+ *  checkedArray={[]}
+ *  headers={[
+ *    {
+ *      id: 'name',
+ *      label: 'User Name'
+ *    },
+ *    {
+ *      id: 'email',
+ *      label: 'User Email'
+ *    },
+ *    {
+ *      id: 'phone',
+ *      label: 'Phone Number'
+ *    },
+ *  ]}
+ *  headerCheck={false}
+ *  row={
+ *   {
+ *     name: 'Joao',
+ *     email: 'joao@email.com',
+ *     phone: '6046004574',
+ *     details: 'Details'
+ *   }
+ *  }
+ *  index={0}
+ *  onRowClick={(row) => window.alert(`${row.name} row`)}
+ *  details={(row: TableRowType) => (
+ *    <p>
+ *      {`${row.name}-${row.details}`}
+ *    </p>
+ *  )}
+ *  additionalClasses={{
+ *    row: ['gray-background'],
+ *    dataWrapper: ['red-background'],
+ *    data: ['large-font-size'],
+ *    details: ['yellow-background'],
+ *    iconWrapper: ['blue-border']
+ *  }}
+ * />
+ * 
+ * @returns {JSX.Element} - Row
+ */
+
 export const Row = ({
   checkedArray,
   headers,

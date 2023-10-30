@@ -1,6 +1,6 @@
 export type ToastUseCaseEnums = 'primary'
 | 'success'
-| 'fail'
+| 'alert'
 | 'warning'
 
 export type ToastAdditionalClassesPropTypes = {
