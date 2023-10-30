@@ -33,6 +33,8 @@ export type ButtonComponentPropTypes = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   additionalClasses?: ButtonAdditionalClassesPropTypes
   disabled?: boolean
+  name?: string
+  value?: string
 }
 
 export type ButtonComponentsEnum = 'button'

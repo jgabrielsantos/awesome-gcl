@@ -29,6 +29,8 @@ export type TextButtonComponentPropTypes = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   additionalClasses?: TextButtonAdditionalClassesPropTypes
   disabled?: boolean
+  name?: string
+  value?: string
 }
 
 export type TextButtonComponentsEnum = 'button'

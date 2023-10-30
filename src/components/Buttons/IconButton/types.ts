@@ -33,6 +33,8 @@ export type IconButtonComponentPropTypes = {
   handleClick: React.MouseEventHandler<HTMLButtonElement>
   additionalClasses?: IconButtonAdditionalClassesPropTypes
   disabled?: boolean
+  name?: string
+  value?: string
 }
 
 export type IconButtonComponentsEnum = 'button'
