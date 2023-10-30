@@ -14,6 +14,9 @@ import { HeaderPropTypes } from "./types"
  * <Header
  *  id='name'
  *  label='User Name'
+ *  additionalClasses={{
+ *    [header: 'font-size-large']
+ *  }}
  * />
  * 
  * @returns {JSX.Element} - Header

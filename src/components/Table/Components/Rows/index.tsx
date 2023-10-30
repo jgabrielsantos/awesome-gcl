@@ -16,9 +16,9 @@ import { useRows } from "./logic";
  * @property {DataPropTypes} row - Information to be passed
  * @property {number} index - Determines if all rows have the marked checkbox
  * @property {function} onRowClick - Function to retrieve row information
- * @property {DataPropTypes} onRowClick.row - Row clicked
+ * @param {DataPropTypes} onRowClick.row - Row clicked
  * @property {function} details - Function to render a ReactNode based on the row information
- * @property {DataPropTypes} details.row - Row clicked
+ * @param {DataPropTypes} details.row - Row clicked
  * @property {RowAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tah
  * @property {string[]} [additionalClasses.row] - CSS classes for row tr HTML tag
  * @property {string[]} [additionalClasses.dataWrapper] - CSS classes for data wrapper td HTML tag
