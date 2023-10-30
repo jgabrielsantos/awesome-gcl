@@ -12,6 +12,8 @@ import { IconButtonComponentPropTypes } from './types'
  * @property {IconButtonThemesEnum} props.theme - Defines background color, border and text color
  * @property {React.MouseEventHandler<HTMLButtonElement>} props.handleClick - Function triggered by Mouse Evenet
  * @property {boolean} [props.disabled] - Blocks Mouse Event and change background-color
+ * @property {boolean} [props.name]
+ * @property {boolean} [props.value]
  * @property {IconButtonAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tag
  * @property {string[]} [additionalClasses.button] - CSS classes for button div HTML tag
  * @example
@@ -21,6 +23,8 @@ import { IconButtonComponentPropTypes } from './types'
  *  theme='primary'
  *  handleClick={() => window.alert('Awesome GCL button was clicked')}
  *  disabled={false}
+ *  name='buttonIdentifier'
+ *  value='clicked'
  *  additionalClasses={{
  *    button: ['button-custom-border']
  *  }}
@@ -38,6 +42,8 @@ export const IconButton = ({
   type,
   size,
   theme,
+  name,
+  value,
   handleClick,
   disabled = false,
   additionalClasses
@@ -55,6 +61,8 @@ export const IconButton = ({
       type={type}
       onClick={handleClick}
       disabled={disabled}
+      name={name}
+      value={value}
       className={buttonClass}
       data-testid='awesome-gcl-button-component'
     >

@@ -12,6 +12,8 @@ import { TextButtonComponentPropTypes } from './types'
  * @property {TextButtonThemesEnum} props.theme - Defines background color, border and text color
  * @property {React.MouseEventHandler<HTMLButtonElement>} props.handleClick - Function triggered by Mouse Evenet
  * @property {boolean} [props.disabled] - Blocks Mouse Event and change background-color
+ * @property {boolean} [props.name]
+ * @property {boolean} [props.value]
  * @property {TextButtonAdditionalClassesPropTypes} [props.additionalClasses] - Object for additional css classes to each HTML tag
  * @property {string[]} [additionalClasses.button] - CSS classes for button div HTML tag
  * @example
@@ -21,6 +23,8 @@ import { TextButtonComponentPropTypes } from './types'
  *  theme='primary'
  *  handleClick={() => window.alert('Awesome GCL button was clicked')}
  *  disabled={false}
+ *  name='buttonIdentifier'
+ *  value='clicked'
  *  additionalClasses={{
  *    button: ['button-custom-border']
  *  }}
@@ -38,6 +42,8 @@ export const TextButton = ({
   theme,
   handleClick,
   disabled = false,
+  name,
+  value,
   additionalClasses
 }: Readonly<TextButtonComponentPropTypes>) => {
   const styles = new TextButtonStyles({
@@ -52,6 +58,8 @@ export const TextButton = ({
       type={type}
       onClick={handleClick}
       disabled={disabled}
+      name={name}
+      value={value}
       className={buttonClass}
       data-testid='awesome-gcl-button-component'
     >
