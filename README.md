@@ -2,7 +2,7 @@
 
 Foundation React UI components for shipping new projects faster
 
-## Instalation
+## Installation
 
 ```bash
 npm i awesome-gcl
