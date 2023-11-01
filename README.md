@@ -23,7 +23,15 @@ import { Button } from 'awesome-gcl'
 
 **Remix:**
 ```jsx
-'use client'
+// remix.config.js
+export default {
+  ...,
+  serverDependenciesToBundle: [
+    /awesome-gcl/
+  ]
+}
+
+// app/routes/route.tsx
 import { Button } from 'awesome-gcl'
 ```
 
