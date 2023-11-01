@@ -1,7 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 const Theme = require('./src/styles/theme')
 
-module.exports = {
+export default {
   content: [
     './src/**/*.{ts, tsx, html, js, jsx}'
   ],
