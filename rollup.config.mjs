@@ -1,5 +1,4 @@
 import resolve from "@rollup/plugin-node-resolve";
-import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
 import peerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
@@ -14,7 +13,7 @@ export default [
     ],
     output: [
       {
-        file: packageJson.module,
+        file: packageJson.main,
         format: "esm",
         sourcemap: true,
       },
@@ -24,7 +23,6 @@ export default [
       resolve({
         browser: true,
       }),
-      commonjs(),
       typescript({ tsconfig: "./tsconfig.json" }),
       cssOnly(),
     ],

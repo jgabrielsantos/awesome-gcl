@@ -2,7 +2,7 @@
 
 Foundation React UI components for shipping new projects faster
 
-## Instalation
+## Installation
 
 ```bash
 npm i awesome-gcl
@@ -23,7 +23,15 @@ import { Button } from 'awesome-gcl'
 
 **Remix:**
 ```jsx
-'use client'
+// remix.config.js
+export default {
+  ...,
+  serverDependenciesToBundle: [
+    /awesome-gcl/
+  ]
+}
+
+// app/routes/route.tsx
 import { Button } from 'awesome-gcl'
 ```
 
@@ -117,3 +125,4 @@ let colors = {
   }
 }
 ```
+![Color set visualization](./assets/images/colorSet.png)
