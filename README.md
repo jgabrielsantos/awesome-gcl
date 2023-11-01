@@ -125,4 +125,4 @@ let colors = {
   }
 }
 ```
-![Color set visualisation] (./assets/images/colorSet.png)
+![Color set visualization](./assets/images/colorSet.png)
