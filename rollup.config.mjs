@@ -1,5 +1,6 @@
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
+import cjs from '@rollup/plugin-commonjs'
 import dts from "rollup-plugin-dts";
 import peerDepsExternalPlugin from "rollup-plugin-peer-deps-external";
 import cssOnly from 'rollup-plugin-css-only'
@@ -25,6 +26,7 @@ export default [
       }),
       typescript({ tsconfig: "./tsconfig.json" }),
       cssOnly(),
+      cjs()
     ],
   },
   {
