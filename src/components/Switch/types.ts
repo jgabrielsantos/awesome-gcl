@@ -3,7 +3,7 @@ import { GSizeEnum } from "../types"
 export type SwitchPropTypes = {
   size: GSizeEnum
   checked: boolean
-  handleClick: React.MouseEventHandler<HTMLDivElement>
+  handleClick: () => void
   label?: string
   disabled?: boolean
   additionalClasses?: SwitchAdditionalClasses
@@ -17,6 +17,7 @@ export type SwitchComponentsEnum = 'wrapper'
 
 export type SwitchSizeComponentsEnum = 'wrapper'
 | 'label'
+| 'switchWrapper'
 | 'span'
 
 export type SwitchAdditionalClasses = {

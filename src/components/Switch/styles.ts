@@ -56,6 +56,8 @@ export class SwitchStyles implements SwitchStyle {
 
   private applyDisabledRules() {
     if(this.isDisabled) {
+      this.themes.switchWrapper.set('cursor', 'cursor-not-allowed')
+      this.themes.switchWrapper.set('hover-border-color', 'hover:border-transparent')
       this.themes.span.set('cursor', 'cursor-not-allowed')
       this.themes.span.set('background-color', 'bg-grayscale-5')
       this.themes.span.set('before-background-color', 'bg-grayscale-60')
@@ -78,6 +80,7 @@ export class SwitchStyles implements SwitchStyle {
       ].join(' '),
       switchWrapperClass: [
         ...this.themes.switchWrapper.values(),
+        ...this.getComponentSizeRules('switchWrapper').values(),
         ...this.additionalClasses.switchWrapper
       ].join(' '),
       inputClass: [

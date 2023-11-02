@@ -37,8 +37,8 @@ export const Switch = ({
 
   return (
     <div
+      onClick={label !== undefined ? handleClick : undefined}
       className={wrapperClass}
-      onClick={handleClick}
     >
       {label !== undefined && (
         <label
@@ -48,6 +48,10 @@ export const Switch = ({
         </label>
       )}
       <label
+        onClick={(event) => {
+          event.stopPropagation()
+          handleClick
+        }}
         className={switchWrapperClass}
       >
         <input

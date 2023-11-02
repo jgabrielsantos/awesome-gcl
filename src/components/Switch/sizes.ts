@@ -5,6 +5,10 @@ const large = () => ({
   label: new Map([
     ['font-size', 'text-base']
   ]),
+  switchWrapper: new Map([
+    ['min-width', 'min-w-[52px]'],
+    ['min-height', 'min-h-[32px]'],
+  ]),
   span: new Map([
     ['width', 'w-11'],
     ['height', 'h-6'],
@@ -19,6 +23,10 @@ const medium = () => ({
   ]),
   label: new Map([
     ['font-size', 'text-sm']
+  ]),
+  switchWrapper: new Map([
+    ['min-width', 'min-w-[44px]'],
+    ['min-height', 'min-h-[28px]'],
   ]),
   span: new Map([
     ['width', 'w-9'],
@@ -35,11 +43,15 @@ const small = () => ({
   label: new Map([
     ['font-size', 'text-xs']
   ]),
+  switchWrapper: new Map([
+    ['min-width', 'min-w-[36px]'],
+    ['min-height', 'min-h-[24px]'],
+  ]),
   span: new Map([
     ['width', 'w-7'],
     ['height', 'h-4'],
-    ['widht', 'before-w-3'],
-    ['height', 'before-h-3']
+    ['widht', 'before:w-3'],
+    ['height', 'before:h-3']
   ])
 })
 
