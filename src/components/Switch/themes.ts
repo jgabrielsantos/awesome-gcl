@@ -48,7 +48,7 @@ const span = () => new Map([
   ['before-bottom', 'before:bottom-0.5'],
   ['before-left', 'before:left-0.5'],
   ['before-background-color', 'before:bg-white-100'],
-  ['before-transition', 'before:duration-300'],
+  ['before-transition', 'before:duration-200'],
   ['before-border-radius', 'before:rounded-full'],
 
   // On Input checked

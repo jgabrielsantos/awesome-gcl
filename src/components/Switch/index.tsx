@@ -37,7 +37,7 @@ export const Switch = ({
 
   return (
     <div
-      onClick={label !== undefined ? handleClick : undefined}
+      onClick={disabled ? undefined : handleClick}
       className={wrapperClass}
     >
       {label !== undefined && (
@@ -47,11 +47,7 @@ export const Switch = ({
           {label}
         </label>
       )}
-      <label
-        onClick={(event) => {
-          event.stopPropagation()
-          handleClick
-        }}
+      <div
         className={switchWrapperClass}
       >
         <input
@@ -61,10 +57,10 @@ export const Switch = ({
           readOnly
           className={inputClass}
         />
-        <span
+        <div
           className={spanClass}
         />
-      </label>
+      </div>
     </div>
   )
 }

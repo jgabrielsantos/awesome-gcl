@@ -56,7 +56,8 @@ export class SwitchStyles implements SwitchStyle {
 
   private applyDisabledRules() {
     if(this.isDisabled) {
-      this.themes.switchWrapper.set('cursor', 'cursor-not-allowed')
+      this.themes.wrapper.set('cursor', 'cursor-default')
+      this.themes.switchWrapper.set('cursor', 'cursor-default')
       this.themes.switchWrapper.set('hover-border-color', 'hover:border-transparent')
       this.themes.span.set('cursor', 'cursor-not-allowed')
       this.themes.span.set('background-color', 'bg-grayscale-5')
