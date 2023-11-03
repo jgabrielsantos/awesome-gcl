@@ -10,6 +10,21 @@ import { SwitchStyles } from "./styles";
  * @property {boolean} props.checked
  * @property {function} props.handleClick
  * @property {SwitchAdditionalClassesPropTypes} props.additionalClasses
+ * @example
+ * <Switch
+ *   size='medium'
+ *   checked={isChecked}
+ *   handleClick={() => setIsChecked(!isChecked)}
+ *   label='Switch component'
+ *   disabled={isDataLoading}
+ *   additionalClasses={
+ *      wrapper: ['wrapper-additional-class'],
+ *      label: ['label-additional-class'],
+ *      switchwrapper: ['switchwrapper-additional-class'],
+ *      input: ['input-additional-class'],
+ *      span: ['span-additional-class'],
+ *   }
+ * />
  * 
  * @returns {JSX.Element} Switch
  */
@@ -39,9 +54,11 @@ export const Switch = ({
     <div
       onClick={disabled ? undefined : handleClick}
       className={wrapperClass}
+      data-testid='switch-wrapper'
     >
       {label !== undefined && (
         <label
+          data-testid='switch-label'
           className={labelClass}
         >
           {label}
