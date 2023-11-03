@@ -1,5 +1,6 @@
 const large = () => ({
   input: new Map([
+    ['min-width', 'min-w-[24px]'],
     ['width', 'w-6'], // width: 1.5rem (24px)
     ['height', 'h-6'] // height: 1.5re, (24px)
   ]),
@@ -14,8 +15,9 @@ const large = () => ({
 })
 const medium = () => ({
   input: new Map([
-   ['width', 'w-5'], // width: 1.25rem (20px)
-   ['height', 'h-5'] // height: 1.25rem (20px)
+    ['min-width', 'min-w-[20px]'],
+    ['width', 'w-5'], // width: 1.25rem (20px)
+    ['height', 'h-5'] // height: 1.25rem (20px)
   ]),
   label: new Map([
     ['font-size', 'text-sm']
@@ -28,6 +30,7 @@ const medium = () => ({
 })
 const small = () => ({
   input: new Map([
+    ['min-width', 'min-w-[16px]'],
     ['width', 'w-4'], // width: 1rem (16px)
     ['height', 'h-4'] // height: 1rem (16px)
   ]),
