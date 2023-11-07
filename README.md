@@ -45,6 +45,7 @@ import { Button } from 'awesome-gcl'
 - Modal
 - Select
 - Select Multi
+- Switch
 - Table
 - Toast List
 - User
