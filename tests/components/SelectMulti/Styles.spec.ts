@@ -35,11 +35,18 @@ describe('Select Multi styles', () => {
     const expectedCursor = disabled ? 'cursor-not-allowed' : 'cursor-pointer'
     const expectedBackgroundColor = disabled ? 'bg-grayscale-0' : 'bg-white-100'
     const expectedStyle = [
-      ...Themes[component]().values(),
-      expectedCursor,
-      expectedBackgroundColor,
-      expectedDisplay
+      ...Themes[component]().values()
     ]
+
+    switch(component) {
+      case 'input':
+        expectedStyle.push(expectedCursor)
+        expectedStyle.push(expectedBackgroundColor)
+        break;
+      case 'optionList':
+        expectedStyle.push(expectedDisplay)
+        break;
+    }
 
     if(sizeComponent !== undefined) {
       const sizes = Sizes[size]()
@@ -52,14 +59,16 @@ describe('Select Multi styles', () => {
         label: additionalClasses?.label || [],
         input: additionalClasses?.input || [],
         placeholder: additionalClasses?.placeholder || [],
-        selectedList: additionalClasses?.optionList || [],
-        selectedItem: additionalClasses?.optionItem || [],
+        selectedList: additionalClasses?.selectedList || [],
+        selectedItem: additionalClasses?.selectedItem || [],
         optionList: additionalClasses?.optionList || [],
         optionItem: additionalClasses?.optionItem || []
       }
 
       expectedStyle.push(...additional[component])
-    } 
+    }
+
+    expect(themes[`${component}Class`]).toEqual(expectedStyle.join(' '))
   }
 
   describe('Components', () => {
@@ -91,7 +100,8 @@ describe('Select Multi styles', () => {
     describe('Label', () => {
       describe('Themes', () => {
         it('Should pass wrapper theme class', () => testTheme({
-          component: 'label'
+          component: 'label',
+          sizeComponent: 'label'
         }))
       })
 
@@ -118,6 +128,7 @@ describe('Select Multi styles', () => {
       describe('Additional Classes', () => {
         it('Should have additional classes', () => testTheme({
           component: 'label',
+          sizeComponent: 'label',
           additionalClasses: {
             label: [
               'outline-0'
@@ -127,6 +138,7 @@ describe('Select Multi styles', () => {
 
         it('Should not have additional classes', () => testTheme({
           component: 'label',
+          sizeComponent: 'label',
           additionalClasses: {
             label: []
           }
@@ -136,17 +148,20 @@ describe('Select Multi styles', () => {
     describe('Input', () => {
       describe('Themes', () => {
         it('Should pass input theme class', () => testTheme({
-          component: 'input'
+          component: 'input',
+          sizeComponent: 'input'
         }))
 
         it('Should pass correct disabled style rule', () => {
           testTheme({
             component: 'input',
+            sizeComponent: 'input',
             disabled: true
           })
 
           testTheme({
             component: 'input',
+            sizeComponent: 'input',
             disabled: false
           })
         })
@@ -175,6 +190,7 @@ describe('Select Multi styles', () => {
       describe('Additional Classes', () => {
         it('Should have additional classes', () => testTheme({
           component: 'input',
+          sizeComponent: 'input',
           additionalClasses: {
             input: [
               'outline-0'
@@ -184,6 +200,7 @@ describe('Select Multi styles', () => {
 
         it('Should not have additional classes', () => testTheme({
           component: 'input',
+          sizeComponent: 'input',
           additionalClasses: {
             input: []
           }
@@ -218,7 +235,8 @@ describe('Select Multi styles', () => {
     describe('Selected Item', () => {
       describe('Themes', () => {
         it('Should pass selected item theme class', () => testTheme({
-          component: 'selectedItem'
+          component: 'selectedItem',
+          sizeComponent: 'selectedItem'
         }))
       })
 
@@ -245,6 +263,7 @@ describe('Select Multi styles', () => {
       describe('Additional Classes', () => {
         it('Should have additional classes', () => testTheme({
           component: 'selectedItem',
+          sizeComponent: 'selectedItem',
           additionalClasses: {
             selectedItem: [
               'outline-0'
@@ -254,6 +273,7 @@ describe('Select Multi styles', () => {
 
         it('Should not have additional classes', () => testTheme({
           component: 'selectedItem',
+          sizeComponent: 'selectedItem',
           additionalClasses: {
             selectedItem: []
           }
@@ -263,7 +283,8 @@ describe('Select Multi styles', () => {
     describe('Selected List', () => {
       describe('Themes', () => {
         it('Should pass selectedL list theme class', () => testTheme({
-          component: 'selectedList'
+          component: 'selectedList',
+          sizeComponent: 'selectedList'
         }))
       })
 
@@ -290,6 +311,7 @@ describe('Select Multi styles', () => {
       describe('Additional Classes', () => {
         it('Should have additional classes', () => testTheme({
           component: 'selectedList',
+          sizeComponent: 'selectedList',
           additionalClasses: {
             selectedList: [
               'outline-0'
@@ -299,6 +321,7 @@ describe('Select Multi styles', () => {
 
         it('Should not have additional classes', () => testTheme({
           component: 'selectedList',
+          sizeComponent: 'selectedList',
           additionalClasses: {
             selectedList: []
           }
@@ -333,17 +356,20 @@ describe('Select Multi styles', () => {
     describe('Option List', () => {
       describe('Themes', () => {
         it('Should pass option list theme class', () => testTheme({
-          component: 'optionList'
+          component: 'optionList',
+          sizeComponent: 'optionList'
         }))
 
         it('Should pass correct display style rule', () => {
           testTheme({
             component: 'optionList',
+            sizeComponent: 'optionList',
             isOpen: true
           })
 
           testTheme({
             component: 'optionList',
+            sizeComponent: 'optionList',
             isOpen: false
           })
         })
@@ -372,6 +398,7 @@ describe('Select Multi styles', () => {
       describe('Additional Classes', () => {
         it('Should have additional classes', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           additionalClasses: {
             optionList: [
               'outline-0'
@@ -381,6 +408,7 @@ describe('Select Multi styles', () => {
 
         it('Should not have additional classes', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           additionalClasses: {
             optionList: []
           }

@@ -43,6 +43,7 @@ import { Button } from 'awesome-gcl'
 - Figure
 - Input
 - Modal
+- Radio
 - Select
 - Select Multi
 - Switch

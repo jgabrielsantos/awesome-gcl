@@ -36,10 +36,17 @@ describe('Select styles', () => {
     const expectedBackgroundColor = disabled ? 'bg-grayscale-0' : 'bg-white-100'
     const expectedStyle = [
       ...Themes[component]().values(),
-      expectedCursor,
-      expectedBackgroundColor,
-      expectedDisplay
     ]
+
+    switch(component) {
+      case 'inputWrapper':
+        expectedStyle.push(expectedCursor)
+        expectedStyle.push(expectedBackgroundColor)
+        break;
+      case 'optionList':
+        expectedStyle.push(expectedDisplay)
+        break;
+    }
 
     if(sizeComponent !== undefined) {
       const sizes = Sizes[size]()
@@ -58,6 +65,8 @@ describe('Select styles', () => {
 
       expectedStyle.push(...additional[component])
     }
+
+    expect(themes[`${component}Class`]).toEqual(expectedStyle.join(' '))
   }
 
   describe('Components', () => {
@@ -90,7 +99,8 @@ describe('Select styles', () => {
     describe('Label', () => {
       describe('Themes', () => {
         it('Should pass label theme class', () => testTheme({
-          component: 'label'
+          component: 'label',
+          sizeComponent: 'label'
         }))
       })
 
@@ -117,6 +127,7 @@ describe('Select styles', () => {
       describe('Additional Classes', () => {
         it('Should pass aditional classes', () => testTheme({
           component: 'label',
+          sizeComponent: 'label',
           additionalClasses: {
             label: [
               'outline-0'
@@ -126,6 +137,7 @@ describe('Select styles', () => {
 
         it('Should not pass aditional classes', () => testTheme({
           component: 'label',
+          sizeComponent: 'label',
           additionalClasses: {
             label: []
           }
@@ -136,7 +148,8 @@ describe('Select styles', () => {
     describe('Input Wrapper', () => {
       describe('Themes', () => {
         it('Should pass input theme class', () => testTheme({
-          component: 'inputWrapper'
+          component: 'inputWrapper',
+          sizeComponent: 'inputWrapper'
         }))
 
         it('Should pass disabled style rules class', () => testTheme({
@@ -175,6 +188,7 @@ describe('Select styles', () => {
       describe('Additional Classes', () => {
         it('Should pass aditional classes', () => testTheme({
           component: 'inputWrapper',
+          sizeComponent: 'inputWrapper',
           additionalClasses: {
             inputWrapper: [
               'outline-0'
@@ -184,6 +198,7 @@ describe('Select styles', () => {
 
         it('Should not pass aditional classes', () => testTheme({
           component: 'inputWrapper',
+          sizeComponent: 'inputWrapper',
           additionalClasses: {
             inputWrapper: []
           }
@@ -194,7 +209,8 @@ describe('Select styles', () => {
     describe('Input', () => {
       describe('Themes', () => {
         it('Should pass input theme class', () => testTheme({
-          component: 'input'
+          component: 'input',
+          sizeComponent: 'input'
         }))
       })
 
@@ -221,6 +237,7 @@ describe('Select styles', () => {
       describe('Additional Classes', () => {
         it('Should pass aditional classes', () => testTheme({
           component: 'input',
+          sizeComponent: 'input',
           additionalClasses: {
             input: [
               'outline-0'
@@ -230,6 +247,7 @@ describe('Select styles', () => {
 
         it('Should not pass aditional classes', () => testTheme({
           component: 'input',
+          sizeComponent: 'input',
           additionalClasses: {
             input: []
           }
@@ -240,16 +258,19 @@ describe('Select styles', () => {
     describe('Option List', () => {
       describe('Themes', () => {
         it('Should pass option list theme class', () => testTheme({
-          component: 'optionList'
+          component: 'optionList',
+          sizeComponent: 'optionList'
         }))
 
         it('Should pass display style rules class', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           isOpen: true
         }))
 
         it('Should not pass display style rules class', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           isOpen: false
         }))
       })
@@ -277,6 +298,7 @@ describe('Select styles', () => {
       describe('Additional Classes', () => {
         it('Should pass aditional classes', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           additionalClasses: {
             optionList: [
               'outline-0'
@@ -286,6 +308,7 @@ describe('Select styles', () => {
 
         it('Should not pass aditional classes', () => testTheme({
           component: 'optionList',
+          sizeComponent: 'optionList',
           additionalClasses: {
             optionList: []
           }
