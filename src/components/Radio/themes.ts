@@ -7,7 +7,7 @@ const wrapper = () => new Map([
 ])
 
 const input = () => new Map([
-  ['visibility', 'invisible'],
+  ['display', 'hidden'],
   ['width', 'w-0'],
   ['height', 'h-0'],
   ['peer', 'peer']
@@ -18,6 +18,7 @@ const spanWrapper = () => new Map([
 ])
 
 const span = () => new Map([
+  ['display', 'block'],
   ['border-width', 'border'],
   ['border-style', 'border-solid'],
   ['border-color', 'border-grayscale-40'],
@@ -30,6 +31,7 @@ const span = () => new Map([
 
   // Before pseudo element
   ['before-visibility', 'before:invisible'],
+  ['before-border-radius', 'before:rounded-full'],
   ['before-position', 'before:absolute'],
   ['before-content', "before:content-['']"],
   ['before-background-color', "before:bg-primary-50"],
@@ -40,6 +42,8 @@ const span = () => new Map([
   ['peer-disabled-before-background-color', 'peer-disabled:before:bg-grayscale-60'],
 
   // On input checked
+  ['peer-checked-border-width', 'peer-checked:border-2'],
+  ['peer-checked-border-color', 'peer-checked:border-primary-50'],
   ['peer-checked-before-visibility', 'peer-checked:before:visible']
 ])
 
@@ -51,6 +55,7 @@ const section = () => new Map([
 
 const label = () => new Map([
   ['color', 'text-grayscale-100'],
+  ['cursor', 'cursor-pointer'],
 
   // On input disabled
   ['peer-disabled-color', 'peer-disabled:text-grayscale-60']

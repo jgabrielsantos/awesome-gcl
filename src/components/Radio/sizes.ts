@@ -1,11 +1,15 @@
 const large = () => ({
   wrapper: new Map([
-    ['gap-vertical', '8'],
-    ['gap-horizontal', '16']
+    ['gap-vertical', 'gap-y-2'],
+    ['gap-horizontal', 'gap-x-4']
   ]),
   span: new Map([
-    ['width', '24'],
-    ['before-width', 'before:12'],
+    ['width', 'w-6'],
+    ['heihgt', 'h-6'],
+    ['before-width', 'before:w-3'],
+    ['before-heihgt', 'before:h-3'],
+    ['before-top', 'before:top-1.5'],
+    ['before-left', 'before:left-1.5']
   ]),
   label: new Map([
     ['font-size', 'text-base']
@@ -17,12 +21,16 @@ const large = () => ({
 
 const medium = () => ({
   wrapper: new Map([
-    ['gap-vertical', '8'],
-    ['gap-horizontal', '12']
+    ['gap-vertical', 'gap-y-2'],
+    ['gap-horizontal', 'gap-x-3']
   ]),
   span: new Map([
-    ['width', '20'],
-    ['before-width', 'before:10'],
+    ['width', 'w-5'],
+    ['height', 'h-5'],
+    ['before-width', 'before:w-2.5'],
+    ['before-height', 'before:h-2.5'],
+    ['before-top', 'before:top-[5px]'],
+    ['before-left', 'before:left-[5px]']
   ]),
   label: new Map([
     ['font-size', 'text-sm']
@@ -34,12 +42,16 @@ const medium = () => ({
 
 const small = () => ({
   wrapper: new Map([
-    ['gap-vertical', '4'],
-    ['gap-horizontal', '8']
+    ['gap-vertical', 'gap-y-1'],
+    ['gap-horizontal', 'gap-x-2']
   ]),
   span: new Map([
-    ['width', '16'],
-    ['before-width', 'before:8'],
+    ['width', 'w-4'],
+    ['height', 'h-4'],
+    ['before-width', 'before:w-2'],
+    ['before-height', 'before:h-2'],
+    ['before-top', 'before:top-1'],
+    ['before-left', 'before:left-1']
   ]),
   label: new Map([
     ['font-size', 'text-xs']
