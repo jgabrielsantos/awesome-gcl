@@ -1,6 +1,5 @@
 const large = () => ({
   wrapper: new Map([
-    ['gap-vertical', 'gap-y-2'],
     ['gap-horizontal', 'gap-x-4']
   ]),
   span: new Map([
@@ -10,6 +9,9 @@ const large = () => ({
     ['before-heihgt', 'before:h-3'],
     ['before-top', 'before:top-1.5'],
     ['before-left', 'before:left-1.5']
+  ]),
+  section: new Map([
+    ['gap-vertical', 'gap-y-2']
   ]),
   label: new Map([
     ['font-size', 'text-base']
@@ -21,7 +23,6 @@ const large = () => ({
 
 const medium = () => ({
   wrapper: new Map([
-    ['gap-vertical', 'gap-y-2'],
     ['gap-horizontal', 'gap-x-3']
   ]),
   span: new Map([
@@ -31,6 +32,9 @@ const medium = () => ({
     ['before-height', 'before:h-2.5'],
     ['before-top', 'before:top-[5px]'],
     ['before-left', 'before:left-[5px]']
+  ]),
+  section: new Map([
+    ['gap-vertical', 'gap-y-2']
   ]),
   label: new Map([
     ['font-size', 'text-sm']
@@ -42,7 +46,6 @@ const medium = () => ({
 
 const small = () => ({
   wrapper: new Map([
-    ['gap-vertical', 'gap-y-1'],
     ['gap-horizontal', 'gap-x-2']
   ]),
   span: new Map([
@@ -52,6 +55,9 @@ const small = () => ({
     ['before-height', 'before:h-2'],
     ['before-top', 'before:top-1'],
     ['before-left', 'before:left-1']
+  ]),
+  section: new Map([
+    ['gap-vertical', 'gap-y-1']
   ]),
   label: new Map([
     ['font-size', 'text-xs']

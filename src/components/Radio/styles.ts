@@ -79,6 +79,7 @@ export class RadioStyles implements IRadioStyles {
       ].join(' '),
       sectionClass: [
         ...this.themes.section.values(),
+        ...this.getSizeRules('section').values(),
         ...this.additionalClasses.section
       ].join(' '),
       labelClass: [

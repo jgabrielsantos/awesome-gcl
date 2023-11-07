@@ -50,7 +50,7 @@ const span = () => new Map([
 const section = () => new Map([
   ['display', 'flex'],
   ['flex-direction', 'flex-col'],
-  ['flex-direction', 'items-center'],
+  ['align-items', 'items-start'],
 ])
 
 const label = () => new Map([

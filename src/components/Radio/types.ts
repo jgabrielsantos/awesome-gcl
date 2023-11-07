@@ -10,6 +10,7 @@ export type RadioComponentsEnum = 'wrapper'
 
 export type RadioSizeComponentsEnum = 'wrapper'
 | 'span'
+| 'section'
 | 'label'
 | 'caption'
 

@@ -255,12 +255,34 @@ describe('Styles', () => {
     describe('Themes', () => {
       it('Should pass section theme classes', () => testTheme({
         component: 'section',
+        sizeComponent: 'section',
+      }))
+    })
+
+    describe('Sizes', () => {
+      it('Should pass large size classes', () => testTheme({
+        component: 'section',
+        size: 'large',
+        sizeComponent: 'section'
+      }))
+
+      it('Should pass medium size classes', () => testTheme({
+        component: 'section',
+        size: 'medium',
+        sizeComponent: 'section'
+      }))
+
+      it('Should pass small size classes', () => testTheme({
+        component: 'section',
+        size: 'small',
+        sizeComponent: 'section'
       }))
     })
 
     describe('Additional classes', () => {
       it('Should have additional classes', () => testTheme({
         component: 'section',
+        sizeComponent: 'section',
         additionalClasses: {
           section: ['section-custom-class']
         }
@@ -268,6 +290,7 @@ describe('Styles', () => {
 
       it('Should not have additional classes', () => testTheme({
         component: 'section',
+        sizeComponent: 'section',
         additionalClasses: {
           section: []
         }
